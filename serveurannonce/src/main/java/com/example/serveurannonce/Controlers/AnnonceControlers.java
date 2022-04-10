@@ -1,10 +1,7 @@
 package com.example.serveurannonce.Controlers;
 
 import com.example.serveurannonce.Models.Annonce;
-import com.example.serveurannonce.Models.Annonceur_Particulier;
-import com.example.serveurannonce.Models.User;
 import com.example.serveurannonce.Repository.AnnonceRepository;
-import com.example.serveurannonce.Repository.AnnonceurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +21,7 @@ public class AnnonceControlers {
 
     private static final String uri = "LeMauvaisCoin/api/annonce";
     @GetMapping(uri + "/GetAnnonce")
-    public List<Annonce> GetAnnonceurPart() {
+    public List<Annonce> GetAnnonce() {
         return annonce.findAll();
     }
 

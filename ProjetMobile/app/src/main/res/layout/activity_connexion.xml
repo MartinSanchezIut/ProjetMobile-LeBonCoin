@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Connexion">
+
+    <TextView
+            android:text="Email"
+            android:layout_width="168dp"
+            android:gravity="center"
+            android:layout_height="54dp" android:id="@+id/textView"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="264dp"
+            app:layout_constraintHorizontal_bias="0.497" android:textSize="40dp"/>
+    <TextView
+            android:text="Mots de passe"
+            android:layout_width="372dp"
+            android:gravity="center"
+            android:layout_height="55dp" android:id="@+id/textView2"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="420dp"
+            app:layout_constraintHorizontal_bias="0.497" android:textSize="40dp"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/idpassword"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="528dp"
+            app:layout_constraintHorizontal_bias="0.497"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/idemail"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="340dp"
+            app:layout_constraintHorizontal_bias="0.497"/>
+    <Button
+            android:text="Connexion"
+            android:layout_width="wrap_content"
+            android:onClick="Connexion"
+            android:layout_height="wrap_content" android:id="@+id/idbutttonconnexion"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="608dp"
+            app:layout_constraintHorizontal_bias="0.829"/>
+    <Button
+            android:text="Inscription"
+            android:layout_width="wrap_content"
+            android:onClick="Inscription"
+            android:layout_height="wrap_content" android:id="@+id/idbutttoninscription"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="608dp"
+            app:layout_constraintHorizontal_bias="0.256"/>
+    <TextView
+            android:text="Mauvais mot de passe ou email"
+            android:textSize="25dp"
+            android:textColor="#f00020"
+            android:layout_width="270dp"
+            android:layout_height="60dp" android:id="@+id/iderreur"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="100dp"
+            app:layout_constraintHorizontal_bias="0.498"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
