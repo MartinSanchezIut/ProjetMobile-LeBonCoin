@@ -6,23 +6,62 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".Acceuille">
+    <LinearLayout
+            android:layout_width="277dp"
+            android:layout_height="76dp"
+            android:orientation="horizontal"
+            tools:context=".MainActivity" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="100dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.578"
+            android:layout_marginStart="5dp" android:layout_marginEnd="5dp">
 
-    <ListView
-            android:id="@+id/listView"
-            android:layout_width="369dp"
-            android:layout_height="570dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/idrecherche"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:enabled="true"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:startIconDrawable="@drawable/baseline_search_black_24dp"
+
+
+                android:hint="Rechercher">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <GridView
+            android:id="@+id/gridView"
+            android:layout_width="352dp"
+            android:layout_height="525dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:numColumns="2"
+            android:stretchMode="columnWidth"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="144dp"/>
-    <TextView
-            android:text="TextView"
-            android:layout_width="340dp"
-            android:textSize="15dp"
-            android:layout_height="67dp" android:id="@+id/user"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="4dp"
-            app:layout_constraintHorizontal_bias="0.0"/>
+            app:layout_constraintVertical_bias="0.729" app:layout_constraintHorizontal_bias="0.48">
+    </GridView>
+    <ImageView
+            android:layout_width="361dp"
+            android:layout_height="88dp" app:srcCompat="@drawable/logo" android:id="@+id/imageView3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="12dp"/>
+    <androidx.fragment.app.FragmentContainerView
+            android:layout_width="389dp"
+            android:layout_height="50dp" android:name="com.example.projetmobile.navbarre"
+            android:id="@+id/fragmentContainerView4"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.979"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

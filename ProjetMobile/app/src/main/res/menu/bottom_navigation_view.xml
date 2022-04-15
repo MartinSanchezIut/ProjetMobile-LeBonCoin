@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+            android:id="@+id/navigate_inscription"
+            android:enabled="true"
+            android:icon="@drawable/edit_note_black_24dp"
+            android:title="Inscription"
+            app:showAsAction="ifRoom"
+    />
+
+    <item
+            android:id="@+id/navigation_connexion"
+            android:enabled="true"
+            android:icon="@drawable/baseline_lock_person_black_24dp"
+            android:title="Connexion"
+            android:state_window_focused="true"
+            app:showAsAction="ifRoom"/>
+    <item
+            android:id="@+id/navigation_home"
+            android:enabled="true"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="Acceuil"
+            android:state_window_focused="true"
+            app:showAsAction="ifRoom"/>
+
+    <item
+            android:id="@+id/navigate_publication"
+            android:enabled="true"
+            android:icon="@drawable/baseline_add_box_black_24dp"
+            android:title="Publier"
+            android:state_window_focused="true"
+            app:showAsAction="ifRoom"/>
+
+    <item
+            android:id="@+id/navigate_profile"
+            android:enabled="true"
+            android:icon="@drawable/baseline_account_circle_black_24dp"
+            android:title="Profil"
+            android:state_window_focused="true"
+            app:showAsAction="ifRoom"/>
+
+
+
+</menu>

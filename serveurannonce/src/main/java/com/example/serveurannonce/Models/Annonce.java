@@ -4,8 +4,13 @@ package com.example.serveurannonce.Models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.imageio.ImageIO;
 import javax.persistence.*;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +40,9 @@ public class Annonce {
     @Column(name = "IMAGE")
     private String adresse_image;
 
+    @Lob
+    @Column(name = "content")
+    private byte[] image;
 
     @Column(name = "STASTISTIQUE")
     @ElementCollection
@@ -68,7 +76,7 @@ public class Annonce {
     private List<User> ann3 = new ArrayList<>();
 
 
-    public Annonce(long id_annonce, String titre, String description, float prix, String date_publication, String lieux,Long annonceur, String adresse_image, Map<String, Integer> nbvues, String categories,String filtre , List<Message> list_messages) {
+    public Annonce(long id_annonce, String titre, String description, float prix, String date_publication, String lieux,Long annonceur, String adresse_image, Map<String, Integer> nbvues, String categories,String filtre , List<Message> list_messages) throws IOException {
         this.id_annonce = id_annonce;
         this.titre = titre;
         this.description = description;
@@ -81,6 +89,14 @@ public class Annonce {
         this.filtre = filtre;
         this.list_messages = list_messages;
         this.lieux = lieux;
+
+        File fichier = new File (adresse_image);
+
+        BufferedImage bi = ImageIO.read (fichier);
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ImageIO.write(bi, "jpg", bos );
+        this.image = bos.toByteArray();
 
     }
 
@@ -146,5 +162,8 @@ public class Annonce {
 */
     public void addAnn3(User ann3) {
         this.ann3.add(ann3);
+    }
+    public byte[] getPic_bytes() {
+        return this.image;
     }
 }

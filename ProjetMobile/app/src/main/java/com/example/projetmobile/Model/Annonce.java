@@ -19,6 +19,7 @@ public class Annonce {
     private Map<String, Integer> nbvues;
     private String categories;
     private String filtre;
+    private String pic_bytes;
     private List<Message> list_messages;
 
 
@@ -86,6 +87,10 @@ public class Annonce {
 
     public String getLieux() {
         return lieux;
+    }
+
+    public String getimage(){
+        return this.pic_bytes;
     }
 
 

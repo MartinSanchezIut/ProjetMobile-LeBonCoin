@@ -5,65 +5,114 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Connexion">
+        tools:context=".Connexion"
+>
 
-    <TextView
-            android:text="Email"
-            android:layout_width="168dp"
-            android:gravity="center"
-            android:layout_height="54dp" android:id="@+id/textView"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="264dp"
-            app:layout_constraintHorizontal_bias="0.497" android:textSize="40dp"/>
-    <TextView
-            android:text="Mots de passe"
-            android:layout_width="372dp"
-            android:gravity="center"
-            android:layout_height="55dp" android:id="@+id/textView2"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="420dp"
-            app:layout_constraintHorizontal_bias="0.497" android:textSize="40dp"/>
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/idpassword"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="528dp"
-            app:layout_constraintHorizontal_bias="0.497"/>
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/idemail"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="340dp"
-            app:layout_constraintHorizontal_bias="0.497"/>
+
+    <LinearLayout
+            android:layout_width="287dp"
+            android:layout_height="69dp"
+            android:orientation="horizontal"
+            tools:context=".MainActivity" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="332dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.604"
+            android:layout_marginStart="5dp" android:layout_marginEnd="5dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/idemail"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+
+
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:startIconDrawable="@drawable/baseline_lock_person_black_24dp"
+
+
+                android:hint="Email">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+    <LinearLayout
+            android:layout_width="287dp"
+            android:layout_height="69dp"
+            android:orientation="horizontal"
+            tools:context=".MainActivity" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="436dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.604"
+            android:layout_marginStart="5dp" android:layout_marginEnd="5dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:startIconDrawable="@drawable/baseline_vpn_key_black_24dp"
+                android:id="@+id/idpassword"
+                android:hint="Mots de passe"
+                app:endIconMode="password_toggle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
     <Button
             android:text="Connexion"
-            android:layout_width="wrap_content"
+            android:layout_width="217dp"
             android:onClick="Connexion"
-            android:layout_height="wrap_content" android:id="@+id/idbutttonconnexion"
+            app:cornerRadius="8dp"
+            android:background="@drawable/button_layout"
+            android:layout_height="56dp" android:id="@+id/idbutttonconnexion"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="608dp"
-            app:layout_constraintHorizontal_bias="0.829"/>
-    <Button
-            android:text="Inscription"
-            android:layout_width="wrap_content"
-            android:onClick="Inscription"
-            android:layout_height="wrap_content" android:id="@+id/idbutttoninscription"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="608dp"
-            app:layout_constraintHorizontal_bias="0.256"/>
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="548dp"
+            app:backgroundTint="#2286C3"
+    />
     <TextView
             android:text="Mauvais mot de passe ou email"
             android:textSize="25dp"
             android:textColor="#f00020"
-            android:layout_width="270dp"
-            android:layout_height="60dp" android:id="@+id/iderreur"
+            android:layout_width="373dp"
+            android:layout_height="47dp" android:id="@+id/iderreur"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="100dp"
-            app:layout_constraintHorizontal_bias="0.498"/>
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="288dp"
+            app:layout_constraintHorizontal_bias="0.6"/>
+<!--
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="match_parent"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:background="#64B5F6"
+            app:menu="@menu/bottom_navigation_view"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:itemIconTint="@color/black"
+            app:itemTextColor="@color/black"
+            app:labelVisibilityMode="labeled"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="0.981"/>
+            -->
+
+    <ImageView
+            android:layout_width="369dp"
+            android:layout_height="285dp" app:srcCompat="@drawable/logo2" android:id="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="4dp"/>
+    <androidx.fragment.app.FragmentContainerView
+            android:layout_width="393dp"
+            android:layout_height="64dp" android:name="com.example.projetmobile.navbarre"
+            android:id="@+id/fragmentContainerView3"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="664dp"
+            app:layout_constraintHorizontal_bias="0.0"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,26 +13,33 @@ import com.example.projetmobile.BDD.models.UserBDD;
 import com.example.projetmobile.Model.Annonceur_Particulier;
 import com.example.projetmobile.Model.Annonceur_pro;
 import com.example.projetmobile.Model.User;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 
 import java.util.concurrent.ExecutionException;
 
 public class Connexion extends AppCompatActivity {
-    private EditText email;
-    private EditText password;
+    private TextInputLayout email;
+
+    private TextInputLayout password;
     private TextView erreur;
     private Button connexion;
     private User user;
+    BottomNavigationView bottomNavigationView ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_connexion);
-
-        this.email = (EditText) findViewById(R.id.idemail);
-        this.password = (EditText) findViewById(R.id.idpassword);
+        email = (TextInputLayout) findViewById(R.id.idemail);
+        password = (TextInputLayout) findViewById(R.id.idpassword);
         this.erreur = (TextView) findViewById(R.id.iderreur);
         this.erreur.setVisibility(View.INVISIBLE);
         this.connexion = (Button) findViewById(R.id.idbutttonconnexion);
+
+        bottomNavigationView =  findViewById (R.id.bottomNavigationView);
 
 
 
@@ -44,7 +51,8 @@ public class Connexion extends AppCompatActivity {
         MyAsyncConnexion myAsyncTasks = new MyAsyncConnexion();
 
         Gson gson = new Gson();
-        String url = "http://192.168.1.25:8080/LeMauvaisCoin/api/User/Connexion/" + this.email.getText() + "/" + this.password.getText() ;
+        System.out.println(this.email.getEditText().getText().toString());
+        String url = "http://172.16.5.209:8080/LeMauvaisCoin/api/User/Connexion/" + this.email.getEditText().getText().toString() + "/" + this.password.getEditText().getText().toString();
         String reponse = myAsyncTasks.execute(url).get();
         System.out.println("ICI " + reponse);
         if(!reponse.equals("")) {
