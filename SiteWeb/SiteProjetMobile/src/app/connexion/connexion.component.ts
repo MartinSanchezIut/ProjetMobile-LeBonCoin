@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ConnexionService } from '../connexion.service';
-import { User } from '../user';
+import { UserauthentificationService } from '../userauthentification.service';
+import { User } from '../Models/user';
 
 @Component({
   selector: 'app-connexion',
@@ -9,14 +9,26 @@ import { User } from '../user';
 })
 export class ConnexionComponent implements OnInit {
 
-  public userconnected : User;
+  private email: string = "";
+  private password: string = "";
+  private userconnected: User | null | undefined;
 
-  constructor(private user : ConnexionService) { }
+
+  constructor(private connectingUser: UserauthentificationService) { }
 
   ngOnInit(): void {
-    console.log("Recherche des identifiants pour la connexion");
-    this.user.getUserConnexion(email, password).subscribe(userconnected => {
-      this.userconnected = userconnected});
+    this.email = (<HTMLInputElement>document.getElementById('emailInput')!).value;
+    this.password = (<HTMLInputElement>document.getElementById('passwordInput')!).value;
   }
 
+  submit(): void {
+    console.log("Recherche des identifiants pour la connexion");
+    this.connectingUser.getUserConnexion(this.email, this.password).subscribe(userconnected => {
+      this.userconnected = userconnected});
+    if (this.userconnected != null){
+      console.log("Vous êtes connectés");
+    }
+    else
+      console.log("Connection échouée");
+  }
 }
