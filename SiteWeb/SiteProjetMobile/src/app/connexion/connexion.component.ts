@@ -14,13 +14,13 @@ export class ConnexionComponent implements OnInit {
   private userconnected: User | null | undefined;
 
 
-  constructor(private connectingUser: UserauthentificationService) { }
+  constructor() { } //private connectingUser: UserauthentificationService
 
   ngOnInit(): void {
-    this.email = (<HTMLInputElement>document.getElementById('emailInput')!).value;
-    this.password = (<HTMLInputElement>document.getElementById('passwordInput')!).value;
+    // this.email = (<HTMLInputElement>document.getElementById('emailInput')!).value;
+    // this.password = (<HTMLInputElement>document.getElementById('passwordInput')!).value;
   }
-
+/*
   submit(): void {
     console.log("Recherche des identifiants pour la connexion");
     this.connectingUser.getUserConnexion(this.email, this.password).subscribe(userconnected => {
@@ -31,4 +31,5 @@ export class ConnexionComponent implements OnInit {
     else
       console.log("Connection échouée");
   }
+  */
 }
