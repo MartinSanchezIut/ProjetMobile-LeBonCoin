@@ -1,8 +1,7 @@
-.footer {
-    position: absolute;
-    background-color: #9BE7FF;
-    width: 100%;
-    height: 125px;
-    left: 0px;
-    top: 992px;
+.bg-color {
+    background-color: #9BE7FF ;
+}
+
+.hoverable:hover {
+    background-color: blue;
 }
