@@ -14,13 +14,19 @@ export class ConnexionComponent {
   public userconnected: User | null | undefined;
 
 
-  constructor(private connectingUser: UserauthentificationService) { }
+  constructor() { } //private connectingUser: UserauthentificationService
 
-  submit(){
+  ngOnInit(): void {
+    // this.email = (<HTMLInputElement>document.getElementById('emailInput')!).value;
+    // this.password = (<HTMLInputElement>document.getElementById('passwordInput')!).value;
+  }
+/*
+  submit(): void {
     this.email = (<HTMLInputElement>document.getElementById('emailInput')!).value;
     this.password = (<HTMLInputElement>document.getElementById('passwordInput')!).value;
     console.log("Recherche des identifiants pour la connexion");
     this.connectingUser.getUserConnexion(this.email, this.password).subscribe(userconnected => {
       this.userconnected = userconnected}); 
   }
+  */
 }
