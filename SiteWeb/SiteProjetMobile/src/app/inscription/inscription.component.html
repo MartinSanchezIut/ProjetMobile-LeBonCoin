@@ -1,45 +1,82 @@
-<div class="container" style="margin-top: 50px; margin-bottom: 50px;">
+<div #page1 id="1" class="container page" style="margin-top: 50px; margin-bottom: 50px;">
     <div class="center card" style="background-color: #F1EEEE;">
-
-
 
         <div class="row">
             <div class="col s6" style="margin-top: 100px; margin-bottom: 100px;"> 
                 <a #part class="waves-effect waves-light btn-large center black-text center" style="margin-top: 25px; background-color: #F1EEEE;"
-                (click)="select(part, pro);">Particulier</a>
+                (click)="select(part, pro, goToPage2);">Particulier</a>
             </div>
             <div class="col s6" style="margin-top: 100px; margin-bottom: 100px;">
                 <a #pro class="waves-effect waves-light btn-large center black-text center" style="margin-top: 25px; background-color: #F1EEEE;"
-                (click)="select(pro, part);">Professionnel</a>
+                (click)="select(pro, part, goToPage2);">Professionnel</a>
             </div>
         </div>
 
-        <a class="waves-effect waves-light btn-large center black-text" style="margin-top: 25px; margin-bottom: 100px; background-color: #9BE7FF;">Suivant</a>
+        <a #goToPage2 (click)="nextPage()" class="waves-effect waves-light btn-large center black-text disabled" style="margin-top: 25px; margin-bottom: 100px; background-color: #9BE7FF;">Suivant</a>
+    </div>
+</div>
 
-<!-- 
-        <h3 style="padding: 20px;"> Connexion </h3>
-        <hr style="width: 99%;">
 
-        <div class="row">
-            <h5 class="col s5"> Identifiant : </h5>
+<div #page2 id="2" class="container page hide" style="margin-top: 50px; margin-bottom: 50px;">
+    <div class="center card" style="background-color: #F1EEEE;">
+
+        <div class="row" style="padding-top: 100px;">
+            <h5 class="col s5"> Nom : </h5>
             <div class="input-field col s7">
-                <input placeholder="Identifiant" id="Identifiant" type="text" class="validate left" style="width: 90%;">
-                <label for="Identifiant">Identifiant</label>
+                <input #nom placeholder="Nom" id="Nom" type="text" class="validate left" style="width: 90%;">
+                <label for="Nom">Nom :</label>
             </div>
         </div>
 
         
         <div class="row">
-            <h5 class="col s5"> Mot de passe : </h5>
+            <h5 class="col s5"> Prénom : </h5>
             <div class="input-field col s7">
-                <input placeholder="Mot de passe" id="password" type="password" class="validate left" style="width: 90%;">
-                <label for="password"> Mot de passe</label>
+                <input #prenom placeholder="Prénom" id="Prénom" type="text" class="validate left" style="width: 90%;">
+                <label for="Prénom"> Prénom :</label>
             </div>
         </div>
 
-        <hr style="width: 99%;">
-        <a class="waves-effect waves-light btn-large center black-text" style="margin-top: 25px; background-color: #9BE7FF;">Valider</a>
-        <a href="#" style="margin: 5px; " class="black-text"> <p> Vous n'avez pas de compte ? Inscrivez vous ici. </p> </a>
--->
+        <div class="row">
+            <h5 class="col s5"> Email : </h5>
+            <div class="input-field col s7">
+                <input #email placeholder="Email" id="Email" type="text" class="validate left" style="width: 90%;">
+                <label for="Email"> Email :</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <h5 class="col s5"> Tèl : </h5>
+            <div class="input-field col s7">
+                <input #tel placeholder="Tèl" id="Tèl" type="text" class="validate left" style="width: 90%;">
+                <label for="Tèl"> Tèl :</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <h5 class="col s5"> Identifiant : </h5>
+            <div class="input-field col s7">
+                <input #pseudo placeholder="Identifiant" id="Identifiant" type="text" class="validate left" style="width: 90%;">
+                <label for="Identifiant"> Identifiant :</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <h5 class="col s5"> Mot de passe : </h5>
+            <div class="input-field col s7">
+                <input #mdp placeholder="Mot de passe" id="Mot de passe" type="password" class="validate left" style="width: 90%;">
+                <label for="Mot de passe"> Mot de passe :</label>
+            </div>
+        </div>
+
+        <div id="nEntreprise" class="row hide" >
+            <h5 class="col s5"> Nom d'entreprise : </h5>
+            <div class="input-field col s7">
+                <input #entreprise placeholder="Nom d'entreprise" id="Nom d'entreprise" type="text" class="validate left" style="width: 90%;">
+                <label for="Nom d'entreprise"> Nom d'entreprise :</label>
+            </div>
+        </div>
+
+        <a (click)="saveForm(nom.value, prenom.value, email.value, tel.value, pseudo.value, mdp.value, entreprise.value) ;" class="waves-effect waves-light btn-large center black-text" style="margin-top: 25px; margin-bottom: 100px; background-color: #9BE7FF;">Terminer</a>
     </div>
 </div>

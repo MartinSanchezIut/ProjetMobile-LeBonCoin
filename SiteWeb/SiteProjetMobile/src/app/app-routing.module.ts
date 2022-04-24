@@ -5,6 +5,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 
 const routes: Routes = [
+  { path: '', component: HomepageComponent },
   { path: 'home', component: HomepageComponent },
   { path: 'inscription', component: InscriptionComponent },
   { path: 'connexion', component: ConnexionComponent }
