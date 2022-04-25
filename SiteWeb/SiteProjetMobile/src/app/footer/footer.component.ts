@@ -12,4 +12,12 @@ export class FooterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public showContact() : void {
+    alert("Contactez nous par mail : adresse.mail@leMauvaisCoin.fr");
+  }
+
+
+  public downloadApp() : void {
+    alert("Téléchargez notre application android nule part ...");
+  }
 }
