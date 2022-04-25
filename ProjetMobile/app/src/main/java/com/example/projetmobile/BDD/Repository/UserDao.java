@@ -14,4 +14,7 @@ public interface UserDao {
     List<UserBDD> getAll();
     @Delete
     void delete(UserBDD plan);
+
+    @Query("SELECT COUNT(id_user) FROM UserBDD")
+    int getCount();
 }

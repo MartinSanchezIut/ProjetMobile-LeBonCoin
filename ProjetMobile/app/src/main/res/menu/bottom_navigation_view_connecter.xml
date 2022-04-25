@@ -2,12 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+
     <item
-            android:id="@+id/navigate_inscription"
-            android:icon="@drawable/edit_note_black_24dp"
-            android:title="Inscription"
-            app:showAsAction="ifRoom"
-    />
+            android:id="@+id/navigate_publication"
+            android:icon="@drawable/baseline_add_box_black_24dp"
+            android:title="Publier"
+            app:showAsAction="ifRoom"/>
 
     <item
             android:id="@+id/navigation_home"
@@ -16,13 +17,9 @@
             app:showAsAction="ifRoom"/>
 
     <item
-            android:id="@+id/navigation_connexion"
-            android:icon="@drawable/baseline_lock_person_black_24dp"
-            android:title="Connexion"
+            android:id="@+id/navigate_profile"
+            android:icon="@drawable/baseline_account_circle_black_24dp"
+            android:title="Profil"
             app:showAsAction="ifRoom"/>
-
-
-
-
 
 </menu>

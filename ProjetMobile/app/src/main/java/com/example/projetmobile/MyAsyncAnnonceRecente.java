@@ -1,13 +1,22 @@
 package com.example.projetmobile;
 
 import android.os.AsyncTask;
+import android.widget.Toast;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import org.apache.commons.io.Charsets;
+import org.apache.commons.io.IOUtils;
 
 
-;import java.io.IOException;
+;import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class MyAsyncAnnonceRecente extends AsyncTask<String, String, String> {
 
@@ -22,46 +31,15 @@ public class MyAsyncAnnonceRecente extends AsyncTask<String, String, String> {
 
     @Override
     protected String doInBackground (String...params){
+        try {
+            return IOUtils.toString(new InputStreamReader(new BufferedInputStream(new URL(params[0]).openConnection().getInputStream()), Charsets.UTF_8));
+
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 /*
-        String result = "";
-        try{
-            URL url;
-            HttpURLConnection urlConnection = null;
-            try {
-                url = new URL(params[0]);
-                //open a URL coonnection
-                System.out.println("00000000000000000000000000");
-                urlConnection = (HttpURLConnection) url.openConnection();
-                System.out.println("5555555555555555555555555555555555");
-                InputStream in = urlConnection.getInputStream();
-                System.out.println("6666666666666666666666666");
-                InputStreamReader isw = new InputStreamReader(in);
-                System.out.println("77777777777777777777777777");
-                int data = isw.read();
-                System.out.println("88888888888888888888888888888888888888888");
-
-                while (data != -1) {
-                    result += (char) data;
-                    data = isw.read();
-                    System.out.println("2");
-
-                }
-                System.out.println("333333333333333333333333333333");
-
-                return result;
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                if (urlConnection != null) {
-                    urlConnection.disconnect();
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "Exception: " + e.getMessage();
-        }*/
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(params[0])
@@ -79,6 +57,8 @@ public class MyAsyncAnnonceRecente extends AsyncTask<String, String, String> {
             e.printStackTrace();
         }
         return result;
+
+ */
 
     }
     @Override

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+                                                   android:layout_height="match_parent">
+
+    <TextView
+            android:text="TextView"
+            android:gravity="center|left"
+            android:layout_width="242dp"
+            android:textSize="15dp"
+            android:textColor="@color/black"
+            android:layout_height="33dp" android:id="@+id/filtre"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="16dp"
+            app:layout_constraintHorizontal_bias="0.245"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

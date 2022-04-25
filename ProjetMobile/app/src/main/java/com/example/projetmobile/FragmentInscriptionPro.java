@@ -45,7 +45,7 @@ public class FragmentInscriptionPro extends Fragment {
         valider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url ="http://172.16.5.209:8080/LeMauvaisCoin/api/User/InscriptionAnnonceurPro";
+                String url ="http://192.168.1.25:8080/LeMauvaisCoin/api/User/InscriptionAnnonceurPro";
                 MyAsyncInscription myAsyncTasks = new MyAsyncInscription();
                 try {
                     Gson gson = new Gson();

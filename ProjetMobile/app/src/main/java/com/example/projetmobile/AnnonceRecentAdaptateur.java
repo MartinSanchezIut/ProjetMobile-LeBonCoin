@@ -48,7 +48,7 @@ public class AnnonceRecentAdaptateur extends BaseAdapter  {
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = layoutInflater.inflate(R.layout.list_view_adapteur_annonce_recent, null);
         getItem(i).getPrix();
-        byte[] myImage = Base64.getDecoder().decode(getItem(i).getimage().getBytes(StandardCharsets.UTF_8));
+        byte[] myImage = Base64.getDecoder().decode(getItem(i).getimage().get(0).getBytes(StandardCharsets.UTF_8));
         Bitmap bmp= BitmapFactory.decodeByteArray(myImage,0,myImage.length);
         ImageView myView = (ImageView)view.findViewById(R.id.photo_annonce);
         myView.setImageBitmap(bmp);
@@ -59,7 +59,7 @@ public class AnnonceRecentAdaptateur extends BaseAdapter  {
         Titre.setText(getItem(i).getTitre());
         Description.setText(getItem(i).getDescription());
         Date.setText(getItem(i).getDate_publication());
-        Lieux.setText(getItem(i).getLieux());
+        Lieux.setText(getItem(i).getville());
         return view;
     }
 }

@@ -11,9 +11,8 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 
 @Entity
 public class Annonce {
@@ -33,16 +32,19 @@ public class Annonce {
     @Column(name = "Annonceur")
     private Long id_annonceur;
 
-    @Column(name = "LIEUX")
-    private String lieux;
+    @Column(name = "Departement")
+    private String departement;
 
+    @Column(name = "VILLE")
+    private String ville;
+    @ElementCollection
+    @CollectionTable(name="Adresse_Image")
+    private List<String> adresse_image ;
 
-    @Column(name = "IMAGE")
-    private String adresse_image;
-
-    @Lob
-    @Column(name = "content")
-    private byte[] image;
+    @Column(length=1000000)
+    @ElementCollection
+    @CollectionTable(name="Image")
+    private List<String> image = new ArrayList<>();
 
     @Column(name = "STASTISTIQUE")
     @ElementCollection
@@ -51,6 +53,8 @@ public class Annonce {
     private Map<String, Integer> nbvues;
 
 
+    @Column(name = "Contact")
+    private String contact;
     @Column(name = "CATEGORIES")
     private String categories;
 
@@ -62,7 +66,7 @@ public class Annonce {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="MesAnnonce", nullable=false)
+    @JoinColumn(name="MesAnnonce")
     private User ann1;
 
 /*
@@ -76,7 +80,8 @@ public class Annonce {
     private List<User> ann3 = new ArrayList<>();
 
 
-    public Annonce(long id_annonce, String titre, String description, float prix, String date_publication, String lieux,Long annonceur, String adresse_image, Map<String, Integer> nbvues, String categories,String filtre , List<Message> list_messages) throws IOException {
+
+    public Annonce(long id_annonce, String titre, String description, float prix, String date_publication, String departement,String ville , Long annonceur, List<String> adresse_image, Map<String, Integer> nbvues, String contact,String categories,String filtre , List<Message> list_messages) throws IOException {
         this.id_annonce = id_annonce;
         this.titre = titre;
         this.description = description;
@@ -86,20 +91,42 @@ public class Annonce {
         this.adresse_image = adresse_image;
         this.nbvues = nbvues;
         this.categories = categories;
+        this.contact = contact;
         this.filtre = filtre;
         this.list_messages = list_messages;
-        this.lieux = lieux;
+        this.departement = departement;
+        this.ville = ville;
 
-        File fichier = new File (adresse_image);
+        for(String s : adresse_image) {
+            File fichier = new File(s);
 
-        BufferedImage bi = ImageIO.read (fichier);
+            BufferedImage bi = ImageIO.read(fichier);
 
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ImageIO.write(bi, "jpg", bos );
-        this.image = bos.toByteArray();
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ImageIO.write(bi, "jpg", bos);
+            this.image.add(Base64.getEncoder().encodeToString(bos.toByteArray()));
+        }
 
     }
 
+    public Annonce(String titre, String description, float prix, String date_publication, String departement,String ville , Long annonceur, List<String> image, String contact,String categories,String filtre ) throws IOException {
+        this.titre = titre;
+        this.description = description;
+        this.prix = prix;
+        this.date_publication = date_publication;
+        this.id_annonceur = annonceur;
+        this.image = image;
+        this.categories = categories;
+        this.contact = contact;
+        this.filtre = filtre;
+        this.departement = departement;
+        this.ville = ville;
+        this.adresse_image = new ArrayList<>();
+        this.nbvues = new HashMap<>();
+        this.list_messages = new ArrayList<>();
+
+
+    }
     public Annonce() {
 
     }
@@ -128,7 +155,7 @@ public class Annonce {
         return id_annonceur;
     }
 
-    public String getAdresse_image() {
+    public List<String> getAdresse_image() {
         return adresse_image;
     }
 
@@ -148,8 +175,16 @@ public class Annonce {
         return list_messages;
     }
 
-    public String getLieux() {
-        return lieux;
+    public Long getId_annonceur() {
+        return id_annonceur;
+    }
+
+    public String getDepartement() {
+        return departement;
+    }
+
+    public String getVille() {
+        return ville;
     }
 
     public void setAnn1(User ann1) {
@@ -163,7 +198,15 @@ public class Annonce {
     public void addAnn3(User ann3) {
         this.ann3.add(ann3);
     }
-    public byte[] getPic_bytes() {
+    public List<String> getPic_bytes() {
         return this.image;
+    }
+
+    public List<String> getImage() {
+        return image;
+    }
+
+    public String getContact() {
+        return contact;
     }
 }

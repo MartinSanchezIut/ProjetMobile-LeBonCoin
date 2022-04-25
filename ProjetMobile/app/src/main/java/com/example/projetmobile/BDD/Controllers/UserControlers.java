@@ -29,4 +29,9 @@ public class UserControlers extends ViewModel {
          userdao.insert(c);
 
     }
+
+    public int Count() {
+       return userdao.getCount();
+
+    }
 }

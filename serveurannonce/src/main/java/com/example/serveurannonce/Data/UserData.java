@@ -31,13 +31,29 @@ public class UserData {
 
             Map<String, Integer> nbvue = new HashMap<>();
             ArrayList<Message> m1= new ArrayList<>();
-            Annonce ann = new Annonce(0L,"Velo","Tres beau velo",50,"15/04/2022","Paris" ,0L,"src/main/java/com/example/serveurannonce/Image/Velo.jpg",nbvue,"Sport","velo",m1);
-            Annonce ann1 = new Annonce(1L,"Marteau","Tres beau Marteau",50,"15/04/2022","Montpellier" ,0L,"src/main/java/com/example/serveurannonce/Image/marteau.jpg",nbvue,"Bricolage","Marteau",m1);
-            Annonce ann2 = new Annonce(2L,"Phone","Tres beau téléphone",50,"15/04/2022","Miramas" ,0L,"src/main/java/com/example/serveurannonce/Image/phone.jpg",nbvue,"Multimedia","Telephone",m1);
-            Annonce ann3 = new Annonce(3L,"ordinateur","Tres beau ordinateur",50,"15/04/2022","Eyguières" ,0L,"src/main/java/com/example/serveurannonce/Image/ordinateur.jpg",nbvue,"Sport","velo",m1);
-            Annonce ann4 = new Annonce(4L,"bateau","Tres beau bateau",50,"15/04/2022","Salon" ,0L,"src/main/java/com/example/serveurannonce/Image/bateau.jpg",nbvue,"Sport","velo",m1);
-            Annonce ann5 = new Annonce(5L,"cafetière","Tres beau cafetière",50,"15/04/2022","Renne" ,0L,"src/main/java/com/example/serveurannonce/Image/caf.jpg",nbvue,"Sport","velo",m1);
-            Annonce ann6 = new Annonce(6L,"Eponge","Tres beau Eponge",50,"15/04/2022","Brest" ,0L,"src/main/java/com/example/serveurannonce/Image/eponge.jpg",nbvue,"Sport","velo",m1);
+
+            ArrayList<String> i1 = new ArrayList<>();
+            i1.add("src/main/java/com/example/serveurannonce/Image/Velo.jpg");
+            ArrayList<String> i2 = new ArrayList<>();
+            i2.add("src/main/java/com/example/serveurannonce/Image/marteau.jpg");
+            ArrayList<String> i3 = new ArrayList<>();
+            i3.add("src/main/java/com/example/serveurannonce/Image/phone.jpg");
+            ArrayList<String> i4 = new ArrayList<>();
+            i4.add("src/main/java/com/example/serveurannonce/Image/ordinateur.jpg");
+            ArrayList<String> i5 = new ArrayList<>();
+            i5.add("src/main/java/com/example/serveurannonce/Image/bateau.jpg");
+            ArrayList<String> i6 = new ArrayList<>();
+            i6.add("src/main/java/com/example/serveurannonce/Image/caf.jpg");
+            ArrayList<String> i7 = new ArrayList<>();
+            i7.add("src/main/java/com/example/serveurannonce/Image/eponge.jpg");
+
+            Annonce ann = new Annonce(0L,"Velo","Tres beau velo",50,"23/04/2022","Ile de france","Paris" ,0L,i1,nbvue,"Email","Sport","velo",m1);
+            Annonce ann1 = new Annonce(1L,"Marteau","Tres beau Marteau",50,"23/04/2022","Herault","Montpellier" ,0L,i2,nbvue,"Email","Bricolage","Marteau",m1);
+            Annonce ann2 = new Annonce(2L,"Phone","Tres beau téléphone",50,"23/04/2022","Bouche du Rhone","Miramas" ,0L,i3,nbvue,"Email","Multimedia","Telephone",m1);
+            Annonce ann3 = new Annonce(3L,"ordinateur","Tres beau ordinateur",50,"23/04/2022","Bouche du Rhone","Eyguières" ,0L,i4,nbvue,"Email","Sport","velo",m1);
+            Annonce ann4 = new Annonce(4L,"bateau","Tres beau bateau",50,"23/04/2022","Bouche du Rhone","Salon" ,0L,i5,nbvue,"Email","Sport","velo",m1);
+            Annonce ann5 = new Annonce(5L,"cafetière","Tres beau cafetière",50,"23/04/2022","Ile est Vilaine","Renne" ,0L,i6,nbvue,"Email","Sport","velo",m1);
+            Annonce ann6 = new Annonce(6L,"Eponge","Tres beau Eponge",50,"23/04/2022","Finistère","Brest" ,0L,i7,nbvue,"Email","Sport","velo",m1);
 
             ann.setAnn1(a);
             ann1.setAnn1(a);

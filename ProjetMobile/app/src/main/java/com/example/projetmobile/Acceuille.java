@@ -5,9 +5,11 @@ import android.view.View;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.projetmobile.BDD.Controllers.UserControlers;
 import com.example.projetmobile.BDD.models.UserBDD;
@@ -37,6 +39,7 @@ public class Acceuille extends AppCompatActivity {
         recherche = (TextInputLayout) findViewById(R.id.idrecherche);
         extras = getIntent().getExtras();
         listView = (GridView ) findViewById(R.id.gridView);
+
 //       User user =  extras.getParcelable("USER");
   //      System.out.println("utilisateur " + user.getEmail());
         MyAsyncConnexion myAsyncTasks = new MyAsyncConnexion();
@@ -50,16 +53,15 @@ public class Acceuille extends AppCompatActivity {
 
  */
         Gson gson = new Gson();
-        String url = "http://172.16.5.209:8080/LeMauvaisCoin/api/annonce/Recent" ;
+        String url = "http://192.168.1.25:8080/LeMauvaisCoin/api/annonce/Recent" ;
         String reponse = null;
-        System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
         try {
+            Toast.makeText(Acceuille.this, "ICI1", Toast.LENGTH_LONG).show();
             reponse = myAsyncTasks.execute(url).get();
+            Toast.makeText(Acceuille.this, "ICI2", Toast.LENGTH_LONG).show();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP");
-        System.out.println("ICI " + reponse);
         if(!reponse.equals("")) {
             List<Annonce> test = new ArrayList<Annonce>();
             ArrayList<Annonce> annonce = gson.fromJson(reponse,  new TypeToken<ArrayList<Annonce>>(){}.getType());

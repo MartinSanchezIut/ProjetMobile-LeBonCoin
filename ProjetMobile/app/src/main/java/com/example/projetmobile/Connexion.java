@@ -52,7 +52,7 @@ public class Connexion extends AppCompatActivity {
 
         Gson gson = new Gson();
         System.out.println(this.email.getEditText().getText().toString());
-        String url = "http://172.16.5.209:8080/LeMauvaisCoin/api/User/Connexion/" + this.email.getEditText().getText().toString() + "/" + this.password.getEditText().getText().toString();
+        String url = "http://192.168.1.25:8080/LeMauvaisCoin/api/User/Connexion/" + this.email.getEditText().getText().toString() + "/" + this.password.getEditText().getText().toString();
         String reponse = myAsyncTasks.execute(url).get();
         System.out.println("ICI " + reponse);
         if(!reponse.equals("")) {
