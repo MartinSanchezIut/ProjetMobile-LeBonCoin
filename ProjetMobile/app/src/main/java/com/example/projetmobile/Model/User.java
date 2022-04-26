@@ -3,6 +3,7 @@ package com.example.projetmobile.Model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.provider.ContactsContract;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,15 +18,18 @@ public class User implements Parcelable {
     private String email;
     private String numero;
     private String mot_de_passe;
+
+    private String image;
     private String statu;
     private List<Annonce> mesannonces;
     private List<Annonce> sauvegarde= new ArrayList<>();
     public User(){
 
     }
-    public User(String statu,String pseudo, String nom, String prenom, String email, String numero, String mot_de_passe) {
+    public User(String statu,String pseudo, String image,String nom, String prenom, String email, String numero, String mot_de_passe) {
         this.pseudo = pseudo;
         this.nom = nom;
+        this.image = image;
         this.prenom = prenom;
         this.email = email;
         this.numero = numero;
@@ -36,6 +40,7 @@ public class User implements Parcelable {
     protected User(Parcel in) {
         pseudo = in.readString();
         nom = in.readString();
+        image = in.readString();
         prenom = in.readString();
         email = in.readString();
         numero = in.readString();
@@ -116,6 +121,14 @@ public class User implements Parcelable {
         this.mot_de_passe = mot_de_passe;
     }
 
+    public void setImage(String image) {
+        image = image;
+    }
+
+    public void setStatu(String statu) {
+        this.statu = statu;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -125,10 +138,15 @@ public class User implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(pseudo);
         parcel.writeString(nom);
+        parcel.writeString(image);
         parcel.writeString(prenom);
         parcel.writeString(email);
         parcel.writeString(numero);
         parcel.writeString(mot_de_passe);
         parcel.writeString(statu);
+    }
+
+    public String getImage() {
+        return image;
     }
 }

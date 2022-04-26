@@ -416,7 +416,7 @@ public class FragmentDeposer extends Fragment {
         }
         Bitmap i = BitmapFactory.decodeStream(inputStream);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        i.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+        i.compress(Bitmap.CompressFormat.JPEG, 5, baos);
         byte[] b = baos.toByteArray();
         String temp = Base64.getEncoder().encodeToString(baos.toByteArray());
         image.add(temp);

@@ -37,10 +37,6 @@ public class MyAsyncInscription  extends AsyncTask<String, String, String> {
             OutputStreamWriter  out = new OutputStreamWriter (
                     httpCon.getOutputStream());
 
-            Gson gson = new Gson();
-            Annonceur_pro f = gson.fromJson(params[1], Annonceur_pro.class);
-           // JSONObject parameters = new JSONObject((Map) f);
-            System.out.println(f.getEmail());
             out.write(params[1]);
             out.close();
             httpCon.getInputStream();

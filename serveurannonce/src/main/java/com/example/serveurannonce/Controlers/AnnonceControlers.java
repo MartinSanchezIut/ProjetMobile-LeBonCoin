@@ -1,7 +1,9 @@
 package com.example.serveurannonce.Controlers;
 
 import com.example.serveurannonce.Models.Annonce;
+import com.example.serveurannonce.Models.Recherche;
 import com.example.serveurannonce.Repository.AnnonceRepository;
+import com.example.serveurannonce.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +22,8 @@ public class AnnonceControlers {
     @Autowired
     private AnnonceRepository annonce;
 
-
+    @Autowired
+    private UserRepository user;
     private static final String uri = "LeMauvaisCoin/api/annonce";
     @GetMapping(uri + "/GetAnnonce")
     public List<Annonce> GetAnnonce() {
@@ -32,14 +35,42 @@ public class AnnonceControlers {
         return annonce.findById(id).get();
     }
 
-    @GetMapping(uri + "/Recherche/{Ville}/{categories}/{filtre}")
-    public List<Annonce> GetRechercheAnnonce(@PathVariable String Ville,@PathVariable String categories ,@PathVariable String filtre) {
+    @PostMapping(uri + "/Recherche")
+    public List<Annonce> GetRechercheAnnonce(@RequestBody Recherche re) {
         List<Annonce> result = new ArrayList<Annonce>();
+        /*
+        System.out.println(re.getPrix1());
+        System.out.println(re.getPrix2());
+        System.out.println(re.getCategorie());
+        System.out.println(re.getDepartement());
+        System.out.println(re.getFiltre());
+        System.out.println(re.getVille());
+        System.out.println(re.isParticulier());
+        System.out.println(re.isProfessionel());
+
+         */
         for(Annonce ann : annonce.findAll()){
-            if((Ville.equals("null") || Ville.equals(ann.getVille())) && (categories.equals("null") || categories.equals(ann.getCategories())) &&(filtre.equals("null") || filtre.equals(ann.getFiltre()))){
-                result.add(ann);
+            System.out.println(ann.getTitre());
+            System.out.println(re.getCategorie() == null || re.getCategorie().equals(ann.getCategories()));
+            System.out.println(re.getFiltre() == null || re.getFiltre().equals(ann.getFiltre()) );
+            System.out.println(re.getPrix1() == null || re.getPrix1() <= ann.getPrix());
+            System.out.println(re.getPrix2() == null || re.getPrix2() >= ann.getPrix());
+            System.out.println(re.getDepartement() == null || re.getDepartement().equals(ann.getDepartement()));
+            System.out.println(re.getVille() == null || re.getVille().equals(ann.getVille()));
+
+            if(
+                    (re.getCategorie() == null || re.getCategorie().equals(ann.getCategories()) ) &&
+                            (re.getFiltre() == null || re.getFiltre().equals(ann.getFiltre()) ) &&
+                            (re.getPrix1() == null || re.getPrix1() <= ann.getPrix())  &&
+                            (re.getPrix2() == null || re.getPrix2() >= ann.getPrix())  &&
+                            (re.getDepartement() == null || re.getDepartement().equals(ann.getDepartement()))  &&
+                            (re.getVille() == null || re.getVille().equals(ann.getVille()))
+            ){
+                    result.add(ann);
+
             }
         }
+        System.out.println(result.get(0).getTitre());
         return result;
     }
 

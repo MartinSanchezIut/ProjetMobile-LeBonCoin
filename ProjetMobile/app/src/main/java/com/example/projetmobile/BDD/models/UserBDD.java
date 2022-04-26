@@ -23,14 +23,18 @@ public class UserBDD {
     private String mot_de_passe;
     @ColumnInfo(name = "Statu")
     private String statu;
+    @ColumnInfo(name = "Image")
+    private String Image;
+
 
     @ColumnInfo(name = "Entreprise")
     private String entreprise;
 
 
-    public UserBDD(long id_user, String pseudo, String nom, String prenom, String email, String numero, String mot_de_passe, String statu, String entreprise) {
+    public UserBDD(long id_user, String pseudo,String Image, String nom ,String prenom, String email, String numero, String mot_de_passe, String statu, String entreprise) {
         this.id_user = id_user;
         this.pseudo = pseudo;
+        this.Image = Image;
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
@@ -107,5 +111,9 @@ public class UserBDD {
 
     public void setStatu(String statu) {
         this.statu = statu;
+    }
+
+    public String getImage() {
+        return Image;
     }
 }

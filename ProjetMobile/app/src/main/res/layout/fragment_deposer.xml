@@ -190,8 +190,6 @@
                   app:layout_constraintTop_toBottomOf="@+id/Description"
                   android:id="@+id/linearLayoutdepartement"
                   android:layout_marginTop="80dp">
-
-
         <TextView
                 android:text="Département"
                 android:textStyle="bold"

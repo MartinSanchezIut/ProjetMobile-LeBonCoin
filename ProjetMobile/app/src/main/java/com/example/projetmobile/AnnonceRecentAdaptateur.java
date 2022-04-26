@@ -56,6 +56,8 @@ public class AnnonceRecentAdaptateur extends BaseAdapter  {
         TextView Description = (TextView)view.findViewById(R.id.Descriptions);
         TextView Date = (TextView)view.findViewById(R.id.Date);
         TextView Lieux = (TextView)view.findViewById(R.id.Lieux);
+        TextView Prix = (TextView)view.findViewById(R.id.Prix);
+        Prix.setText(String.valueOf(getItem(i).getPrix()));
         Titre.setText(getItem(i).getTitre());
         Description.setText(getItem(i).getDescription());
         Date.setText(getItem(i).getDate_publication());

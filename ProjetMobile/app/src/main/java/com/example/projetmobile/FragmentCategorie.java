@@ -59,7 +59,7 @@ public class FragmentCategorie extends Fragment {
     public void init(){
         listcategorie = new ArrayList<>();
         ArrayList<String> vacance = new ArrayList<>();
-        vacance.add("Location & Gites");
+        vacance.add("Location et Gites");
         vacance.add("Chambres d'hôtes");
         vacance.add("Campings");
         vacance.add("Hébergement insolites");

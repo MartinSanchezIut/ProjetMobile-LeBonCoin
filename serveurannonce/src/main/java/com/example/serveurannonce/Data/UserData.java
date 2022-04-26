@@ -22,10 +22,10 @@ public class UserData {
     public CommandLineRunner initDatabase( AnnonceurProRepository annonceur_pro, AnnonceurPartRepository annonceur_part, AnnonceRepository annonce,MessageRepository message) {
         return args -> {
             ArrayList<Annonce> n1= new ArrayList<>();
-            Annonceur_Particulier a = new Annonceur_Particulier(0,"AnnonceurPart","toto","sanchez","martin","test1","06 16 66 16 30","A");
+            Annonceur_Particulier a = new Annonceur_Particulier(0,"AnnonceurPart","toto",null,"sanchez","martin","test1","06 16 66 16 30","A");
             annonceur_part.save(a);
             ArrayList<Annonce> n2= new ArrayList<>();
-            Annonceur_pro ap = new Annonceur_pro(1,"AnnonceurPro","toto","TRINQUART","Matthieu","test2","06 06 06 06 06","A","matthieucompagny");
+            Annonceur_pro ap = new Annonceur_pro(1,"AnnonceurPro","toto",null,"TRINQUART","Matthieu","test2","06 06 06 06 06","A","matthieucompagny");
             annonceur_pro.save(ap);
             ArrayList<Annonce> n3= new ArrayList<>();
 
@@ -47,7 +47,7 @@ public class UserData {
             ArrayList<String> i7 = new ArrayList<>();
             i7.add("src/main/java/com/example/serveurannonce/Image/eponge.jpg");
 
-            Annonce ann = new Annonce(0L,"Velo","Tres beau velo",50,"23/04/2022","Ile de france","Paris" ,0L,i1,nbvue,"Email","Sport","velo",m1);
+            Annonce ann = new Annonce(0L,"Velo","Tres beau velo",50,"23/04/2022","Bouche du Rhone","Eyguières" ,0L,i1,nbvue,"Email","Vacances","Location et Gites",m1);
             Annonce ann1 = new Annonce(1L,"Marteau","Tres beau Marteau",50,"23/04/2022","Herault","Montpellier" ,0L,i2,nbvue,"Email","Bricolage","Marteau",m1);
             Annonce ann2 = new Annonce(2L,"Phone","Tres beau téléphone",50,"23/04/2022","Bouche du Rhone","Miramas" ,0L,i3,nbvue,"Email","Multimedia","Telephone",m1);
             Annonce ann3 = new Annonce(3L,"ordinateur","Tres beau ordinateur",50,"23/04/2022","Bouche du Rhone","Eyguières" ,0L,i4,nbvue,"Email","Sport","velo",m1);

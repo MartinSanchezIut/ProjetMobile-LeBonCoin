@@ -6,9 +6,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".Acceuille">
+    <Button
+            android:text="Filtre"
+            android:layout_width="239dp"
+            android:onClick="filtre"
+            app:cornerRadius="8dp"
+            android:background="@drawable/button_layout"
+            android:layout_height="38dp" android:id="@+id/idbutttonconnexion2"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="168dp"
+            app:backgroundTint="#2286C3"
+    />
     <LinearLayout
-            android:layout_width="277dp"
-            android:layout_height="76dp"
+            android:layout_width="280dp"
+            android:layout_height="57dp"
             android:orientation="horizontal"
             tools:context=".MainActivity" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="100dp"
@@ -37,8 +48,8 @@
 
     <GridView
             android:id="@+id/gridView"
-            android:layout_width="352dp"
-            android:layout_height="525dp"
+            android:layout_width="344dp"
+            android:layout_height="462dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
@@ -49,7 +60,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.729" app:layout_constraintHorizontal_bias="0.48">
+            app:layout_constraintVertical_bias="0.757" app:layout_constraintHorizontal_bias="0.484">
     </GridView>
     <ImageView
             android:layout_width="361dp"

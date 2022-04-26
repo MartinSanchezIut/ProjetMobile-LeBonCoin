@@ -52,12 +52,15 @@ public class UserControlers {
     @ResponseStatus(HttpStatus.CREATED)
     @PutMapping(uri + "/InscriptionAnnonceurPro")
     public Annonceur_pro GetUserById( @RequestBody Annonceur_pro annonceur) {
+
+        System.out.println(annonceur.getImage());
         return annonceur_pro.save(annonceur);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PutMapping(uri + "/InscriptionAnnonceurPart")
     public Annonceur_Particulier GetUserById(@RequestBody Annonceur_Particulier annonceur) {
+        System.out.println(annonceur.getImage());
         return annonceur_part.save(annonceur);
     }
 

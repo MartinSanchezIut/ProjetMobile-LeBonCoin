@@ -15,6 +15,10 @@ public class User {
     private String pseudo;
     @Column(name = "NOM")
     private String nom;
+
+
+    @Column(name = "IMAGE",length=1000000)
+    private String image;
     @Column(name = "PRENOM")
     private String prenom;
     @Column(name = "EMAIL")
@@ -25,6 +29,7 @@ public class User {
     private String mot_de_passe;
     @Column(name = "statu")
     private String statu;
+
     @Column(name = "MESANNONCES")
     @OneToMany(mappedBy = "ann1", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Annonce> mesannonces;
@@ -42,9 +47,10 @@ public class User {
     public User(){
 
     }
-    public User(long id_user, String statu,String pseudo, String nom, String prenom, String email, String numero, String mot_de_passe) {
+    public User(long id_user, String statu,String pseudo,String image ,String nom, String prenom, String email, String numero, String mot_de_passe) {
         this.id_user = id_user;
         this.pseudo = pseudo;
+        this.image = image;
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
@@ -114,6 +120,14 @@ public class User {
         this.mot_de_passe = mot_de_passe;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public List<Annonce> getMesannonces() {
         return mesannonces;
     }
@@ -124,5 +138,13 @@ public class User {
 
     public void addsauvegarde(Annonce ann) {
         sauvegarde.add(ann);
+    }
+
+
+
+
+
+    public void setStatu(String statu) {
+        this.statu = statu;
     }
 }

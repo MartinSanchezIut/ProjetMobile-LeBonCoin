@@ -34,4 +34,9 @@ public class UserControlers extends ViewModel {
        return userdao.getCount();
 
     }
+
+    public void Delete(UserBDD u) {
+         userdao.delete(u);
+
+    }
 }

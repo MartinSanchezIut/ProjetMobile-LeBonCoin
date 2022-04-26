@@ -40,25 +40,14 @@ public class Acceuille extends AppCompatActivity {
         extras = getIntent().getExtras();
         listView = (GridView ) findViewById(R.id.gridView);
 
-//       User user =  extras.getParcelable("USER");
-  //      System.out.println("utilisateur " + user.getEmail());
         MyAsyncConnexion myAsyncTasks = new MyAsyncConnexion();
 
-/*
-        UserControlers planningModel = new ViewModelProvider(this).get(UserControlers.class);
-        planningModel.init(getApplicationContext());
-        List<UserBDD> d = planningModel.getPlanning();
-        System.out.println(d.get(0).getPseudo());
-        Tuser.setText(d.get(0).getPseudo());
 
- */
         Gson gson = new Gson();
         String url = "http://192.168.1.25:8080/LeMauvaisCoin/api/annonce/Recent" ;
         String reponse = null;
         try {
-            Toast.makeText(Acceuille.this, "ICI1", Toast.LENGTH_LONG).show();
             reponse = myAsyncTasks.execute(url).get();
-            Toast.makeText(Acceuille.this, "ICI2", Toast.LENGTH_LONG).show();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
@@ -68,7 +57,10 @@ public class Acceuille extends AppCompatActivity {
             AnnonceRecentAdaptateur myAdapter=new AnnonceRecentAdaptateur(this,annonce);
             listView.setAdapter(myAdapter);
         }
+    }
 
-
+    public void filtre(View view){
+        Intent intention= new Intent(Acceuille.this, Recherche.class);
+        startActivity(intention);
     }
 }

@@ -63,14 +63,14 @@ public class Connexion extends AppCompatActivity {
                 intention.putExtra("USER", annonceur);
                 UserControlers planningModel = new ViewModelProvider(this).get(UserControlers.class);
                 //(long id_user, String pseudo, String nom, String prenom, String email, String numero, String mot_de_passe, String statu, String entreprise)
-                UserBDD t = new UserBDD(annonceur.getId_user(),annonceur.getPseudo(),annonceur.getNom(),annonceur.getPrenom(),annonceur.getEmail(),annonceur.getNumero(),annonceur.getMot_de_passe(),annonceur.getStatu(),annonceur.getNom_societe());
+                UserBDD t = new UserBDD(annonceur.getId_user(),annonceur.getPseudo(),annonceur.getImage(),annonceur.getNom(),annonceur.getPrenom(),annonceur.getEmail(),annonceur.getNumero(),annonceur.getMot_de_passe(),annonceur.getStatu(),annonceur.getNom_societe());
                 planningModel.init(getApplicationContext());
                 planningModel.insert(t);
             } else if (user.getStatu().equals("AnnonceurPart")) {
                 Annonceur_Particulier annonceur = gson.fromJson(reponse, Annonceur_Particulier.class);
                 UserControlers planningModel = new ViewModelProvider(this).get(UserControlers.class);
                 intention.putExtra("USER", annonceur);
-                UserBDD t = new UserBDD(annonceur.getId_user(),annonceur.getPseudo(),annonceur.getNom(),annonceur.getPrenom(),annonceur.getEmail(),annonceur.getNumero(),annonceur.getMot_de_passe(),annonceur.getStatu(),null);
+                UserBDD t = new UserBDD(annonceur.getId_user(),annonceur.getPseudo(),annonceur.getImage(),annonceur.getNom(),annonceur.getPrenom(),annonceur.getEmail(),annonceur.getNumero(),annonceur.getMot_de_passe(),annonceur.getStatu(),null);
                 planningModel.init(getApplicationContext());
                 planningModel.insert(t);
 
