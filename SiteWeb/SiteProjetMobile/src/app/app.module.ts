@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ChatComponent } from './chat/chat.component';
 import { MesannoncesComponent } from './mesannonces/mesannonces.component';
 import { AnnoncessauvegardeesComponent } from './annoncessauvegardees/annoncessauvegardees.component';
 import { AjouterannonceComponent } from './ajouterannonce/ajouterannonce.component';
@@ -24,7 +23,6 @@ import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
-    ChatComponent,
     MesannoncesComponent,
     AnnoncessauvegardeesComponent,
     AjouterannonceComponent,

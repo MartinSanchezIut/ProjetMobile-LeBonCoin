@@ -21,4 +21,13 @@ export class Categories {
         {nomCat: "Loisir", listeSousCat:["..."]},
         {nomCat: "Divers", listeSousCat:["..."]},
     ]; 
+
+    public static getSousCategorieOf(categorie : string) : string[] {
+        for (let cat of Categories.list) {
+            if (cat.nomCat == categorie) {
+                return cat.listeSousCat;
+            }
+        }
+        return [] ;
+    }
 }
