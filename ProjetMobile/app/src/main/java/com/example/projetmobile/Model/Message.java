@@ -4,21 +4,18 @@ package com.example.projetmobile.Model;
 
 public class Message {
     private long id_message;
-    private long id_user;
+    private long user;
     private String message;
 
 
-    public Message(){
 
-    }
-    public Message(long id_message, long id_user, String message) {
-        this.id_message = id_message;
-        this.id_user = id_user;
+    public Message(long user, String message) {
+        this.user = user;
         this.message = message;
     }
 
     public long getUser() {
-        return id_user;
+        return user;
     }
 
 

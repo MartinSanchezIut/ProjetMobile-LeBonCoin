@@ -2,18 +2,12 @@ package com.example.projetmobile;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,19 +15,19 @@ import android.view.ViewGroup;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.room.Room;
-import com.example.projetmobile.BDD.Controllers.UserControlers;
+import com.example.projetmobile.BDD.models.Controllers.UserControlers;
 import com.example.projetmobile.BDD.Repository.AppDataBase;
 import com.example.projetmobile.BDD.Repository.UserDao;
-import com.example.projetmobile.BDD.models.UserBDD;
 import com.example.projetmobile.Model.Annonce;
 import com.example.projetmobile.Model.Message;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
-import java.util.concurrent.ExecutionException;
 
 
 public class FragmentDeposer extends Fragment {
@@ -135,25 +129,23 @@ public class FragmentDeposer extends Fragment {
                         f.setContact(Contact.getEditText().getText().toString());
                         UserControlers userControlers = new ViewModelProvider(getActivity()).get(UserControlers.class);
                         userControlers.init(getContext());
+                        System.out.println("ID UTILISATEUR  :  " + userControlers.getPlanning().get(0).getId_user());
                         f.setId_annonceur(userControlers.getPlanning().get(0).getId_user());
                         Map<String, Integer> d = new HashMap<>();
                         f.setNbvues(d);
                         List<Message> m = new ArrayList<>();
                         f.setList_messages(m);
-                        MyAsyncPutAnnonce myAsyncTasks = new MyAsyncPutAnnonce();
-                        String url = "http://192.168.1.25:8080/LeMauvaisCoin/api/annonce/PutAnnonce";
+                        String url = "http://172.16.5.209:8080/LeMauvaisCoin/api/annonce/PutAnnonce";
                         String json = gson.toJson(f);
-                        String reponse = myAsyncTasks.execute(url,json).get();
-                        System.out.println(f);
+                        System.out.println(json);
+                        PutRequest(url,json);
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    } catch (ExecutionException e) {
-                        throw new RuntimeException(e);
-                    } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
                     t.delete();
                 }
+                Intent intent = new Intent(getActivity(),Acceuille.class);
+                startActivity(intent);
             }
         });
 
@@ -404,6 +396,42 @@ public class FragmentDeposer extends Fragment {
             }
         });
     }
+    public void PutRequest(String url,String json) throws IOException {
+        Thread thread = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                try  {
+                    URL adress = null;
+                    try {
+                        adress = new URL(url);
+                        HttpURLConnection httpCon = (HttpURLConnection) adress.openConnection();
+                        httpCon.setDoOutput(true);
+                        httpCon.setRequestMethod("PUT");
+                        httpCon.setRequestProperty("Content-Type", "application/json");
+                        httpCon.setRequestProperty("Accept", "application/json");
+                        OutputStreamWriter out = new OutputStreamWriter (
+                                httpCon.getOutputStream());
+                        out.write(json);
+                        out.close();
+                        httpCon.getInputStream();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -416,7 +444,7 @@ public class FragmentDeposer extends Fragment {
         }
         Bitmap i = BitmapFactory.decodeStream(inputStream);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        i.compress(Bitmap.CompressFormat.JPEG, 5, baos);
+        i.compress(Bitmap.CompressFormat.JPEG, 20, baos);
         byte[] b = baos.toByteArray();
         String temp = Base64.getEncoder().encodeToString(baos.toByteArray());
         image.add(temp);
@@ -444,7 +472,9 @@ public class FragmentDeposer extends Fragment {
                     break;
 
             }
+
         }
+
     }
 
 

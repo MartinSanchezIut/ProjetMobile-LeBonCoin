@@ -47,8 +47,7 @@ public class User {
     public User(){
 
     }
-    public User(long id_user, String statu,String pseudo,String image ,String nom, String prenom, String email, String numero, String mot_de_passe) {
-        this.id_user = id_user;
+    public User(String statu,String pseudo,String image ,String nom, String prenom, String email, String numero, String mot_de_passe) {
         this.pseudo = pseudo;
         this.image = image;
         this.nom = nom;

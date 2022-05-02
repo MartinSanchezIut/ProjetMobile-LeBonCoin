@@ -19,6 +19,8 @@ public class ListDepartementRechercheAdaptateur  extends BaseAdapter {
     private List<Departement> list;
     private LayoutInflater inflater;
 
+    CheckBox chkbox;
+
     public ListDepartementRechercheAdaptateur(Context context, List<Departement> list) {
         this.context = context;
         this.list = list;
@@ -45,9 +47,9 @@ public class ListDepartementRechercheAdaptateur  extends BaseAdapter {
 
         String e = getItem(i).getNom();
         TextView departement = view.findViewById(R.id.Departement);
-        CheckBox chkbox=(CheckBox) view.findViewById(R.id.checkboxdepartement);
+        chkbox=(CheckBox) view.findViewById(R.id.checkboxdepartement);
         departement.setText(e);
-
+        chkbox.setChecked(getItem(i).isIschecked());
         chkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
@@ -55,8 +57,22 @@ public class ListDepartementRechercheAdaptateur  extends BaseAdapter {
                 if(isChecked)
                 {
                     getItem(i).setIschecked(true);
+                    if(i==0){
+                        for(int j=0; j < getCount(); j++){
+                            System.out.println(getCount());
+                            getItem(j).setIschecked(true);
+                        }
+                        notifyDataSetChanged();
+                    }
                 }else{
                     getItem(i).setIschecked(false);
+                    if(i==0){
+                        for(int j=0; j < getCount(); j++){
+                            System.out.println(getCount());
+                            getItem(j).setIschecked(false);
+                        }
+                        notifyDataSetChanged();
+                    }
                 }
             }
         });

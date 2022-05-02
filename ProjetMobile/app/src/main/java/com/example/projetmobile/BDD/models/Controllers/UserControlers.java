@@ -1,4 +1,4 @@
-package com.example.projetmobile.BDD.Controllers;
+package com.example.projetmobile.BDD.models.Controllers;
 
 import android.content.Context;
 import androidx.lifecycle.ViewModel;

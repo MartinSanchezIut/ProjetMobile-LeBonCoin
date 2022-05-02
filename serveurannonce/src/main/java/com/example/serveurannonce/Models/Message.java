@@ -3,33 +3,34 @@ package com.example.serveurannonce.Models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 @Entity
 public class Message {
     @Id
+    @GeneratedValue
     private long id_message;
 
-    private long id_user;
+    private long user;
+
     @Column(name = "MESSAGE")
     private String message;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="Annonce", nullable=false)
-    private Annonce ann;
-
+    @JoinColumn(name="Conversation", nullable=false)
+    private Conversation messagec;
     public Message(){
 
     }
-    public Message(long id_message, long id_user, String message, Annonce ann) {
-        this.id_message = id_message;
-        this.id_user = id_user;
+    public Message(long user, String message,Conversation messagec) {
+        this.user = user;
         this.message = message;
-        this.ann = ann;
+        this.messagec = messagec;
     }
 
     public long getUser() {
-        return id_user;
+        return user;
     }
 
 
@@ -37,7 +38,20 @@ public class Message {
         return message;
     }
 
-    public Annonce getAnn() {
-        return ann;
+
+    public void setId_message(long id_message) {
+        this.id_message = id_message;
+    }
+
+    public void setId_user(long user) {
+        this.user = user;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setMessagec(Conversation messagec) {
+        this.messagec = messagec;
     }
 }

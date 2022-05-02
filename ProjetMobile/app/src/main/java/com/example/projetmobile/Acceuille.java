@@ -2,35 +2,32 @@ package com.example.projetmobile;
 
 import android.content.Intent;
 import android.view.View;
-import android.widget.GridView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import com.example.projetmobile.BDD.Controllers.UserControlers;
-import com.example.projetmobile.BDD.models.UserBDD;
+import androidx.room.Room;
+import com.example.projetmobile.BDD.Repository.AppDataBase;
+import com.example.projetmobile.BDD.Repository.UserDao;
 import com.example.projetmobile.Model.Annonce;
-import com.example.projetmobile.Model.Annonceur_Particulier;
-import com.example.projetmobile.Model.Annonceur_pro;
-import com.example.projetmobile.Model.User;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.io.Charsets;
+import org.apache.commons.io.IOUtils;
 
-import java.lang.reflect.Type;
+import java.io.*;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class Acceuille extends AppCompatActivity {
     private Bundle extras ;
     private GridView  listView ;
     private TextView Tuser ;
     private TextInputLayout recherche;
+    private ArrayList<Annonce> annonce;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,27 +37,66 @@ public class Acceuille extends AppCompatActivity {
         extras = getIntent().getExtras();
         listView = (GridView ) findViewById(R.id.gridView);
 
-        MyAsyncConnexion myAsyncTasks = new MyAsyncConnexion();
 
 
         Gson gson = new Gson();
-        String url = "http://192.168.1.25:8080/LeMauvaisCoin/api/annonce/Recent" ;
+        String url = "http://172.16.5.209:8080/LeMauvaisCoin/api/annonce/Recent" ;
         String reponse = null;
         try {
-            reponse = myAsyncTasks.execute(url).get();
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
+            reponse = getRequest(url);
+           // reponse = myAsyncTasks.execute(url).get();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+        System.out.println(reponse.getBytes().length);
         if(!reponse.equals("")) {
-            List<Annonce> test = new ArrayList<Annonce>();
-            ArrayList<Annonce> annonce = gson.fromJson(reponse,  new TypeToken<ArrayList<Annonce>>(){}.getType());
+             annonce = gson.fromJson(reponse,  new TypeToken<ArrayList<Annonce>>(){}.getType());
             AnnonceRecentAdaptateur myAdapter=new AnnonceRecentAdaptateur(this,annonce);
             listView.setAdapter(myAdapter);
         }
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3)
+            {
+                final int REQUEST_CODE = 20;
+                Intent intention= new Intent(Acceuille.this, DetailAnnonce.class);
+                Gson gson = new Gson();
+                FileOutputStream fOut = null;
+                String myJson = gson.toJson(annonce.get(position));
+                intention.putExtra("Annonce",myJson);
+                startActivity(intention);
+            }
+        });
     }
 
     public void filtre(View view){
         Intent intention= new Intent(Acceuille.this, Recherche.class);
         startActivity(intention);
+    }
+
+    public String getRequest(String url) throws IOException {
+        final String[] result = {""};
+        Thread thread = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                try  {
+                    result[0]= IOUtils.toString(new InputStreamReader(new BufferedInputStream(new URL(url).openConnection().getInputStream()), Charsets.UTF_8));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        return result[0];
     }
 }

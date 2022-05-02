@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.lifecycle.ViewModelProvider;
-import com.example.projetmobile.BDD.Controllers.UserControlers;
+import com.example.projetmobile.BDD.models.Controllers.UserControlers;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
@@ -29,6 +29,8 @@ public class AcceuilProfile extends Fragment {
 
     private ImageView profil ;
     private Button Annoncesauv;
+
+    private Button Messages;
     private Button Mesannonces;
     private Button Deconnexion;
 
@@ -43,6 +45,9 @@ public class AcceuilProfile extends Fragment {
         Temail = (TextView)root.findViewById(R.id.idEmail);
         Tentreprise = (TextView)root.findViewById(R.id.idEntreprise);
         profil = (ImageView)root.findViewById(R.id.profil);
+
+
+
         UserControlers userControlers = new ViewModelProvider(getActivity()).get(UserControlers.class);
         userControlers.init(getContext());
         Tpseudo.setText(userControlers.getPlanning().get(0).getPseudo());
@@ -57,7 +62,6 @@ public class AcceuilProfile extends Fragment {
             Tentreprise.setText("");
         }
         if(userControlers.getPlanning().get(0).getImage() != null) {
-            System.out.println("IMAGE = " + userControlers.getPlanning().get(0).getImage());
             byte[] myImage = Base64.getDecoder().decode(userControlers.getPlanning().get(0).getImage().getBytes(StandardCharsets.UTF_8));
             Bitmap bmp = BitmapFactory.decodeByteArray(myImage, 0, myImage.length);
             profil.setImageBitmap(bmp);
@@ -66,6 +70,16 @@ public class AcceuilProfile extends Fragment {
         Tentreprise = (TextView)root.findViewById(R.id.identreprise);
         Annoncesauv = (Button)root.findViewById(R.id.btnAnnoncesauv);
         Mesannonces = (Button)root.findViewById(R.id.btnMesAnnonces);
+
+        Messages = (Button)root.findViewById(R.id.btnMessages);
+        Messages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intention= new Intent(getContext(), ActivityMessage.class);
+                startActivity(intention);
+
+            }
+        });
         Deconnexion = (Button)root.findViewById(R.id.btnDeconnexion);
         Deconnexion.setOnClickListener(new View.OnClickListener() {
             @Override

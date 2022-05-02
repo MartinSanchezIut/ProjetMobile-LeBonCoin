@@ -1,25 +1,14 @@
 package com.example.projetmobile;
 
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.room.Room;
-import androidx.room.RoomDatabase;
-import androidx.sqlite.db.SupportSQLiteDatabase;
-import com.example.projetmobile.BDD.Controllers.UserControlers;
-import com.example.projetmobile.BDD.Repository.AppDataBase;
-import com.example.projetmobile.BDD.Repository.UserDao;
-import com.example.projetmobile.BDD.models.UserBDD;
+import com.example.projetmobile.BDD.models.Controllers.UserControlers;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.List;
 
 
 public class navbarreDeconnecter extends Fragment {
@@ -71,6 +60,10 @@ public class navbarreDeconnecter extends Fragment {
         } else if (AjouterAnnonce.class.getName().equals(c)) {
             System.out.println("ICI5");
             bottomNavigationView.getMenu().findItem(R.id.navigate_publication).setChecked(true);
+        }
+        else if (Recherche.class.getName().equals(c)) {
+            System.out.println("ICI5");
+            bottomNavigationView.getMenu().findItem(R.id.navigation_home).setChecked(true);
         }
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> updateMainFragment(item.getItemId()));
         return root;

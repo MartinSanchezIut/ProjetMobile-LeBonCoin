@@ -63,7 +63,6 @@ public class FragmentFiltreRecherche extends Fragment {
                         FileOutputStream fOut = getContext().openFileOutput("recherche.json", 0);
 
                         String json = gson.toJson(r);
-                        System.out.println("ICI   " + json);
                         fOut.write(json.getBytes());
                         fOut.close();
 

@@ -2,12 +2,13 @@ package com.example.projetmobile.Model;
 
 
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 
-public class Annonce {
+public class Annonce  {
 
     private long id_annonce;
     private String titre;
@@ -46,6 +47,8 @@ public class Annonce {
         this.departement = departement;
 
     }
+
+
 
 
 

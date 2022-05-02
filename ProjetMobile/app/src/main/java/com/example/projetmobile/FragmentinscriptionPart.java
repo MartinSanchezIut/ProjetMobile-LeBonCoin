@@ -24,6 +24,10 @@ import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Base64;
 import java.util.concurrent.ExecutionException;
 
@@ -109,16 +113,14 @@ public class FragmentinscriptionPart extends Fragment {
     }
 
     public void inscription(){
-        String url ="http://192.168.1.25:8080/LeMauvaisCoin/api/User/InscriptionAnnonceurPart";
-        MyAsyncInscription myAsyncTasks = new MyAsyncInscription();
+        String url ="http://172.16.5.209:8080/LeMauvaisCoin/api/User/InscriptionAnnonceurPart";
         try {
             Gson gson = new Gson();
             Annonceur_Particulier pro = new Annonceur_Particulier("AnnonceurPart",Epseudo.getEditText().getText().toString(),this.Image,Enom.getEditText().getText().toString(),Eprenom.getEditText().getText().toString(),Eemail.getEditText().getText().toString(),Enumero.getEditText().getText().toString(),Epassword.getEditText().getText().toString());
             String json = gson.toJson(pro);
-            System.out.println("IMAGE  = " + json);
-            String reponse = myAsyncTasks.execute(url,json).get();
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
+            PutRequest(url,json);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
         Intent intent = new Intent(getActivity(),Connexion.class);
@@ -136,6 +138,43 @@ public class FragmentinscriptionPart extends Fragment {
             this.Image = Base64.getEncoder().encodeToString(baos.toByteArray());
             inscription();
         }
+    }
+
+    public void PutRequest(String url,String json) throws IOException {
+        Thread thread = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                try  {
+                    URL adress = null;
+                    try {
+                        adress = new URL(url);
+                        HttpURLConnection httpCon = (HttpURLConnection) adress.openConnection();
+                        httpCon.setDoOutput(true);
+                        httpCon.setRequestMethod("PUT");
+                        httpCon.setRequestProperty("Content-Type", "application/json");
+                        httpCon.setRequestProperty("Accept", "application/json");
+                        OutputStreamWriter out = new OutputStreamWriter (
+                                httpCon.getOutputStream());
+                        out.write(json);
+                        out.close();
+                        httpCon.getInputStream();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
 

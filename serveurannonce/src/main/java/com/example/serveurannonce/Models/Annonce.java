@@ -29,7 +29,7 @@ public class Annonce {
     private String date_publication;
 
 
-    @Column(name = "Annonceur")
+    @Column(name = "id_annonceur")
     private Long id_annonceur;
 
     @Column(name = "Departement")
@@ -62,7 +62,7 @@ public class Annonce {
     private String filtre;
 
     @OneToMany(mappedBy = "ann", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Message> list_messages;
+    private List<Conversation> list_messages;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
@@ -81,8 +81,7 @@ public class Annonce {
 
 
 
-    public Annonce(long id_annonce, String titre, String description, float prix, String date_publication, String departement,String ville , Long annonceur, List<String> adresse_image, Map<String, Integer> nbvues, String contact,String categories,String filtre , List<Message> list_messages) throws IOException {
-        this.id_annonce = id_annonce;
+    public Annonce( String titre, String description, float prix, String date_publication, String departement,String ville , Long annonceur, List<String> adresse_image, Map<String, Integer> nbvues, String contact,String categories,String filtre ) throws IOException {
         this.titre = titre;
         this.description = description;
         this.prix = prix;
@@ -93,7 +92,7 @@ public class Annonce {
         this.categories = categories;
         this.contact = contact;
         this.filtre = filtre;
-        this.list_messages = list_messages;
+        this.list_messages = new ArrayList<>();
         this.departement = departement;
         this.ville = ville;
 
@@ -171,7 +170,7 @@ public class Annonce {
         return filtre;
     }
 
-    public List<Message> getList_messages() {
+    public List<Conversation> getList_messages() {
         return list_messages;
     }
 
@@ -209,4 +208,42 @@ public class Annonce {
     public String getContact() {
         return contact;
     }
+
+    public void setId_annonce(long id_annonce) {
+        this.id_annonce = id_annonce;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPrix(float prix) {
+        this.prix = prix;
+    }
+
+    public void setDate_publication(String date_publication) {
+        this.date_publication = date_publication;
+    }
+
+    public void setId_annonceur(Long id_annonceur) {
+        this.id_annonceur = id_annonceur;
+    }
+
+    public void setDepartement(String departement) {
+        this.departement = departement;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
+    }
+
+    public void setList_messages(List<Conversation> list_messages) {
+        this.list_messages = list_messages;
+    }
+
+
 }

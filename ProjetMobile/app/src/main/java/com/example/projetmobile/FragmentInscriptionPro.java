@@ -19,8 +19,15 @@ import com.example.projetmobile.Model.Annonceur_Particulier;
 import com.example.projetmobile.Model.Annonceur_pro;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.concurrent.ExecutionException;
@@ -65,15 +72,14 @@ public class FragmentInscriptionPro extends Fragment {
     }
 
     public void inscription(){
-        String url ="http://192.168.1.25:8080/LeMauvaisCoin/api/User/InscriptionAnnonceurPro";
-        MyAsyncInscription myAsyncTasks = new MyAsyncInscription();
+        String url ="http://172.16.5.209:8080/LeMauvaisCoin/api/User/InscriptionAnnonceurPro";
         try {
             Gson gson = new Gson();
             Annonceur_pro pro = new Annonceur_pro("AnnonceurPro",Epseudo.getEditText().getText().toString(),Image,Enom.getEditText().getText().toString(),Eprenom.getEditText().getText().toString(),Eemail.getEditText().getText().toString(),Enumero.getEditText().getText().toString(),Epassword.getEditText().getText().toString(),Eentreprise.getEditText().getText().toString());
             String json = gson.toJson(pro);
-            String reponse = myAsyncTasks.execute(url,json).get();
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
+            PutRequest(url,json);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         Intent intent = new Intent(getActivity(),Connexion.class);
         startActivity(intent);
@@ -130,6 +136,42 @@ public class FragmentInscriptionPro extends Fragment {
             byte[] b = baos.toByteArray();
             this.Image = Base64.getEncoder().encodeToString(baos.toByteArray());
             inscription();
+        }
+    }
+
+    public void PutRequest(String url,String json) throws IOException {
+        Thread thread = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                try  {
+                    URL adress = null;
+                    try {
+                        adress = new URL(url);
+                        HttpURLConnection httpCon = (HttpURLConnection) adress.openConnection();
+                        httpCon.setDoOutput(true);
+                        httpCon.setRequestMethod("PUT");
+                        httpCon.setRequestProperty("Content-Type", "application/json");
+                        httpCon.setRequestProperty("Accept", "application/json");
+                        OutputStreamWriter out = new OutputStreamWriter (
+                                httpCon.getOutputStream());
+                        out.write(json);
+                        out.close();
+                        httpCon.getInputStream();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 

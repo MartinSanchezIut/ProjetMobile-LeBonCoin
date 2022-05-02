@@ -82,7 +82,7 @@ public class FragmentDepartementRecherche extends Fragment {
 
     public void init(){
         Departement = new ArrayList<>();
-
+        Departement.add(new Departement("Toute la France",false));
         Departement.add(new Departement("Bouche du Rhone",false));
         Departement.add(new Departement("Var",false));
         Departement.add(new Departement("Hérault",false));

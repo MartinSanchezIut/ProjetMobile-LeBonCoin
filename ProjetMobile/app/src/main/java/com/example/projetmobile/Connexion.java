@@ -3,12 +3,11 @@ package com.example.projetmobile;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.lifecycle.ViewModelProvider;
-import com.example.projetmobile.BDD.Controllers.UserControlers;
+import com.example.projetmobile.BDD.models.Controllers.UserControlers;
 import com.example.projetmobile.BDD.models.UserBDD;
 import com.example.projetmobile.Model.Annonceur_Particulier;
 import com.example.projetmobile.Model.Annonceur_pro;
@@ -16,7 +15,13 @@ import com.example.projetmobile.Model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
+import org.apache.commons.io.Charsets;
+import org.apache.commons.io.IOUtils;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.concurrent.ExecutionException;
 
 public class Connexion extends AppCompatActivity {
@@ -46,14 +51,13 @@ public class Connexion extends AppCompatActivity {
 
     }
 
-    public void Connexion(View view) throws ExecutionException, InterruptedException {
+    public void Connexion(View view) throws ExecutionException, InterruptedException, IOException {
         final int REQUEST_CODE = 20;
-        MyAsyncConnexion myAsyncTasks = new MyAsyncConnexion();
 
         Gson gson = new Gson();
         System.out.println(this.email.getEditText().getText().toString());
-        String url = "http://192.168.1.25:8080/LeMauvaisCoin/api/User/Connexion/" + this.email.getEditText().getText().toString() + "/" + this.password.getEditText().getText().toString();
-        String reponse = myAsyncTasks.execute(url).get();
+        String url = "http://172.16.5.209:8080/LeMauvaisCoin/api/User/Connexion/" + this.email.getEditText().getText().toString() + "/" + this.password.getEditText().getText().toString();
+        String reponse = getRequest(url);
         System.out.println("ICI " + reponse);
         if(!reponse.equals("")) {
             User user = gson.fromJson(reponse, User.class);
@@ -84,8 +88,29 @@ public class Connexion extends AppCompatActivity {
 
     }
 
-    public void Inscription(View view) {
-        Intent intention= new Intent(Connexion.this, Inscription.class);
-        startActivity(intention);
+    public String getRequest(String url) throws IOException {
+        final String[] result = {""};
+        Thread thread = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                try  {
+                    result[0]= IOUtils.toString(new InputStreamReader(new BufferedInputStream(new URL(url).openConnection().getInputStream()), Charsets.UTF_8));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        return result[0];
     }
+
+
 }

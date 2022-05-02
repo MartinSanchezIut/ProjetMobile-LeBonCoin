@@ -11,8 +11,8 @@ public class Annonceur_pro extends User{
     public Annonceur_pro(){
         super();
     }
-    public Annonceur_pro(long id_user, String statu,String pseudo,String Image ,String nom, String prenom, String email, String numero, String mot_de_passe, String nom_societe){//, List<Annonce> mesannonces) {
-        super(id_user, statu,pseudo, Image,nom, prenom, email, numero, mot_de_passe);
+    public Annonceur_pro( String statu,String pseudo,String Image ,String nom, String prenom, String email, String numero, String mot_de_passe, String nom_societe){//, List<Annonce> mesannonces) {
+        super(statu,pseudo, Image,nom, prenom, email, numero, mot_de_passe);
         this.nom_societe = nom_societe;
     }
 
