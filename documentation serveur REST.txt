@@ -1,0 +1,66 @@
+AnnonceControler
+
+Retourne une en fonction de son id
+@GetMapping(uri + "/AnnonceById/{id}")
+public Annonce GetAnnonceById(@PathVariable Long id)
+
+Prend en paramètre un Object Recherche(Regarde dans model les paramètres de la classe) et retourne les annonces qui correspondes à cette recherche.
+@PostMapping(uri + "/Recherche")
+public List<Annonce> GetRechercheAnnonce(@RequestBody Recherche re)
+
+Retourne les annnonces du jour
+@GetMapping(uri + "/Recent")
+public List<Annonce> GetRecentAnnonce()
+
+Prend en paramètre une annonce et Ajoute une annonce.
+@PutMapping(uri+"/PutAnnonce")
+public Annonce Postformulaire(@RequestBody Annonce f)
+
+UserControlers
+
+Retourne un User en fonction d'un id passé en paramètre
+@GetMapping(uri + "/UserById/{id}")
+public User GetUserById( @PathVariable Long id)
+
+
+Permet d'inscrire un AnnonceurPro
+@PutMapping(uri + "/InscriptionAnnonceurPro")
+public Annonceur_pro GetUserById( @RequestBody Annonceur_pro annonceur) 
+
+Permet d'inscrire un Particulier
+@PutMapping(uri + "/InscriptionAnnonceurPart")
+public Annonceur_Particulier GetUserById(@RequestBody Annonceur_Particulier annonceur)
+
+Permet de connecter un utilisateur
+@GetMapping(uri + "/Connexion/{email}/{password}")
+public User GetConnexion( @PathVariable String email ,@PathVariable String password )
+
+Retourne les annonces sauvegardé par un utilisateur en fonction de son id.
+@GetMapping(uri + "/Sauvegarde/{id}")
+public List<Annonce> GetConnexion(@PathVariable Long id)
+
+
+Permet de retourner les annonces faire par un utilisateur en fonction de son id
+@GetMapping(uri + "/AnnonceId/{id}")
+public List<Annonce> GetAnnonceById(@PathVariable Long id)
+
+MessageControlers
+
+Permet de mettre un message dans une conversation.
+Prend un ArrayList de String.
+argument.get(0) doit contenir l'id de la conversation
+argument.get(1) doit contenir en json le message.(Le Json est un object Message le meme que dans le dossier models)
+@PutMapping(uri + "/PutMessage")
+public Message PutMessage(@RequestBody ArrayList<String> argument)
+
+Retourne une conversation en fonction de son  id
+@PostMapping(uri + "/ConversationById")
+public Conversation GetConversationById(@RequestBody long id) 
+
+Ajoute une conversation entre 2 utilisateur
+@PutMapping(uri+"/PutConversation")
+public Conversation PutConversation(@RequestBody Conversation f)
+
+Retourne un MessageAffichage en fonction de l'id d'un utilisateur(MessageAffichage est un object du models)
+@PostMapping(uri + "/MessageByIdAnnonceur")
+public List<MessageAffichage> MessageByIdAnnonceur(@RequestBody long id)

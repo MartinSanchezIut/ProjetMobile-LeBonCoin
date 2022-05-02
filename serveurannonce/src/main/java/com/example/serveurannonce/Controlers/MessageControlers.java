@@ -29,11 +29,7 @@ public class MessageControlers {
     private UserRepository user;
 
 private static final String uri = "LeMauvaisCoin/api/message";
-    @GetMapping(uri + "/AllConversation")
-    public List<Conversation> GetAnnonce() {
 
-        return conversation.findAll();
-    }
     @ResponseStatus(HttpStatus.CREATED)
     @PutMapping(uri + "/PutMessage")
     public Message PutMessage(@RequestBody ArrayList<String> argument) {
@@ -74,7 +70,7 @@ private static final String uri = "LeMauvaisCoin/api/message";
     }
 
     @PostMapping(uri + "/MessageByIdAnnonceur")
-    public List<MessageAffichage> GetAnnonceById(@RequestBody long id) {
+    public List<MessageAffichage> MessageByIdAnnonceur(@RequestBody long id) {
         List<Annonce> Mesannonces = user.findById(id).get().getMesannonces();
         List<MessageAffichage> m = new ArrayList<>();
 

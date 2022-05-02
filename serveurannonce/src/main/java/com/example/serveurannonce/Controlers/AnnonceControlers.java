@@ -26,10 +26,6 @@ public class AnnonceControlers {
     @Autowired
     private UserRepository user;
     private static final String uri = "LeMauvaisCoin/api/annonce";
-    @GetMapping(uri + "/GetAnnonce")
-    public List<Annonce> GetAnnonce() {
-        return annonce.findAll();
-    }
 
     @GetMapping(uri + "/AnnonceById/{id}")
     public Annonce GetAnnonceById(@PathVariable Long id) {

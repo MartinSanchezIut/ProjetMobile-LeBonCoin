@@ -45,25 +45,16 @@ public class navbarreDeconnecter extends Fragment {
             bottomNavigationView.inflateMenu(R.menu.bottom_navigation_view_connecter);
         }
         String c = getContext().getClass().getName();
-        if (Acceuille.class.getName().equals(c)) {
-            System.out.println("ICI1");
+        if (Acceuille.class.getName().equals(c) || Recherche.class.getName().equals(c) || DetailAnnonce.class.getName().equals(c)) {
             bottomNavigationView.getMenu().findItem(R.id.navigation_home).setChecked(true);
         } else if (Inscription.class.getName().equals(c)) {
-            System.out.println("ICI2");
             bottomNavigationView.getMenu().findItem(R.id.navigate_inscription).setChecked(true);
-        } else if (Profil.class.getName().equals(c)) {
-            System.out.println("ICI3");
+        } else if (Profil.class.getName().equals(c) || ActivityMessage.class.getName().equals(c) ||ActivityConversation.class.getName().equals(c) ) {
             bottomNavigationView.getMenu().findItem(R.id.navigate_profile).setChecked(true);
         } else if (Connexion.class.getName().equals(c)) {
-            System.out.println("ICI4");
             bottomNavigationView.getMenu().findItem(R.id.navigation_connexion).setChecked(true);
         } else if (AjouterAnnonce.class.getName().equals(c)) {
-            System.out.println("ICI5");
             bottomNavigationView.getMenu().findItem(R.id.navigate_publication).setChecked(true);
-        }
-        else if (Recherche.class.getName().equals(c)) {
-            System.out.println("ICI5");
-            bottomNavigationView.getMenu().findItem(R.id.navigation_home).setChecked(true);
         }
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> updateMainFragment(item.getItemId()));
         return root;

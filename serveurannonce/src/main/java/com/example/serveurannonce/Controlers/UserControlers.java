@@ -28,23 +28,6 @@ public class UserControlers {
 
 
     private static final String uri = "LeMauvaisCoin/api/User";
-    @GetMapping(uri + "/Annonceur_parti")
-    public List<Annonceur_Particulier> GetAnnonceurPart() {
-        return (List<Annonceur_Particulier>) annonceur_part.findAll();
-
-    }
-
-    @GetMapping(uri + "/Annonceur_pro")
-    public List<Annonceur_pro> GetAnnonceurPro() {
-        return (List<Annonceur_pro>) annonceur_pro.findAll();
-
-    }
-
-    @GetMapping(uri + "/User")
-    public List<User> GetUser() {
-        return  (List<User>)user.findAll();
-    }
-
     @GetMapping(uri + "/UserById/{id}")
     public User GetUserById( @PathVariable Long id) {
         return user.findById(id).get();
