@@ -9,7 +9,14 @@ export class ProfilComponent implements OnInit {
 
   constructor() { }
 
+
   ngOnInit(): void {
+
+
+  
+
   }
 
 }
+
+
