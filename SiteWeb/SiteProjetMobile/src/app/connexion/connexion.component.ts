@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UserauthentificationService } from '../userauthentification.service';
-import { User } from '../Models/user';
+import { User } from '../_Models/user';
 
 @Component({
   selector: 'app-connexion',

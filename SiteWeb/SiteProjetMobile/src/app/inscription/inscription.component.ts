@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormUser } from '../Models/FormUser';
+import { FormUser } from '../_Models/FormUser';
 
 @Component({
   selector: 'app-inscription',
