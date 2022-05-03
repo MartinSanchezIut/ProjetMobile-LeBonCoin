@@ -8,6 +8,16 @@ import { AjouterannonceComponent } from './ajouterannonce/ajouterannonce.compone
 import { ProfilComponent } from './profil/profil.component';
 import { MessagesComponent } from './messages/messages.component';
 
+import { NavbarComponent } from './navbar/navbar.component';
+import { MesannoncesComponent } from './mesannonces/mesannonces.component';
+import { ListeannonceComponent } from './listeannonce/listeannonce.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { EditerannonceComponent } from './editerannonce/editerannonce.component';
+import { DetailannonceComponent } from './detailannonce/detailannonce.component';
+import { AnnoncessauvegardeesComponent } from './annoncessauvegardees/annoncessauvegardees.component';
+
+
 const routes: Routes = [
   { path: '', component: HomepageComponent },
   { path: 'home', component: HomepageComponent },
@@ -16,7 +26,19 @@ const routes: Routes = [
   { path: 'profil', component: ProfilComponent },
   { path: 'messages', component: MessagesComponent },
   { path: 'inscription', component: InscriptionComponent },
-  { path: 'connexion', component: ConnexionComponent }
+  { path: 'connexion', component: ConnexionComponent },
+
+
+
+
+  { path: 'test/navbar', component: NavbarComponent },
+  { path: 'test/header', component: HeaderComponent },
+  { path: 'test/footer', component: FooterComponent },
+  { path: 'test/mesannonces', component: MesannoncesComponent },
+  { path: 'test/listeannonce', component: ListeannonceComponent },
+  { path: 'test/editerannonce', component: EditerannonceComponent },
+  { path: 'test/detailannonce', component: DetailannonceComponent },
+  { path: 'test/annoncesauvegardes', component: AnnoncessauvegardeesComponent },
 ];
 
 @NgModule({
