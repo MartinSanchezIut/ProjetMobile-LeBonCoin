@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/activity_acceuil.xml" value="0.1969298245614035" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/activity_ajouterannonce.xml" value="0.1969298245614035" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/activity_connexion.xml" value="0.1969298245614035" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/activity_conversation.xml" value="0.2" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/activity_detail_annonce.xml" value="0.176" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/activity_inscription.xml" value="0.1969298245614035" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/activity_message.xml" value="0.1969298245614035" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/activity_modifier.xml" value="0.1969298245614035" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/activity_profil.xml" value="0.1969298245614035" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/activity_recherche.xml" value="0.1969298245614035" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/fragment_acceuil_profile.xml" value="0.1969298245614035" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/fragment_affichage_recherche.xml" value="0.2" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/fragment_categorie.xml" value="0.1969298245614035" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/fragment_categorie_recherche.xml" value="0.1969298245614035" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/fragment_departement.xml" value="0.1969298245614035" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/fragment_departement_recherche.xml" value="0.1969298245614035" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/fragment_deposer.xml" value="0.1969298245614035" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/fragment_detail_annonce_part.xml" value="0.2" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/fragment_filtre_recherche.xml" value="0.1850877192982456" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/fragment_image.xml" value="0.4" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/fragment_list_message.xml" value="0.1850877192982456" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/fragment_localisation_recherche.xml" value="0.1969298245614035" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/fragment_navbarre_deconnecter.xml" value="0.1969298245614035" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/fragment_recherche_acceuil.xml" value="0.264" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/item_message_received.xml" value="0.176" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/item_message_sent.xml" value="0.10921052631578948" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/list_categorie.xml" value="0.1969298245614035" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/list_categorie_recherche.xml" value="0.19605263157894737" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/list_departement.xml" value="0.1969298245614035" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/list_filtre.xml" value="0.1969298245614035" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/list_filtre_recherche.xml" value="0.4" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/list_message.xml" value="0.19605263157894737" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/list_view_adapteur_annonce_recent.xml" value="0.1480978260869565" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/message_destinataire.xml" value="0.6" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile-LeBonCoin/ProjetMobile/app/src/main/res/layout/message_moi.xml" value="0.4" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.10043859649122808" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/drawable/List_categorie.xml" value="0.21228070175438596" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/drawable/baseline_3d_rotation_black_24dp.xml" value="0.16510416666666666" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/drawable/baseline_account_circle_black_24dp.xml" value="0.1109375" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/drawable/baseline_add_box_black_24dp.xml" value="0.16510416666666666" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/drawable/baseline_add_photo_alternate_black_24dp.xml" value="0.21052631578947367" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/drawable/baseline_alternate_email_black_24dp.xml" value="0.21052631578947367" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/drawable/baseline_lock_person_black_24dp.xml" value="0.1109375" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/drawable/button_layout.xml" value="0.21228070175438596" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/drawable/cercle.xml" value="0.21052631578947367" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/drawable/circular.xml" value="0.21052631578947367" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/drawable/color_cursor.xml" value="0.15570175438596492" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/drawable/edit_note_black_24dp.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.1287037037037037" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/drawable/icon_inscription.xml" value="9.6" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/activity_acceuil.xml" value="0.2" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/activity_ajouterannonce.xml" value="0.264" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/activity_connexion.xml" value="0.4" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/activity_inscription.xml" value="0.2" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/activity_main.xml" value="0.221875" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/activity_modifier.xml" value="0.1" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/activity_profil.xml" value="0.3593073593073593" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/activity_recherche.xml" value="0.13125" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/fragment_acceuil.xml" value="0.264" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/fragment_acceuil_profile.xml" value="0.2" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/fragment_affichage_annonce.xml" value="0.221875" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/fragment_affichage_annonceur_pro.xml" value="0.221875" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/fragment_categorie.xml" value="0.2758830694275274" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/fragment_connexion.xml" value="0.221875" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/fragment_departement.xml" value="0.1850877192982456" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/fragment_deposer.xml" value="0.264" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/fragment_depot_annonce.xml" value="0.221875" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/fragment_filtre.xml" value="0.1969298245614035" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/fragment_inscription_annonceur_part.xml" value="0.221875" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/fragment_inscription_annonceur_pro.xml" value="0.221875" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/fragment_inscription_consultant.xml" value="0.221875" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/fragment_inscription_part.xml" value="0.4" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/fragment_inscription_pro.xml" value="0.4" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/fragment_modification_annonce_pro.xml" value="0.221875" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/fragment_navbar.xml" value="0.1986842105263158" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/fragment_navbarre.xml" value="0.16799999999999998" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/fragment_navbarre_deconnecter.xml" value="0.1969298245614035" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/layout_barre_navigation.xml" value="0.221875" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/list_categorie.xml" value="0.536" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/list_departement.xml" value="0.4" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/list_filtre.xml" value="0.264" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/layout/list_view_adapteur_annonce_recent.xml" value="0.4" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.536" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/menu/bottom_navigation_view.xml" value="0.176" />
+        <entry key="..\:/Users/33616/Desktop/M1/S2/mobile/projet/ProjetMobile/app/src/main/res/menu/bottom_navigation_view_connecter.xml" value="0.20921052631578949" />
+      </map>
+    </option>
+  </component>
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="jbr-11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="jpab" />
+  </component>
+  <component name="SwUserDefinedSpecifications">
+    <option name="specTypeByUrl">
+      <map />
+    </option>
+  </component>
+</project>

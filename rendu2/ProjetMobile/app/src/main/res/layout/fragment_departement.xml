@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_height="match_parent"
+             tools:context=".FragmentDepartement">
+
+    <Button
+            android:text="Valider"
+            android:layout_width="269dp"
+            app:cornerRadius="8dp"
+            android:background="@drawable/button_layout"
+            android:layout_height="41dp" android:id="@+id/Valider"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="618dp"
+            app:backgroundTint="#2286C3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_alignParentEnd="true" android:layout_marginEnd="66dp" android:layout_alignParentTop="true"/>
+    <ListView
+            android:id="@+id/listViewdepartement"
+            android:layout_width="381dp"
+            android:layout_height="493dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="106dp" android:layout_alignParentTop="true" android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"/>
+
+</RelativeLayout>
