@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormUser } from '../_Models/FormUser';
+import { UserauthentificationService } from '../userauthentification.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inscription',
@@ -10,10 +12,11 @@ export class InscriptionComponent implements OnInit {
 
   private page : number = 1;
   private usr : FormUser = new FormUser() ;
+  private registeredUser : FormUser = new FormUser() ;
 
   
 
-  constructor() { }
+  constructor(private userauthentification : UserauthentificationService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -33,8 +36,8 @@ export class InscriptionComponent implements OnInit {
     }
 
     if (this.page == 2) {
-      if(this.type == 'PROFESSIONNEL') {
-          document.getElementById("nEntreprise")?.classList.remove("hide");
+      if(this.usr.getStatu() == 'AnnonceurPro') {
+        document.getElementById("nEntreprise")?.classList.remove("hide");
       }
     }
 
@@ -44,13 +47,14 @@ export class InscriptionComponent implements OnInit {
 
   
   // -*-*-*-*-*-*-*-*-*-* PAGE 1 -*-*-*-*-*-*-*-*-*-*
-  public type : String = "";
   public select(first : HTMLElement, second : HTMLElement, nextPage : HTMLElement) : void {
     nextPage.classList.remove("disabled");
 
     // Set type of created user to the value of the selected button
-    this.usr.setType(first.innerText);
-    this.type = first.innerText;
+    if (first.innerText == "PARTICULIER")
+      this.usr.setStatu("AnnonceurPart");
+    else
+      this.usr.setStatu("AnnonceurPro");
 
     first.style.backgroundColor = "#9BE7FF";
     second.style.backgroundColor = "#F1EEEE";
@@ -58,8 +62,8 @@ export class InscriptionComponent implements OnInit {
 
   // -*-*-*-*-*-*-*-*-*-* PAGE 1 -*-*-*-*-*-*-*-*-*-*
 
-  public saveForm(nom : String, prenom : String, email : String, tel : String,
-                  pseudo : String, mdp : String, nomEntreprise : String) : void {
+  public saveForm(nom : string, prenom : string, email : string, tel : string,
+                  pseudo : string, mdp : string, nomEntreprise : string) : void {
                     
       this.usr.setNom(nom) ;
       this.usr.setPrenom(prenom) ;
@@ -67,8 +71,19 @@ export class InscriptionComponent implements OnInit {
       this.usr.setNumero(tel) ;
       this.usr.setPseudo(pseudo) ;
       this.usr.setMot_de_passe(mdp) ;
-      this.usr.setNomEntreprise(nomEntreprise) ;
+      this.usr.setNom_Societe(nomEntreprise);
 
-      console.log(this.usr.toString()) ;
+      this.usr.tostring();
     }
+
+
+  //Fonction pour l'inscription
+  public signIn() : void {
+    if (this.userauthentification.setUserLogIn(this.usr) != null){
+      this.router.navigate(['/connexion']);
+    } else {
+      alert("Un problème est survenue");
+    }
+
+  }
 }
