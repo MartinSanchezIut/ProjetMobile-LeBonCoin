@@ -16,7 +16,7 @@ import { FooterComponent } from './footer/footer.component';
 import { EditerannonceComponent } from './editerannonce/editerannonce.component';
 import { DetailannonceComponent } from './detailannonce/detailannonce.component';
 import { AnnoncessauvegardeesComponent } from './annoncessauvegardees/annoncessauvegardees.component';
-
+import { StatistiquesComponent } from './statistiques/statistiques.component' ;
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
@@ -27,6 +27,7 @@ const routes: Routes = [
   { path: 'messages', component: MessagesComponent },
   { path: 'inscription', component: InscriptionComponent },
   { path: 'connexion', component: ConnexionComponent },
+  { path: 'statistiques', component: StatistiquesComponent },
 
 
 
