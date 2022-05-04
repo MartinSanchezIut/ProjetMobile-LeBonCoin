@@ -1,112 +1,104 @@
 export class FormUser {
 
-    private type : String | null = null;
-
-    private id : Number | null = null;
-    private pseudo : String | null = null;
-    private nom : String | null = null;
-    private prenom : String | null = null;
-    private email : String | null = null;
-    private numero : String | null = null;
-    private mot_de_passe : String | null = null;
-    //private statu : String | null = null;
-    
-    
-    private nomEntreprise : String | null = null;
+    //ATTRIBUTS
+    private id_user : number | null = null;
+    private pseudo : string | null = null;
+    private image : string | null = null;
+    private nom : string | null = null;
+    private prenom : string | null = null;
+    private email : string | null = null;
+    private numero : string | null = null;
+    private mot_de_passe : string | null = null;
+    private statu : string | null = null;
+    private nom_societe : string | null = null;
 
 
-    constructor() {
-/*
-                pseudo : String, nom : String, prenom : String,
-                email : String, numero : String, mot_de_passe : String,
-                statu : String
+    //CONSTRUCTOR
+    constructor() {}
 
-        this.pseudo = pseudo;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.email = email;
-        this.numero = numero;
-        this.mot_de_passe = mot_de_passe;
-        this.statu = statu;
-*/
-    }
-
-    public toString() : String {
-        return " Type: " + this.type + 
-               " Id: " + this.id + 
+    //METHODS
+    public tostring() : void {
+        console.log( " Id: " + this.id_user + 
                " Pseudo: " + this.pseudo + 
                " Nom: " + this.nom + 
                " Prenom: " + this.prenom + 
                " Email: " + this.email + 
                " Numero: " + this.numero + 
                " Mdp: " + this.mot_de_passe + 
-               //"Statu: " + this.statu + 
-               " NomEntreprise: " + this.nomEntreprise;
+               " Statu: " + this.statu + 
+               " NomEntreprise: " + this.nom_societe
+        );
     }
 
-
-
-    public getNomEntreprise(): String | null {
-        return this.nomEntreprise;
+    //GETTERS AND SETTERS
+    public getId_User(): number | null {
+        return this.id_user;
     }
-    public setNomEntreprise(nomEntreprise: String): FormUser {
-        this.nomEntreprise = nomEntreprise;
+    public setId_User(id: number): FormUser {
+        this.id_user = id;
         return this;
     }
-    public getType(): String | null {
-        return this.type;
-    }
-    public setType(type: String): FormUser {
-        this.type = type;
-        return this;
-    }
-    public getId(): Number | null {
-        return this.id;
-    }
-    public setId(id: Number): FormUser {
-        this.id = id;
-        return this;
-    }
-    public getPseudo(): String | null {
+    public getPseudo(): string | null {
         return this.pseudo;
     }
-    public setPseudo(pseudo: String): FormUser {
+    public setPseudo(pseudo: string): FormUser {
         this.pseudo = pseudo;
         return this;
     }
-    public getNom(): String | null {
+    public getNom(): string | null {
         return this.nom;
     }
-    public setNom(nom: String): FormUser {
+    public setNom(nom: string): FormUser {
         this.nom = nom;
         return this;
     }
-    public getPrenom(): String | null {
+    public getPrenom(): string | null {
         return this.prenom;
     }
-    public setPrenom(prenom: String): FormUser {
+    public setPrenom(prenom: string): FormUser {
         this.prenom = prenom;
         return this;
     }
-    public getEmail(): String | null {
+    public getEmail(): string | null {
         return this.email;
     }
-    public setEmail(email: String): FormUser {
+    public setEmail(email: string): FormUser {
         this.email = email;
         return this;
     }
-    public getNumero(): String | null {
+    public getNumero(): string | null {
         return this.numero;
     }
-    public setNumero(numero: String): FormUser {
+    public setNumero(numero: string): FormUser {
         this.numero = numero;
         return this;
     }
-    public getMot_de_passe(): String | null {
+    public getMot_de_passe(): string | null {
         return this.mot_de_passe;
     }
-    public setMot_de_passe(mot_de_passe: String): FormUser {
+    public setMot_de_passe(mot_de_passe: string): FormUser {
         this.mot_de_passe = mot_de_passe;
+        return this;
+    }
+    public getStatu(): string | null {
+        return this.statu;
+    }
+    public setStatu(statu: string): FormUser {
+        this.statu = statu;
+        return this;
+    }
+    public getNom_Societe(): string | null {
+        return this.nom_societe;
+    }
+    public setNom_Societe(nomEntreprise: string): FormUser {
+        this.nom_societe = nomEntreprise;
+        return this;
+    }
+    public getImage(): string | null {
+        return this.image;
+    }
+    public setImage(image: string): FormUser {
+        this.image = image;
         return this;
     }
 }

@@ -1,0 +1,16 @@
+Pour le site web, on ne va pas réexpliquer les fonctionnalités car ce sont les mêmes que pour l'application mobile. On va plutôt faire la liste des fonctionnalités déjà 
+implémentées et celles qu'il reste encore à réalisées.
+
+	- Pour la partie visuel du site, toutes les interfaces ont été réalisées en suivant les maquettes rendues lors du premier rendu. De ce fait, tous les composants
+		Angular du site ont une interface terminée et opérationnelle.
+
+	- Pour la partie métier de l'application, on a, à ce jour, implémenté la connexion et l'inscription. On doit encore travailler un peu sur l'inscription car 
+		elle produit quelques fois une erreur avec le serveur.
+
+A réaliser par la suite :
+	
+	- Voir les annonces
+	- Le profil avec les statistiques et les messages
+	- la recherche
+	- Le dépôt d'annonce
+	
