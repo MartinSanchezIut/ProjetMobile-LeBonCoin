@@ -3,6 +3,8 @@ package com.example.projetmobile.Model;
 
 
 
+
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -48,7 +50,23 @@ public class Annonce  {
 
     }
 
+    public Annonce(String titre, String description, Float prix, String date_publication, String ville,String departement , Long annonceur, ArrayList<String> pic_bytes, Map<String, Integer> nbvues,String contact, String categories ,String filtre , List<Message> list_messages) {
+        this.id_annonce = id_annonce;
+        this.titre = titre;
+        this.description = description;
+        this.prix = prix;
+        this.date_publication = date_publication;
+        this.id_annonceur = annonceur;
+        this.pic_bytes = pic_bytes;
+        this.nbvues = nbvues;
+        this.contact = contact;
+        this.categories = categories;
+        this.filtre = filtre;
+        this.list_messages = list_messages;
+        this.ville = ville;
+        this.departement = departement;
 
+    }
 
 
 
@@ -183,6 +201,27 @@ public class Annonce  {
     public void setList_messages(List<Message> list_messages) {
         this.list_messages = list_messages;
     }
+    public void addImage(String Image){
+        if(this.pic_bytes ==null){
+            this.pic_bytes = new ArrayList<>();
+        }
+        this.pic_bytes.add(Image);
+
+    }
+    public void remove(String Image){
+        for (int i = 0;i<this.pic_bytes.size();++i) {
+            System.out.println(this.pic_bytes.get(i));
+            System.out.println(Image);
+            if(this.pic_bytes.get(i).equals(Image)){
+                this.pic_bytes.remove(i);
+                System.out.println("ICI");
+            }
+
+        }
+
+    }
+
+
 
     @Override
     public String toString() {

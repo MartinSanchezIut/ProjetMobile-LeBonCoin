@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import com.example.projetmobile.Model.Annonce;
 import com.example.projetmobile.Model.Catégorie;
 import com.example.projetmobile.Model.Departement;
 
@@ -13,12 +14,14 @@ import java.util.List;
 public class ListdepartementAdaptateur extends BaseAdapter {
     Integer selected_position = -1;
     private Context context;
+    private Annonce annonce;
     private List<Departement> list;
     private LayoutInflater inflater;
 
-    public ListdepartementAdaptateur(Context context, List<Departement> list) {
+    public ListdepartementAdaptateur(Context context, List<Departement> list, Annonce annonce) {
         this.context = context;
         this.list = list;
+        this.annonce = annonce;
         this.inflater = LayoutInflater.from(context);
     }
     @Override
@@ -46,6 +49,10 @@ public class ListdepartementAdaptateur extends BaseAdapter {
         CheckBox chkbox=(CheckBox) view.findViewById(R.id.checkboxdepartement);
         chkbox.setChecked(i==selected_position);
         getItem(i).setIschecked(i==selected_position);
+        if(e.equals(annonce.getDepartement())){
+            chkbox.setChecked(true);
+            getItem(i).setIschecked(true);
+        }
 
         chkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -54,6 +61,7 @@ public class ListdepartementAdaptateur extends BaseAdapter {
                 if(isChecked)
                 {
                     selected_position =  i;
+                    annonce.setDepartement(departement.getText().toString());
                 }
                 else{
                     selected_position = -1;

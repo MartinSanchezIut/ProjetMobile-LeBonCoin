@@ -22,6 +22,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class ActivityConversation extends AppCompatActivity {
     private RecyclerView mMessageRecycler;
@@ -46,24 +48,17 @@ public class ActivityConversation extends AppCompatActivity {
         if(c.getList_messages() == null) {
             c.setList_messages(new ArrayList<>());
         }
-        System.out.println("ICI2");
         mMessageRecycler = (RecyclerView) findViewById(R.id.recycler_gchat);
-        System.out.println("ICI3");
-        mMessageAdapter = new MessageListAdapter(this, this,c.getList_messages());
-        System.out.println("ICI4");
-        mMessageRecycler.setLayoutManager(new LinearLayoutManager(this));
-        System.out.println("ICI5");
-        /*
-        System.out.println(mMessageAdapter.getItemCount());
-        if(mMessageAdapter.getItemCount() !=0) {
-            System.out.println();
-            mMessageRecycler.scrollToPosition(mMessageAdapter.getItemCount() - 1);
-        }
+        ArrayList<Message> list = c.getList_messages();
+        Collections.reverse(list);
+        mMessageAdapter = new MessageListAdapter(this, this,list);
+        LinearLayoutManager linearLayoutManager =
+                new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        linearLayoutManager.setReverseLayout(true);
+        mMessageRecycler.setLayoutManager(linearLayoutManager);
 
-         */
-        System.out.println(c.getList_messages());
+
         mMessageRecycler.setAdapter(mMessageAdapter);
-        System.out.println("ICI7");
     }
 
     public void Envoyer(View view){
@@ -91,14 +86,16 @@ public class ActivityConversation extends AppCompatActivity {
         }
         c = gson.fromJson(result, Conversation.class);
         mMessageRecycler = (RecyclerView) findViewById(R.id.recycler_gchat);
-        mMessageAdapter = new MessageListAdapter(this, this,c.getList_messages());
-        mMessageRecycler.setLayoutManager(new LinearLayoutManager(this));
-        /*
-        if(mMessageAdapter.getItemCount() !=0) {
-            mMessageRecycler.scrollToPosition(mMessageAdapter.getItemCount() - 1);
-        }
+        ArrayList<Message> list = c.getList_messages();
+        Collections.reverse(list);
+        mMessageAdapter = new MessageListAdapter(this, this,list);
+        LinearLayoutManager linearLayoutManager =
+                new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        linearLayoutManager.setReverseLayout(true);
+        mMessageRecycler.setLayoutManager(linearLayoutManager);
 
-         */
+
+
         mMessageRecycler.setAdapter(mMessageAdapter);
     }
 

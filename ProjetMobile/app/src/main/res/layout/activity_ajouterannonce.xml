@@ -8,24 +8,26 @@
         tools:context=".AjouterAnnonce">
 
     <ImageView
-            android:layout_width="333dp"
-            android:layout_height="80dp" app:srcCompat="@drawable/logo" android:id="@+id/imageView4"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="16dp"/>
+            android:layout_width="372dp"
+            android:layout_height="73dp" app:srcCompat="@drawable/logo" android:id="@+id/imageView5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.476"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="16dp"/>
 
 
     <androidx.fragment.app.FragmentContainerView
             android:layout_width="396dp"
-            android:layout_height="86dp" android:name="com.example.projetmobile.navbarreDeconnecter"
+            android:layout_height="86dp" android:name="com.example.projetmobile.navbarre"
             android:id="@+id/fragmentContainerView4"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintVertical_bias="1.0" app:layout_constraintHorizontal_bias="0.666"/>
+
     <androidx.fragment.app.FragmentContainerView
-            android:layout_width="387dp"
-            android:layout_height="694dp" android:name="com.example.projetmobile.FragmentDeposer"
-            android:id="@+id/fragmentContainerView6"
+            android:layout_width="385dp"
+            android:layout_height="586dp" android:name="com.example.projetmobile.FragmentDeposer"
+            android:id="@+id/fragmentContainerView2"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintHorizontal_bias="0.666"/>
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="88dp"
+    />
 </androidx.constraintlayout.widget.ConstraintLayout>

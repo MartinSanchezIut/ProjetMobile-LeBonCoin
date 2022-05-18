@@ -50,7 +50,7 @@ public class FragmentCategorie extends Fragment {
                 fragment.setArguments(args);
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
 
-                transaction.replace(R.id.fragmentContainerView6, fragment);
+                transaction.replace(R.id.fragmentContainerView2, fragment);
                 transaction.commit();
             }
         });

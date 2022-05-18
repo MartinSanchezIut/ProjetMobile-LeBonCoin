@@ -130,6 +130,11 @@ public class Annonce {
 
     }
 
+    public User getAnn1() {
+        return ann1;
+    }
+
+
     public long getId_annonce() {
         return id_annonce;
     }
@@ -245,5 +250,27 @@ public class Annonce {
         this.list_messages = list_messages;
     }
 
+    public List<User> getAnn3() {
+        return ann3;
+    }
 
+    public void setAdresse_image(List<String> adresse_image) {
+        this.adresse_image = adresse_image;
+    }
+
+    public void setImage(List<String> image) {
+        this.image = image;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public void setCategories(String categories) {
+        this.categories = categories;
+    }
+
+    public void setFiltre(String filtre) {
+        this.filtre = filtre;
+    }
 }

@@ -13,10 +13,11 @@
             android:background="@drawable/button_layout"
             android:layout_height="41dp" android:id="@+id/Valider"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="618dp"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="510dp"
             app:backgroundTint="#2286C3"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_alignParentEnd="true" android:layout_marginEnd="66dp" android:layout_alignParentTop="true"/>
+            android:layout_alignParentEnd="true" android:layout_marginEnd="61dp" android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" android:layout_marginStart="63dp"/>
     <ListView
             android:id="@+id/listViewdepartement"
             android:layout_width="381dp"
@@ -26,7 +27,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="106dp" android:layout_alignParentTop="true" android:layout_alignParentEnd="true"
+            android:layout_marginTop="1dp" android:layout_alignParentTop="true" android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"/>
 
 </RelativeLayout>

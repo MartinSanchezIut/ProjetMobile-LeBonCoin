@@ -26,9 +26,7 @@ public class MessageListAdapter extends RecyclerView.Adapter {
     public MessageListAdapter(Context context, FragmentActivity activity, ArrayList<Message> messageList) {
         mContext = context;
         System.out.println(messageList);
-        System.out.println("JE SUIS ICI1 ");
         mMessageList = messageList;
-        System.out.println("JE SUIS ICI2");
         UserControlers userControlers = new ViewModelProvider(activity).get(UserControlers.class);
         userControlers.init(context);
         this.id = userControlers.getPlanning().get(0).getId_user();

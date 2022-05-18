@@ -65,6 +65,7 @@
                     />
                     <ImageView
                             android:layout_width="39dp"
+                            android:id="@+id/favoris"
                             android:layout_height="match_parent"
                             app:srcCompat="@drawable/baseline_favorite_border_black_24dp"
                             android:scaleType="centerCrop"

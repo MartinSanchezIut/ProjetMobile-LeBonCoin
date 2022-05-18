@@ -5,9 +5,11 @@ import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.room.Room;
 import com.example.projetmobile.BDD.Repository.AppDataBase;
 import com.example.projetmobile.BDD.Repository.UserDao;
+import com.example.projetmobile.BDD.models.Controllers.UserControlers;
 import com.example.projetmobile.Model.Annonce;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
@@ -27,6 +29,8 @@ public class Acceuille extends AppCompatActivity {
     private TextView Tuser ;
     private TextInputLayout recherche;
     private ArrayList<Annonce> annonce;
+    AnnonceRecentAdaptateur myAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +40,6 @@ public class Acceuille extends AppCompatActivity {
         recherche = (TextInputLayout) findViewById(R.id.idrecherche);
         extras = getIntent().getExtras();
         listView = (GridView ) findViewById(R.id.gridView);
-
-
-
         Gson gson = new Gson();
         String url = "http://172.16.5.209:8080/LeMauvaisCoin/api/annonce/Recent" ;
         String reponse = null;
@@ -48,10 +49,9 @@ public class Acceuille extends AppCompatActivity {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(reponse.getBytes().length);
         if(!reponse.equals("")) {
              annonce = gson.fromJson(reponse,  new TypeToken<ArrayList<Annonce>>(){}.getType());
-            AnnonceRecentAdaptateur myAdapter=new AnnonceRecentAdaptateur(this,annonce);
+             myAdapter=new AnnonceRecentAdaptateur(this,annonce);
             listView.setAdapter(myAdapter);
         }
 
@@ -66,6 +66,7 @@ public class Acceuille extends AppCompatActivity {
                 FileOutputStream fOut = null;
                 String myJson = gson.toJson(annonce.get(position));
                 intention.putExtra("Annonce",myJson);
+                intention.putExtra("FAV",myAdapter.getFav().get(position));
                 startActivity(intention);
             }
         });

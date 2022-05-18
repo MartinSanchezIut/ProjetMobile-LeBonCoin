@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -26,6 +27,7 @@ import com.google.gson.Gson;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
@@ -45,7 +47,7 @@ public class FragmentDeposer extends Fragment {
 
 
     private ImageView image3;
-    Annonce f;
+    private Annonce annonce;
 
     private ImageView image4;
 
@@ -83,12 +85,7 @@ public class FragmentDeposer extends Fragment {
         Ville = (TextInputLayout)root.findViewById(R.id.Ville);
         Contact = (TextInputLayout)root.findViewById(R.id.Contact);
 
-
-        //Définissez le type comme image/*.
-        //Cela garantit que seuls les composants de type image sont sélectionnés
         intent.setType("image/*");
-        //Nous passons un tableau supplémentaire avec les types MIME acceptés.
-        //Cela garantira que seuls les composants avec ces types MIME sont ciblés.
         String[] mimeTypes = {"image/jpeg", "image/png","image/jpg"};
         intent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
         image1 = (ImageView) root.findViewById(R.id.image1);
@@ -121,22 +118,35 @@ public class FragmentDeposer extends Fragment {
                         input.close();
                         String text = new String(buffer);
                         Gson gson = new Gson();
-                        Annonce f = gson.fromJson(text, Annonce.class);
-                        f.setTitre(Titre.getEditText().getText().toString());
-                        f.setDescription(Description.getEditText().getText().toString());
-                        f.setPrix(Float.parseFloat(Prix.getEditText().getText().toString()));
-                        f.setVille(Ville.getEditText().getText().toString());
-                        f.setContact(Contact.getEditText().getText().toString());
+                        annonce = gson.fromJson(text, Annonce.class);
+                        annonce.setTitre(Titre.getEditText().getText().toString());
+                        annonce.setDescription(Description.getEditText().getText().toString());
+                        annonce.setPrix(Float.parseFloat(Prix.getEditText().getText().toString()));
+                        annonce.setVille(Ville.getEditText().getText().toString());
+                        annonce.setContact(Contact.getEditText().getText().toString());
+
+
+                        ArrayList<String> images = new ArrayList<>();
+                        for (int j = 0; j < annonce.getimage().size(); ++j) {
+                            byte[] myImage = Base64.getDecoder().decode(annonce.getimage().get(j).getBytes(StandardCharsets.UTF_8));
+                            Bitmap bmp = BitmapFactory.decodeByteArray(myImage, 0, myImage.length);
+                            ByteArrayOutputStream baos=new ByteArrayOutputStream();
+                            bmp.compress(Bitmap.CompressFormat.JPEG,20, baos);
+                            byte [] b=baos.toByteArray();
+                            images.add(Base64.getEncoder().encodeToString(b));
+                        }
+                        annonce.setPic_bytes(images);
+
                         UserControlers userControlers = new ViewModelProvider(getActivity()).get(UserControlers.class);
                         userControlers.init(getContext());
                         System.out.println("ID UTILISATEUR  :  " + userControlers.getPlanning().get(0).getId_user());
-                        f.setId_annonceur(userControlers.getPlanning().get(0).getId_user());
+                        annonce.setId_annonceur(userControlers.getPlanning().get(0).getId_user());
                         Map<String, Integer> d = new HashMap<>();
-                        f.setNbvues(d);
+                        annonce.setNbvues(d);
                         List<Message> m = new ArrayList<>();
-                        f.setList_messages(m);
+                        annonce.setList_messages(m);
                         String url = "http://172.16.5.209:8080/LeMauvaisCoin/api/annonce/PutAnnonce";
-                        String json = gson.toJson(f);
+                        String json = gson.toJson(annonce);
                         System.out.println(json);
                         PutRequest(url,json);
                     } catch (IOException e) {
@@ -160,25 +170,25 @@ public class FragmentDeposer extends Fragment {
                 input.read(buffer);
                 input.close();
                 String text = new String(buffer);
-                System.out.println("TEXTE "+text);
                 Gson gson = new Gson();
-               Annonce f = gson.fromJson(text, Annonce.class);
-               if(f.getTitre()!=null)
-                   Titre.getEditText().setText(f.getTitre());
-                if(f.getDescription()!=null)
-                    Description.getEditText().setText(f.getDescription());
-                if(f.getPrix()!= (Float)null)
-                    Prix.getEditText().setText(String.valueOf(f.getPrix()));
-                if(f.getville()!=null)
-                    Ville.getEditText().setText(f.getville());
-                if(f.getContact()!=null)
-                    Contact.getEditText().setText(f.getContact());
-                if(f.getContact()!=null)
-                    Contact.getEditText().setText(f.getContact());
-                if(f.getimage()!=null) {
-                    for (int i = 0; i < f.getimage().size(); ++i) {
-                        byte[] myImage = Base64.getDecoder().decode(f.getimage().get(i).getBytes(StandardCharsets.UTF_8));
-                        Bitmap bmp = BitmapFactory.decodeByteArray(myImage, 0, myImage.length);
+                annonce = gson.fromJson(text, Annonce.class);
+
+               if(annonce.getTitre()!=null)
+                   Titre.getEditText().setText(annonce.getTitre());
+                if(annonce.getDescription()!=null)
+                    Description.getEditText().setText(annonce.getDescription());
+                if(annonce.getPrix()!= (Float)null)
+                    Prix.getEditText().setText(String.valueOf(annonce.getPrix()));
+                if(annonce.getville()!=null)
+                    Ville.getEditText().setText(annonce.getville());
+                if(annonce.getContact()!=null)
+                    Contact.getEditText().setText(annonce.getContact());
+                if(annonce.getContact()!=null)
+                    Contact.getEditText().setText(annonce.getContact());
+                if(annonce.getimage()!=null) {
+                    for (int i = 0; i < annonce.getimage().size(); ++i) {
+                        byte[] myImage = Base64.getDecoder().decode(annonce.getimage().get(i).getBytes(StandardCharsets.UTF_8));
+                        Bitmap bmp= BitmapFactory.decodeByteArray(myImage, 0, myImage.length);
                         switch (i) {
                             case 0:
                                 image1.setImageBitmap(bmp);
@@ -206,6 +216,8 @@ public class FragmentDeposer extends Fragment {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        } else{
+            this.annonce = new Annonce(0L,null,null,null,null,null,null,null,new ArrayList<>(),null,null,null,null,null);
         }
 
         lin = (LinearLayout)root.findViewById(R.id.linearLayoutcatégorie);
@@ -216,61 +228,32 @@ public class FragmentDeposer extends Fragment {
                 // Create new fragment and transaction
                 Fragment newFragment = new FragmentCategorie();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-
-                String file_name = getActivity().getFilesDir() + "/" + "Data.json";
-                File t = new File(file_name);
-                InputStream input = null;
-                if (t.exists()) {
-                    try {
-                        input = getContext().openFileInput("Data.json");
-                        byte[] buffer = new byte[input.available()];
-                        input.read(buffer);
-                        input.close();
-                        String text = new String(buffer);
-                        Gson gson = new Gson();
-                        Annonce p = gson.fromJson(text, Annonce.class);
-
-                        FileOutputStream fOut = getContext().openFileOutput("Data.json", 0);
-                        AppDataBase db = Room.databaseBuilder(getContext(), AppDataBase.class, "UserBDD").build();
-                        UserDao userDao = db.userDao();
+                Gson gson = new Gson();
+                FileOutputStream fOut = null;
+                try {
+                    fOut = getContext().openFileOutput("Data.json", 0);
+                    AppDataBase db = Room.databaseBuilder(getContext(), AppDataBase.class, "UserBDD").build();
+                    UserDao userDao = db.userDao();
 //                    List<UserBDD> b = userDao.getAll();
 
-                        if (!Prix.getEditText().getText().toString().equals("")) {
-                            f = new Annonce(0L, Titre.getEditText().getText().toString(), Description.getEditText().getText().toString(), Float.parseFloat(Prix.getEditText().getText().toString()), null, Ville.getEditText().getText().toString(), p.getDepartement(), 0L, image, null, Contact.getEditText().getText().toString(), p.getCategories(), p.getFiltre(), null);
-                        } else {
-                            f = new Annonce(0L, Titre.getEditText().getText().toString(), Description.getEditText().getText().toString(), null, null, Ville.getEditText().getText().toString(), p.getDepartement(), 0L, image, null, Contact.getEditText().getText().toString(), p.getCategories(), p.getFiltre(), null);
-                        }
-                        String json = gson.toJson(f);
-                        System.out.println(json);
-                        fOut.write(json.getBytes());
-                        fOut.close();
-                    } catch (FileNotFoundException e) {
-                        throw new RuntimeException(e);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
+                    if (!Prix.getEditText().getText().toString().equals("")) {
+                        annonce = new Annonce(0L, Titre.getEditText().getText().toString(), Description.getEditText().getText().toString(), Float.parseFloat(Prix.getEditText().getText().toString()), null, Ville.getEditText().getText().toString(), annonce.getDepartement(), 0L, annonce.getimage(), null, Contact.getEditText().getText().toString(), annonce.getCategories(), annonce.getFiltre(), null);
+                    } else {
+                        annonce = new Annonce(0L, Titre.getEditText().getText().toString(), Description.getEditText().getText().toString(), null, null, Ville.getEditText().getText().toString(), annonce.getDepartement(), 0L, annonce.getimage(), null, Contact.getEditText().getText().toString(), annonce.getCategories(), annonce.getFiltre(), null);
                     }
-                }else {
-                    try {
-                        FileOutputStream fOut = getContext().openFileOutput("Data.json", 0);
-                        Gson gson = new Gson();
-                        AppDataBase db = Room.databaseBuilder(getContext(), AppDataBase.class, "UserBDD").build();
-                        UserDao userDao = db.userDao();
-//                    List<UserBDD> b = userDao.getAll();
+                    String json = gson.toJson(annonce);
+                    System.out.println("CATEGORIE : " + json);
+                    fOut.write(json.getBytes());
+                    fOut.close();
 
-                        if (!Prix.getEditText().getText().toString().equals("")) {
-                            f = new Annonce(0L, Titre.getEditText().getText().toString(), Description.getEditText().getText().toString(), Float.parseFloat(Prix.getEditText().getText().toString()), null, Ville.getEditText().getText().toString(), null, 0L, image, null, Contact.getEditText().getText().toString(), null, null, null);
-                        } else {
-                            f = new Annonce(0L, Titre.getEditText().getText().toString(), Description.getEditText().getText().toString(), null, null, Ville.getEditText().getText().toString(), null, 0L, image, null, Contact.getEditText().getText().toString(), null, null, null);
-                        }
-                        String json = gson.toJson(f);
-                        System.out.println(json);
-                        fOut.write(json.getBytes());
-                        fOut.close();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
-                transaction.replace(R.id.fragmentContainerView6, newFragment);
+
+
+                transaction.replace(R.id.fragmentContainerView2, newFragment);
                 transaction.commit();
             }
         });
@@ -282,59 +265,31 @@ public class FragmentDeposer extends Fragment {
                 // Create new fragment and transaction
                 Fragment newFragment = new FragmentDepartement();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-
-                String file_name = getActivity().getFilesDir() + "/" + "Data.json";
-                File t = new File(file_name);
-                InputStream input = null;
-                    if (t.exists()) {
-                        try {
-                            input = getContext().openFileInput("Data.json");
-                            byte[] buffer = new byte[input.available()];
-                            input.read(buffer);
-                            input.close();
-                            String text = new String(buffer);
-                            Gson gson = new Gson();
-                            Annonce p = gson.fromJson(text, Annonce.class);
-                            FileOutputStream fOut = getContext().openFileOutput("Data.json", 0);
-                            AppDataBase db = Room.databaseBuilder(getContext(), AppDataBase.class, "UserBDD").build();
-                            UserDao userDao = db.userDao();
-//                    List<UserBDD> b = userDao.getAll();
-                            if (!Prix.getEditText().getText().toString().equals("")) {
-                                f = new Annonce(0L, Titre.getEditText().getText().toString(), Description.getEditText().getText().toString(), Float.parseFloat(Prix.getEditText().getText().toString()), null, Ville.getEditText().getText().toString(), p.getDepartement(), 0L, image, null, Contact.getEditText().getText().toString(), p.getCategories(), p.getFiltre(), null);
-                            } else {
-                                f = new Annonce(0L, Titre.getEditText().getText().toString(), Description.getEditText().getText().toString(), null, null, Ville.getEditText().getText().toString(), p.getDepartement(), 0L, image, null, Contact.getEditText().getText().toString(), p.getCategories(), p.getFiltre(), null);
-                            }
-                            String json = gson.toJson(f);
-                            System.out.println(json);
-                            fOut.write(json.getBytes());
-                            fOut.close();
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }else {
-                        try {
-                            FileOutputStream fOut = getContext().openFileOutput("Data.json", 0);
-                            Gson gson = new Gson();
-                            AppDataBase db = Room.databaseBuilder(getContext(), AppDataBase.class, "UserBDD").build();
-                            UserDao userDao = db.userDao();
+                Gson gson = new Gson();
+                FileOutputStream fOut = null;
+                try {
+                    fOut = getContext().openFileOutput("Data.json", 0);
+                    AppDataBase db = Room.databaseBuilder(getContext(), AppDataBase.class, "UserBDD").build();
+                    UserDao userDao = db.userDao();
 //                    List<UserBDD> b = userDao.getAll();
 
-                            if (!Prix.getEditText().getText().toString().equals("")) {
-                                f = new Annonce(0L, Titre.getEditText().getText().toString(), Description.getEditText().getText().toString(), Float.parseFloat(Prix.getEditText().getText().toString()), null, Ville.getEditText().getText().toString(), null, 0L, image, null, Contact.getEditText().getText().toString(), null, null, null);
-                            } else {
-                                f = new Annonce(0L, Titre.getEditText().getText().toString(), Description.getEditText().getText().toString(), null, null, Ville.getEditText().getText().toString(), null, 0L, image, null, Contact.getEditText().getText().toString(), null, null, null);
-                            }
-                            String json = gson.toJson(f);
-                            System.out.println(json);
-                            fOut.write(json.getBytes());
-                            fOut.close();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                    if (!Prix.getEditText().getText().toString().equals("")) {
+                        annonce = new Annonce(0L, Titre.getEditText().getText().toString(), Description.getEditText().getText().toString(), Float.parseFloat(Prix.getEditText().getText().toString()), null, Ville.getEditText().getText().toString(), annonce.getDepartement(), 0L, annonce.getimage(), null, Contact.getEditText().getText().toString(), annonce.getCategories(), annonce.getFiltre(), null);
+                    } else {
+                        annonce = new Annonce(0L, Titre.getEditText().getText().toString(), Description.getEditText().getText().toString(), null, null, Ville.getEditText().getText().toString(), annonce.getDepartement(), 0L, annonce.getimage(), null, Contact.getEditText().getText().toString(), annonce.getCategories(), annonce.getFiltre(), null);
                     }
+                    String json = gson.toJson(annonce);
+                    System.out.println("IMAGE : " + annonce.getimage());
+                    fOut.write(json.getBytes());
+                    fOut.close();
 
-                transaction.replace(R.id.fragmentContainerView6, newFragment);
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                transaction.replace(R.id.fragmentContainerView2, newFragment);
                 transaction.commit();
             }
         });
@@ -347,16 +302,43 @@ public class FragmentDeposer extends Fragment {
         image1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(intent,1);
+                if(image1.getDrawable().getConstantState().equals(getResources().getDrawable(R.drawable.baseline_add_photo_alternate_black_24dp).getConstantState())) {
+                    startActivityForResult(intent,1);
+                }else{
+                    Annonce annonce = getAnnonce();
+                    Bitmap bm=((BitmapDrawable)image1.getDrawable()).getBitmap();
+                    ByteArrayOutputStream baos=new ByteArrayOutputStream();
+                    bm.compress(Bitmap.CompressFormat.PNG,100, baos);
+                    byte [] b=baos.toByteArray();
+                    String temp = Base64.getEncoder().encodeToString(b);
+                    System.out.println("ICI"+temp);
+                    annonce.remove(temp);
+                    setAnnonce(annonce);
+                    image1.setImageDrawable(getResources().getDrawable(R.drawable.baseline_add_photo_alternate_black_24dp));
+
+                }
             }
         });
     }
+
 
     void image2(){
         image2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(intent,2);
+                if(image2.getDrawable().getConstantState().equals(getResources().getDrawable(R.drawable.baseline_add_photo_alternate_black_24dp).getConstantState())) {
+                    startActivityForResult(intent,2);
+                }else{
+                    Annonce annonce = getAnnonce();
+                    Bitmap bm=((BitmapDrawable)image2.getDrawable()).getBitmap();
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    bm.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    String temp = Base64.getEncoder().encodeToString(stream.toByteArray());
+                    annonce.remove(temp);
+                    setAnnonce(annonce);
+                    image2.setImageDrawable(getResources().getDrawable(R.drawable.baseline_add_photo_alternate_black_24dp));
+
+                }
             }
         });
     }
@@ -365,7 +347,20 @@ public class FragmentDeposer extends Fragment {
         image3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(intent,3);
+
+                if(image3.getDrawable().getConstantState().equals(getResources().getDrawable(R.drawable.baseline_add_photo_alternate_black_24dp).getConstantState())) {
+                    startActivityForResult(intent,3);
+                }else{
+                    Annonce annonce = getAnnonce();
+                    Bitmap bm=((BitmapDrawable)image3.getDrawable()).getBitmap();
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    bm.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    String temp = Base64.getEncoder().encodeToString(stream.toByteArray());
+                    annonce.remove(temp);
+                    setAnnonce(annonce);
+                    image3.setImageDrawable(getResources().getDrawable(R.drawable.baseline_add_photo_alternate_black_24dp));
+
+                }
             }
         });
     }
@@ -374,7 +369,19 @@ public class FragmentDeposer extends Fragment {
         image4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(intent,4);
+                if(image4.getDrawable().getConstantState().equals(getResources().getDrawable(R.drawable.baseline_add_photo_alternate_black_24dp).getConstantState())) {
+                    startActivityForResult(intent,4);
+                }else{
+                    Annonce annonce = getAnnonce();
+                    Bitmap bm=((BitmapDrawable)image4.getDrawable()).getBitmap();
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    bm.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    String temp = Base64.getEncoder().encodeToString(stream.toByteArray());
+                    annonce.remove(temp);
+                    setAnnonce(annonce);
+                    image4.setImageDrawable(getResources().getDrawable(R.drawable.baseline_add_photo_alternate_black_24dp));
+
+                }
             }
         });
     }
@@ -383,7 +390,19 @@ public class FragmentDeposer extends Fragment {
         image5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(intent,5);
+                if(image5.getDrawable().getConstantState().equals(getResources().getDrawable(R.drawable.baseline_add_photo_alternate_black_24dp).getConstantState())) {
+                    startActivityForResult(intent,5);
+                }else{
+                    Annonce annonce = getAnnonce();
+                    Bitmap bm=((BitmapDrawable)image5.getDrawable()).getBitmap();
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    bm.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    String temp = Base64.getEncoder().encodeToString(stream.toByteArray());
+                    annonce.remove(temp);
+                    setAnnonce(annonce);
+                    image5.setImageDrawable(getResources().getDrawable(R.drawable.baseline_add_photo_alternate_black_24dp));
+
+                }
             }
         });
     }
@@ -392,9 +411,28 @@ public class FragmentDeposer extends Fragment {
         image6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(intent,6);
+                if(image6.getDrawable().getConstantState().equals(getResources().getDrawable(R.drawable.baseline_add_photo_alternate_black_24dp).getConstantState())) {
+                    startActivityForResult(intent,6);
+                }else{
+                    Annonce annonce = getAnnonce();
+                    Bitmap bm=((BitmapDrawable)image6.getDrawable()).getBitmap();
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    bm.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    String temp = Base64.getEncoder().encodeToString(stream.toByteArray());
+                    annonce.remove(temp);
+                    setAnnonce(annonce);
+                    image6.setImageDrawable(getResources().getDrawable(R.drawable.baseline_add_photo_alternate_black_24dp));
+
+                }
             }
         });
+    }
+
+    public Annonce getAnnonce() {
+        return this.annonce;
+    }
+    public void setAnnonce(Annonce annonce){
+        this.annonce = annonce;
     }
     public void PutRequest(String url,String json) throws IOException {
         Thread thread = new Thread(new Runnable() {
@@ -443,11 +481,11 @@ public class FragmentDeposer extends Fragment {
             throw new RuntimeException(e);
         }
         Bitmap i = BitmapFactory.decodeStream(inputStream);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        i.compress(Bitmap.CompressFormat.JPEG, 20, baos);
-        byte[] b = baos.toByteArray();
-        String temp = Base64.getEncoder().encodeToString(baos.toByteArray());
-        image.add(temp);
+        ByteArrayOutputStream baos=new ByteArrayOutputStream();
+        i.compress(Bitmap.CompressFormat.PNG,100, baos);
+        byte [] b=baos.toByteArray();
+        String temp = Base64.getEncoder().encodeToString(b);
+        this.annonce.addImage(temp);
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
                 case 1:

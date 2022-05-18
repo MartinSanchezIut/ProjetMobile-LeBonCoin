@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.projetmobile.BDD.models.Controllers.UserControlers;
 
@@ -69,7 +70,27 @@ public class AcceuilProfile extends Fragment {
 
         Tentreprise = (TextView)root.findViewById(R.id.identreprise);
         Annoncesauv = (Button)root.findViewById(R.id.btnAnnoncesauv);
+        Annoncesauv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment newFragment = new FragmentAnnonceSauvegarde();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragmentContainerView2, newFragment);
+                transaction.commit();
+
+            }
+        });
         Mesannonces = (Button)root.findViewById(R.id.btnMesAnnonces);
+        Mesannonces.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment newFragment = new FragmentListMesAnnonce();
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragmentContainerView2, newFragment);
+                transaction.commit();
+
+            }
+        });
 
         Messages = (Button)root.findViewById(R.id.btnMessages);
         Messages.setOnClickListener(new View.OnClickListener() {

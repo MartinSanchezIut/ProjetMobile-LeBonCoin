@@ -111,7 +111,7 @@
 
     <androidx.fragment.app.FragmentContainerView
             android:layout_width="396dp"
-            android:layout_height="86dp" android:name="com.example.projetmobile.navbarreDeconnecter"
+            android:layout_height="86dp" android:name="com.example.projetmobile.navbarre"
             android:id="@+id/fragmentContainerView4"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"

@@ -21,13 +21,12 @@ import com.example.projetmobile.Model.Conversation;
 import com.google.gson.Gson;
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;
-
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Base64;
+import java.util.*;
 
 
 public class DetailAnnoncePart extends Fragment {
@@ -40,6 +39,7 @@ public class DetailAnnoncePart extends Fragment {
     private TextView ville;
     private TextView pseudo;
     private ImageView profileAnnonceur;
+    private ImageView iconFavoris;
 
     private LinearLayout annonceur;
 
@@ -52,7 +52,7 @@ public class DetailAnnoncePart extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_detail_annonce_part, container, false);
+        View root = inflater.inflate(R.layout.fragment_detail_annonce, container, false);
         this.viewPager2image = root.findViewById(R.id.viewpager2);
         this.titre = root.findViewById(R.id.Titre);
         this.description = root.findViewById(R.id.description);
@@ -62,24 +62,29 @@ public class DetailAnnoncePart extends Fragment {
         this.pseudo = root.findViewById(R.id.pseudo);
         this.profileAnnonceur = root.findViewById(R.id.profil);
         this.annonceur = root.findViewById(R.id.messageAnnoneur);
+        this.iconFavoris = root.findViewById(R.id.iconfavoris);
 
         Gson gson = new Gson();
         annonce = gson.fromJson(getActivity().getIntent().getStringExtra("Annonce"), Annonce.class);
+
+        if (getActivity().getIntent().getBooleanExtra("FAV",false)) {
+            this.iconFavoris.setImageResource(R.drawable.baseline_favorite_black_24dp);
+        }
+
+
         titre.setText(annonce.getTitre());
         description.setText(annonce.getDescription());
         prix.setText(String.valueOf(annonce.getPrix()));
         département.setText(annonce.getDepartement());
         ville.setText(annonce.getVille());
         String url = "http://172.16.5.209:8080/LeMauvaisCoin/api/User/UserById/" + annonce.getAnnonceur();
-        String reponse = null;
+         String reponse = null;
         try {
             reponse = getRequest(url);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         User user = gson.fromJson(reponse, User.class);
-        System.out.println(user.getPseudo());
-        this.pseudo.setText(user.getPseudo());
         if(user.getImage() !=null) {
             byte[] myImage = Base64.getDecoder().decode(user.getImage().getBytes(StandardCharsets.UTF_8));
             Bitmap bmp = BitmapFactory.decodeByteArray(myImage, 0, myImage.length);
@@ -120,7 +125,40 @@ public class DetailAnnoncePart extends Fragment {
         });
 
 
+
+        this.iconFavoris.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                iconFavoris();
+
+            }
+        });
+
+
         return root;
+    }
+
+    public void iconFavoris(){
+        String url = "http://172.16.5.209:8080/LeMauvaisCoin/api/annonce/Favoris";
+        UserControlers userControlers = new ViewModelProvider(getActivity()).get(UserControlers.class);
+        userControlers.init(getContext());
+        ArrayList<String> params = new ArrayList<>();
+        params.add(String.valueOf(userControlers.getPlanning().get(0).getId_user()));
+        params.add(String.valueOf(annonce.getId_annonce()));
+        Gson gson = new Gson();
+        String query = gson.toJson(params);
+        try {
+            PostRequest(url,query);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        if(this.iconFavoris.getDrawable().getConstantState().equals(getResources().getDrawable(R.drawable.baseline_favorite_black_24dp).getConstantState())){
+            this.iconFavoris.setImageResource(R.drawable.baseline_favorite_border_black_24dp);
+        }else {
+            this.iconFavoris.setImageResource(R.drawable.baseline_favorite_black_24dp);
+        }
+
     }
 
     public String getRequest(String url) throws IOException {
@@ -145,6 +183,59 @@ public class DetailAnnoncePart extends Fragment {
         }
 
         return result[0];
+    }
+
+    public void PostRequest(String url,String param) throws IOException {
+        Thread thread = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                try  {
+                    URL adress = null;
+                    try {
+                        adress = new URL(url);
+                        HttpURLConnection httpCon = (HttpURLConnection) adress.openConnection();
+                        httpCon.setDoOutput(true);
+                        httpCon.setRequestMethod("POST");
+                        httpCon.setRequestProperty("Content-Type", "application/json");
+                        httpCon.setRequestProperty("Accept", "application/json");
+                        OutputStreamWriter out = new OutputStreamWriter (
+                                httpCon.getOutputStream());
+                        out.write(param);
+                        out.close();
+                        httpCon.getInputStream();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+    private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException{
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+        for(Map.Entry<String, String> entry : params.entrySet()){
+            if (first)
+                first = false;
+            else
+                result.append("&");
+
+            result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+            result.append("=");
+            result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+        }
+
+        return result.toString();
     }
 
     public String PutRequest(String url,String json) throws IOException {

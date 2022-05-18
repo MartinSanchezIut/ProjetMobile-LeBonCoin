@@ -28,6 +28,7 @@ public class FiltreFragment extends Fragment {
     private static final String ARG_PARAM2 = "Categorie";
     // TODO: Rename and change types of parameters
     private ArrayList<String> mParam1;
+    private Annonce annonce;
     private String mParam2;
 
     public FiltreFragment() {
@@ -57,27 +58,50 @@ public class FiltreFragment extends Fragment {
                 //String json = gson.toJson(f);
                 InputStream input = null;
                 try {
-                    input = getContext().openFileInput("Data.json");
-                    byte[] buffer=new byte[input.available()];
-                    input.read(buffer);
-                    input.close();
-                    String text=new String(buffer);
-                    Gson gson = new Gson();
-                    Annonce f = gson.fromJson(text, Annonce.class);
-                    f.setFiltre(mParam1.get(position));
-                    f.setCategories(mParam2);
-                    FileOutputStream fOut = getContext().openFileOutput("Data.json",0);
+                    if (com.example.projetmobile.Profil.class.getName().equals(getContext().getClass().getName())) {
+                        input = getContext().openFileInput("Modification.json");
+                        byte[] buffer = new byte[input.available()];
+                        input.read(buffer);
+                        input.close();
+                        String text = new String(buffer);
+                        System.out.println("ICI" + text);
+                        Gson gson = new Gson();
+                        annonce = gson.fromJson(text, Annonce.class);
+                        annonce.setFiltre(mParam1.get(position));
+                        annonce.setCategories(mParam2);
+                        FileOutputStream fOut = getContext().openFileOutput("Modification.json", 0);
 
-                    String json = gson.toJson(f);
-                    System.out.println("ICI   " + json);
-                    fOut.write(json.getBytes());
-                    fOut.close();
+                        String json = gson.toJson(annonce);
+                        System.out.println("ICI" +json);
+                        fOut.write(json.getBytes());
+                        fOut.close();
+                        FragmentModificationAnnonce fragment = new FragmentModificationAnnonce();
+                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
 
-                    FragmentDeposer fragment = new FragmentDeposer();
-                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.fragmentContainerView2, fragment);
+                        transaction.commit();
+                    }else {
+                        input = getContext().openFileInput("Data.json");
+                        byte[] buffer = new byte[input.available()];
+                        input.read(buffer);
+                        input.close();
+                        String text = new String(buffer);
+                        Gson gson = new Gson();
+                        annonce = gson.fromJson(text, Annonce.class);
+                        annonce.setFiltre(mParam1.get(position));
+                        annonce.setCategories(mParam2);
+                        FileOutputStream fOut = getContext().openFileOutput("Data.json", 0);
 
-                    transaction.replace(R.id.fragmentContainerView6, fragment);
-                    transaction.commit();
+                        String json = gson.toJson(annonce);
+                        fOut.write(json.getBytes());
+                        fOut.close();
+                        FragmentDeposer fragment = new FragmentDeposer();
+                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+
+                        transaction.replace(R.id.fragmentContainerView2, fragment);
+                        transaction.commit();
+                    }
+
                 } catch (FileNotFoundException e) {
                     throw new RuntimeException(e);
                 } catch (IOException e) {

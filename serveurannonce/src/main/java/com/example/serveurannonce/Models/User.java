@@ -135,9 +135,28 @@ public class User {
         return sauvegarde;
     }
 
-    public void addsauvegarde(Annonce ann) {
-        sauvegarde.add(ann);
+    public boolean addsauvegarde(Annonce ann) {
+        boolean is_sauvegarde = false;
+        for(int i = 0 ; i < this.sauvegarde.size();++i){
+            if(this.sauvegarde.get(i).getId_annonce() == ann.getId_annonce()){
+                this.sauvegarde.remove(i);
+                is_sauvegarde = true;
+            }
+        }
+        if(!is_sauvegarde){
+            sauvegarde.add(ann);
+        }
+        return is_sauvegarde;
     }
+    public void deletesauvegarde(Annonce ann){
+        for(int i = 0 ; i < this.sauvegarde.size();++i){
+            if(this.sauvegarde.get(i).getId_annonce() == ann.getId_annonce()){
+                this.sauvegarde.remove(i);
+            }
+        }
+    }
+
+
 
 
 

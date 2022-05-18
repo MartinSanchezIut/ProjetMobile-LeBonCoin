@@ -48,9 +48,12 @@ public class FragmentListMessage extends Fragment {
         System.out.println(result);
         Gson gson = new Gson();
         message = gson.fromJson(result, new TypeToken<ArrayList<MessageAffichage>>(){}.getType());
+        /*
         for(MessageAffichage m : message) {
             System.out.println(m.getTitreAnnonce());
         }
+
+         */
 
         ListMessageAdaptater myAdapter=new ListMessageAdaptater(getContext(),message);
         listView.setAdapter(myAdapter);
