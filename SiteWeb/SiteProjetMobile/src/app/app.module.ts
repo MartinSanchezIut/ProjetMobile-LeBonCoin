@@ -19,6 +19,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { HttpClientModule } from '@angular/common/http';
+import { StatistiquesComponent } from './statistiques/statistiques.component';
+import { DatePipe } from '@angular/common';
+
 
 @NgModule({
   declarations: [
@@ -37,14 +40,15 @@ import { HttpClientModule } from '@angular/common/http';
     MessagesComponent,
     NavbarComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    StatistiquesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

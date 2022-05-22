@@ -1,0 +1,50 @@
+<div class="row container" style="margin-top: 20px;">
+
+    <div #Annonces id="Annonces" class="col s3 card" style="background-color: #F1EEEE; ">
+        <h4 class="center"> Annonces </h4>
+        <hr style="width: 80%;">
+
+        <div class="row" style="margin-top: 15px; height: 500px;   overflow-x: hidden; overflow-y: auto;">
+
+                <a *ngFor="let x of '123451211'.split('') "  
+                class="waves-effect waves-light btn-large black-text col s10 offset-s1"
+                style="background-color: #9BE7FF; margin-top: 6px; margin-bottom: 6px;"
+                (click)="test()">Annonce X </a>
+        </div>
+
+    </div>
+
+    <div #stats id="stats" class="col s9"  style="background-color: #ffffff;">
+
+        <h4 class="center">  Statistiques </h4>
+        <hr style="width: 75%;" class=" center">
+        
+        <div class="row">
+            <h6 class="center" style="margin-top: 30px;">  Nombre de vues total </h6>
+            <hr style="width: 50%;" class=" center">
+            <p #nbVues id="nbVues" class="center" style="margin-bottom: 50px;"> 123123 vues </p>
+    
+    
+            <h6 class="center" style="margin-top: 20px;">  Nombre de vues ces 7 dernier jours </h6>
+            <hr style="width: 50%;" class=" center">
+            <div class="col s10 offset-s1" style="padding: 0px;">
+                <div #day1 id="day1" class="indigo lighten-3" style="width: 60%; height: 50px; margin-top: 10px; margin-bottom: 5px; border-radius: 0px 50px 50px 0px;">
+                    <p style="padding: 13px; margin: 0px; position: absolute;"> 01/02/1234 : 123 vues </p></div>
+                <div #day2 id="day2" class="blue lighten-3" style="width: 70%; height: 50px; margin-top: 5px; margin-bottom: 5px; border-radius: 0px 50px 50px 0px;"> 
+                    <p style="padding: 13px; margin: 0px; position: absolute;"> 02/02/1234 : 123 vues</p></div>
+                <div #day3 id="day3" class="deep-purple lighten-3" style="width: 90%; height: 50px; margin-top: 5px; margin-bottom: 5px; border-radius: 0px 50px 50px 0px;">
+                    <p style="padding: 13px; margin: 0px; position: absolute;"> 03/02/1234 : 123 vues</p></div>
+                <div #day4 id="day4" class="teal lighten-3" style="width: 50%; height: 50px; margin-top: 5px; margin-bottom: 5px; border-radius: 0px 50px 50px 0px;">
+                    <p style="padding: 13px; margin: 0px; position: absolute;">04/02/1234 : 123 vues</p></div>
+                <div #day5 id="day5" class="green lighten-3" style="width: 30%; height: 50px; margin-top: 5px; margin-bottom: 5px; border-radius: 0px 50px 50px 0px;">
+                    <p style="padding: 13px; margin: 0px; position: absolute;">05/02/1234 : 123 vues</p></div>
+                <div #day6 id="day6" class="light-green lighten-3" style="width: 45%; height: 50px; margin-top: 5px; margin-bottom: 5px; border-radius: 0px 50px 50px 0px;">
+                    <p style="padding: 13px; margin: 0px; position: absolute;">06/02/1234 : 123 vues</p></div>
+                <div #day7 id="day7" class="orange lighten-3" style="width: 40%; height: 50px; margin-top: 5px; margin-bottom: 10px; border-radius: 0px 50px 50px 0px;">
+                    <p style="padding: 13px; margin: 0px; position: absolute;">07/02/1234 : 123 vues</p></div>
+            </div>
+        </div>
+    
+
+    </div>
+</div>

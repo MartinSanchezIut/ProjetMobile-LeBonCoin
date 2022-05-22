@@ -11,5 +11,8 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  public hideMeToShow(hide : HTMLElement, show : HTMLElement) : void {
+    hide.classList.add("hide");
+    show.classList.remove("hide");
+  }
 }
