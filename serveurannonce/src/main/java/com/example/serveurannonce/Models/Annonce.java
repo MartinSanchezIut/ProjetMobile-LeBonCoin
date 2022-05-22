@@ -273,4 +273,8 @@ public class Annonce {
     public void setFiltre(String filtre) {
         this.filtre = filtre;
     }
+
+    public void setNbvues(Map<String, Integer> nbvues) {
+        this.nbvues = nbvues;
+    }
 }

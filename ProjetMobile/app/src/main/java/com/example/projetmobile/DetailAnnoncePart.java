@@ -101,6 +101,14 @@ public class DetailAnnoncePart extends Fragment {
         this.viewPager2image.setAdapter(adapter);
 
 
+         url = "http://172.16.5.209:8080/LeMauvaisCoin/api/annonce/vu/" + annonce.getId_annonce();
+        try {
+            System.out.println("ICI");
+            getRequest(url);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         annonceur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,7 +118,6 @@ public class DetailAnnoncePart extends Fragment {
                 Conversation c = new Conversation(annonce.getId_annonce(),userControlers.getPlanning().get(0).getId_user(),annonce.getAnnonceur());
                 Gson gson = new Gson();
                 String json = gson.toJson(c);
-                System.out.println(json);
                 String result = null;
                 try {
                     result = PutRequest(url,json);

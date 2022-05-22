@@ -39,6 +39,21 @@ public class AnnonceControlers {
         }
         return result;
     }
+
+    @GetMapping(uri + "/vu/{id_annonce}")
+    public void PostVu(@PathVariable long id_annonce) {
+        System.out.println(id_annonce);
+        annonce.findById(id_annonce)
+                .map(Annonce -> {
+                    Map<String, Integer> ret = Annonce.getNbvues();
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    String date = dtf.format(LocalDateTime.now());
+                    ret.put(date, ret.get(date) + 1);
+                    Annonce.setNbvues(ret);
+
+                    return annonce.save(Annonce);
+                });
+    }
     @GetMapping(uri + "/NbVuAnnonce/{id_annonce}")
     public Map<String,Integer> GetBnVu(@PathVariable long id_annonce) {
         return annonce.findById(id_annonce).get().getNbvues();

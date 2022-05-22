@@ -20,9 +20,15 @@ import com.example.projetmobile.Model.Annonce;
 import com.example.projetmobile.Model.Conversation;
 import com.example.projetmobile.Model.User;
 import java.text.SimpleDateFormat;
+
+import com.github.mikephil.charting.components.Legend;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;
 
@@ -32,6 +38,8 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -44,6 +52,11 @@ public class DetailAnnoncePro extends Fragment {
     private TextView prix;
     private TextView département;
     private TextView ville;
+
+    private TextView total;
+
+    private TextView aujourdhui;
+
     private TextView pseudo;
     private ImageView profileAnnonceur;
     private ImageView iconFavoris;
@@ -77,10 +90,16 @@ public class DetailAnnoncePro extends Fragment {
         this.pseudo = root.findViewById(R.id.pseudo);
         this.profileAnnonceur = root.findViewById(R.id.profil);
         this.annonceur = root.findViewById(R.id.messageAnnoneur);
+
+        this.total = root.findViewById(R.id.total);
+
+        this.aujourdhui = root.findViewById(R.id.aujourdhui);
+
+
         this.iconFavoris = root.findViewById(R.id.iconfavoris);
         this.supprimer = root.findViewById(R.id.Suprimer);
         this.modifier = root.findViewById(R.id.Modifier);
-        BarChart barChart = (BarChart) findViewById(R.id.barchart);
+        BarChart barChart = (BarChart) root.findViewById(R.id.barchart);
 
 
         Gson gson = new Gson();
@@ -184,65 +203,47 @@ public class DetailAnnoncePro extends Fragment {
                         (z1, z2) -> z1, LinkedHashMap::new));
 
 
-        float start = 1f;
-        ArrayList<BarEntry> values = new ArrayList<>();
-        for (int i = (int) start; i < start + count; i++) {
-            float val = (float) (Math.random() * (range + 1));
-            if (Math.random() * 100 < 25) {
-                values.add(new BarEntry(i, val, getResources().getDrawable(R.drawable.star)));
-            } else {
-                values.add(new BarEntry(i, val));
-            }
+        ArrayList<BarEntry> NoOfEmp = new ArrayList();
+        int i = 0;
+        int toto = 0;
+        for (Integer value : x.values()) {
+            toto = toto + Integer.valueOf(value);
+            NoOfEmp.add(new BarEntry(Float.valueOf(value), i));
+            ++i;
         }
-        chart.getDescription().setEnabled(false);
-        // if more than 60 entries are displayed in the chart, no values will be
-        // drawn
-        chart.setMaxVisibleValueCount(60);
-        // scaling can now only be done on x- and y-axis separately
-        chart.setPinchZoom(false);
-        chart.setDrawGridBackground(false);
-        Legend l = chart.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
-        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-        l.setDrawInside(false);
-        l.setForm(Legend.LegendForm.SQUARE);
-        l.setFormSize(9f);
-        l.setTextSize(11f);
-        l.setXEntrySpace(4f)
-        BarDataSet set1;
-        if (chart.getData() != null &&
-                chart.getData().getDataSetCount() > 0) {
-            set1 = (BarDataSet) chart.getData().getDataSetByIndex(0);
-            set1.setValues(values);
-            chart.getData().notifyDataChanged();
-            chart.notifyDataSetChanged();
-        } else {
-            set1 = new BarDataSet(values, "The year 2017");
-            set1.setDrawIcons(false);
-            int startColor1 = ContextCompat.getColor(this, android.R.color.holo_orange_light);
-            int startColor2 = ContextCompat.getColor(this, android.R.color.holo_blue_light);
-            int startColor3 = ContextCompat.getColor(this, android.R.color.holo_orange_light);
-            int startColor4 = ContextCompat.getColor(this, android.R.color.holo_green_light);
-            int startColor5 = ContextCompat.getColor(this, android.R.color.holo_red_light);
-            int endColor1 = ContextCompat.getColor(this, android.R.color.holo_blue_dark);
-            int endColor2 = ContextCompat.getColor(this, android.R.color.holo_purple);
-            int endColor3 = ContextCompat.getColor(this, android.R.color.holo_green_dark);
-            int endColor4 = ContextCompat.getColor(this, android.R.color.holo_red_dark);
-            int endColor5 = ContextCompat.getColor(this, android.R.color.holo_orange_dark);
-            List<GradientColor> gradientFills = new ArrayList<>();
-            gradientFills.add(new GradientColor(startColor1, endColor1));
-            gradientFills.add(new GradientColor(startColor2, endColor2));
-            gradientFills.add(new GradientColor(startColor3, endColor3));
-            gradientFills.add(new GradientColor(startColor4, endColor4));
-            gradientFills.add(new GradientColor(startColor5, endColor5));
-            set1.setGradientColors(gradientFills);
-            ArrayList<IBarDataSet> dataSets = new ArrayList<>();
-            dataSets.add(set1);
-            BarData data = new BarData(dataSets);
-            data.setValueTextSize(10f);
-            data.setBarWidth(0.9f);
-            chart.setData(data);
+        total.setText(String.valueOf(toto));
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String date = dtf.format(LocalDateTime.now());
+        Set<String> phoneNumbers = x.keySet();
+
+        for (String phoneNumber : phoneNumbers) {
+            if(phoneNumber.equals(date)){
+                aujourdhui.setText(String.valueOf(x.get(phoneNumber)));
+
+
+            }else{
+                aujourdhui.setText("0");
+            }
+
+        }
+        ArrayList<String> year = new ArrayList();
+        for (String key : x.keySet()) {
+            year.add(key);
+        }
+
+        BarDataSet bardataset = new BarDataSet(NoOfEmp, "");
+        barChart.animateY(500);
+        barChart.getAxisLeft().setTextColor(Color.rgb(255, 255, 83));
+        barChart.getAxisRight().setEnabled(false);
+        barChart.getXAxis().setTextColor(Color.rgb(241, 13, 13 ));
+        BarData data = new BarData(year, bardataset);
+        bardataset.setColors(ColorTemplate.COLORFUL_COLORS);
+        bardataset.setValueTextColor(Color.rgb(255, 255, 83));
+        bardataset.setValueTextSize(10);
+        barChart.getLegend().setEnabled(false);
+        barChart.setDescription("");
+
+        barChart.setData(data);
         return root;
     }
     public String getRequest(String url) throws IOException {
