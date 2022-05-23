@@ -7,6 +7,7 @@ import { RechercheComponent } from './recherche/recherche.component';
 import { AjouterannonceComponent } from './ajouterannonce/ajouterannonce.component';
 import { ProfilComponent } from './profil/profil.component';
 import { MessagesComponent } from './messages/messages.component';
+import { Error404Component } from './error404/error404.component' ;
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { MesannoncesComponent } from './mesannonces/mesannonces.component';
@@ -28,6 +29,12 @@ const routes: Routes = [
   { path: 'inscription', component: InscriptionComponent },
   { path: 'connexion', component: ConnexionComponent },
   { path: 'statistiques', component: StatistiquesComponent },
+  { path: 'listeannonce', component: ListeannonceComponent },
+  { path: 'detailannonce/:id', component: DetailannonceComponent },
+  { path: 'detailannonce', component: DetailannonceComponent },
+  
+  
+  { path: '**', component: Error404Component },
 
 
 
@@ -36,9 +43,7 @@ const routes: Routes = [
   { path: 'test/header', component: HeaderComponent },
   { path: 'test/footer', component: FooterComponent },
   { path: 'test/mesannonces', component: MesannoncesComponent },
-  { path: 'test/listeannonce', component: ListeannonceComponent },
   { path: 'test/editerannonce', component: EditerannonceComponent },
-  { path: 'test/detailannonce', component: DetailannonceComponent },
   { path: 'test/annoncesauvegardes', component: AnnoncessauvegardeesComponent },
 ];
 

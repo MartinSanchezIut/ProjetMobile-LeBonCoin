@@ -21,6 +21,7 @@ import { HeaderComponent } from './header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { StatistiquesComponent } from './statistiques/statistiques.component';
 import { DatePipe } from '@angular/common';
+import { Error404Component } from './error404/error404.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { DatePipe } from '@angular/common';
     NavbarComponent,
     FooterComponent,
     HeaderComponent,
-    StatistiquesComponent
+    StatistiquesComponent,
+    Error404Component
   ],
   imports: [
     BrowserModule,

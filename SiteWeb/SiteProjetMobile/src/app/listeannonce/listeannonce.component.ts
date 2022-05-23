@@ -10,8 +10,13 @@ export class ListeannonceComponent implements OnInit {
 
   constructor(private annonce : AnnonceService) { }
 
+  public listeAnnonces : any[] = [];
   ngOnInit(): void {
-    this.annonce.getAllAnnonces() ;
+     
+    this.annonce.getAllAnnonces().subscribe(doc => {
+      console.log(doc) ;
+      this.listeAnnonces = doc; 
+    });
   }
 
 

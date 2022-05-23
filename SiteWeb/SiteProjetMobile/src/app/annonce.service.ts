@@ -13,14 +13,9 @@ export class AnnonceService {
   private urlBase: string = apiUrl + '/annonce';
 
   // Récupère toute les annonces
-  getAllAnnonces(): any[]{
+  getAllAnnonces() : Observable<any> {
       console.log("Récupération de toutes les annonces.");
-      
-      this.http.get<any>(this.urlBase + "/getAll").subscribe(listeAnnonces => {
-        console.log(listeAnnonces) 
-      });
-      
-      return [] ;
+      return this.http.get<any>(this.urlBase + "/getAll");
     }
   
 
