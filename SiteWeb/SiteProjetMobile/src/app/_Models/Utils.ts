@@ -1,3 +1,7 @@
+
+export var apiUrl : string = "tiens c'est pour toi àa gaétan <3 " ;
+
+
 export class Departements {
     // Liste des départements francais : INCOMPLETTE
     public static list : string[] = [

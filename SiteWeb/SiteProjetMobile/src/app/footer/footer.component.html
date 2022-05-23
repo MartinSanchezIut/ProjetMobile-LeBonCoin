@@ -1,16 +1,27 @@
-<nav class="bg-color" style="display: flex;">
+<footer class="page-footer bg-color" style="padding: 0px;">
 
-    <div style="display: flex;"> 
-        <a (click)="downloadApp()" style="cursor: pointer;">  
-            <span class="material-icons black-text" style="font-size: 32px; margin: 20px; margin-top: 15px;"> shop </span>
-        </a>
+    <div style="display: flex; height: 70px;">
+        <div style="display: flex;"> 
+            <a (click)="downloadApp()" style="cursor: pointer;">  
+                <span class="material-icons black-text" style="font-size: 32px; margin: 20px; margin-top: 15px;"> shop </span>
+            </a>
 
-        <p class="black-text" style="font-weight: 500; margin-left: 30px; margin-top: 0px;"> Téléchargez notre application sur le PlayStore</p>
+            <p class="black-text" style="font-weight: 500; margin-left: 30px; margin-top: 23px;"> 
+                Téléchargez notre application sur le PlayStore</p>
+        </div>
+
+        <div style="right: 50px; position: absolute;" > 
+            <a (click)="showContact()" style="cursor: pointer;"> 
+                <p class="black-text right" style="font-weight: 500; margin-top: 23px;"> Contact</p> 
+            </a>
+        </div>
     </div>
 
-    <div style="right: 50px; position: absolute;" > 
-        <a (click)="showContact()" style="cursor: pointer;"> 
-            <p class="black-text right" style="font-weight: 500; margin-top: 0px;"> Contact</p> 
-        </a>
-    </div>
-  </nav>
+    <div class="footer-copyright">
+        <div class="container black-text " style="font-weight: 500;">
+        Par TRINQUART Matthieu, ROMERO Gaétan, SANCHEZ Martin
+        <a class="black-text right" style="font-weight: 500;" 
+        href="https://github.com/MartinSanchezIut/ProjetMobile-LeBonCoin">Github</a>
+        </div>
+      </div>
+</footer>
