@@ -21,6 +21,7 @@ import com.example.projetmobile.Model.Conversation;
 import com.example.projetmobile.Model.User;
 import java.text.SimpleDateFormat;
 
+import com.example.projetmobile.Model.serveur;
 import com.github.mikephil.charting.components.Legend;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -66,6 +67,10 @@ public class DetailAnnoncePro extends Fragment {
 
     private LinearLayout annonceur;
 
+    private LinearLayout linearglobal;
+
+    private LinearLayout fraude;
+    private TextView fraudemotif;
     private Annonce annonce;
 
     private BarChart chart;
@@ -95,6 +100,12 @@ public class DetailAnnoncePro extends Fragment {
 
         this.aujourdhui = root.findViewById(R.id.aujourdhui);
 
+        this.linearglobal = root.findViewById(R.id.linearglobal);
+        this.fraude = root.findViewById(R.id.linearfraude);
+        this.fraudemotif = root.findViewById(R.id.fraudemotif);
+
+
+
 
         this.iconFavoris = root.findViewById(R.id.iconfavoris);
         this.supprimer = root.findViewById(R.id.Suprimer);
@@ -106,15 +117,19 @@ public class DetailAnnoncePro extends Fragment {
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             String reponse = bundle.getString("Annonce", null);
-            System.out.println("REPONSE " + reponse);
             annonce = gson.fromJson(reponse,Annonce.class);
-            System.out.println(annonce.getTitre());
         }
 
         if (bundle.getBoolean("FAV")) {
             this.iconFavoris.setImageResource(R.drawable.baseline_favorite_black_24dp);
         }
 
+        if(!annonce.isIsfraude()){
+            fraude.removeAllViews();
+        }else{
+            fraudemotif.setText(annonce.getMotifFraude());
+            linearglobal.setBackgroundColor(Color.RED);
+        }
 
         titre.setText(annonce.getTitre());
         description.setText(annonce.getDescription());
@@ -146,7 +161,8 @@ public class DetailAnnoncePro extends Fragment {
                 String url = "http://172.16.5.209:8080/LeMauvaisCoin/api/annonce/deleteannonce/" + userControlers.getPlanning().get(0).getId_user()+"/"+annonce.getId_annonce();
 
                 try {
-                    DeleteRequest(url);
+                    serveur s = new serveur("annonce/deleteannonce/" + userControlers.getPlanning().get(0).getId_user()+"/"+annonce.getId_annonce());
+                    s.DeleteRequest();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -181,11 +197,11 @@ public class DetailAnnoncePro extends Fragment {
             }
         });
 
-        String url = "http://172.16.5.209:8080/LeMauvaisCoin/api/annonce/NbVuAnnonce/"+annonce.getId_annonce();
         String reponse = "";
         Map<String,Integer> res = null;
         try {
-            reponse=getRequest(url);
+            serveur s = new serveur("annonce/NbVuAnnonce/"+annonce.getId_annonce());
+            reponse=s.getRequest();
             System.out.println(reponse);
              res = gson.fromJson(reponse,new TypeToken<Map<String,Integer>>(){}.getType());
         } catch (IOException e) {
@@ -244,30 +260,12 @@ public class DetailAnnoncePro extends Fragment {
         barChart.setDescription("");
 
         barChart.setData(data);
+
+
+
+
+
         return root;
-    }
-    public String getRequest(String url) throws IOException {
-        final String[] result = {""};
-        Thread thread = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                try  {
-                    result[0]= IOUtils.toString(new InputStreamReader(new BufferedInputStream(new URL(url).openConnection().getInputStream()), Charsets.UTF_8));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        return result[0];
     }
     public void iconFavoris(){
         String url = "http://172.16.5.209:8080/LeMauvaisCoin/api/annonce/Favoris";
@@ -279,7 +277,8 @@ public class DetailAnnoncePro extends Fragment {
         Gson gson = new Gson();
         String query = gson.toJson(params);
         try {
-            PostRequest(url,query);
+            serveur s = new serveur("annonce/Favoris");
+            s.PostRequest(query);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -287,78 +286,6 @@ public class DetailAnnoncePro extends Fragment {
             this.iconFavoris.setImageResource(R.drawable.baseline_favorite_border_black_24dp);
         }else {
             this.iconFavoris.setImageResource(R.drawable.baseline_favorite_black_24dp);
-        }
-
-    }
-    public void PostRequest(String url,String param) throws IOException {
-        Thread thread = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                try  {
-                    URL adress = null;
-                    try {
-                        adress = new URL(url);
-                        HttpURLConnection httpCon = (HttpURLConnection) adress.openConnection();
-                        httpCon.setDoOutput(true);
-                        httpCon.setRequestMethod("POST");
-                        httpCon.setRequestProperty("Content-Type", "application/json");
-                        httpCon.setRequestProperty("Accept", "application/json");
-                        OutputStreamWriter out = new OutputStreamWriter (
-                                httpCon.getOutputStream());
-                        out.write(param);
-                        out.close();
-                        httpCon.getInputStream();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    public void DeleteRequest(String url) throws IOException {
-        Thread thread = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                try  {
-                    URL adress = null;
-                    try {
-                        adress = new URL(url);
-                        HttpURLConnection httpCon = (HttpURLConnection) adress.openConnection();
-                        httpCon.setDoOutput(true);
-                        httpCon.setRequestMethod("DELETE");
-                        httpCon.setRequestProperty("Content-Type", "application/json");
-                        httpCon.setRequestProperty("Accept", "application/json");
-                        OutputStreamWriter out = new OutputStreamWriter (
-                                httpCon.getOutputStream());
-                        out.close();
-                        httpCon.getInputStream();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
 
     }

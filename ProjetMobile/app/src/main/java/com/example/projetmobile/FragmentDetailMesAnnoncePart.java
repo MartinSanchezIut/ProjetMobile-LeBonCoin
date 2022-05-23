@@ -2,6 +2,7 @@ package com.example.projetmobile;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 import com.example.projetmobile.BDD.models.Controllers.UserControlers;
 import com.example.projetmobile.Model.Annonce;
+import com.example.projetmobile.Model.serveur;
 import com.google.gson.Gson;
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;
@@ -44,6 +46,12 @@ public class FragmentDetailMesAnnoncePart extends Fragment {
 
     private LinearLayout annonceur;
 
+
+    private LinearLayout fraude;
+
+    private LinearLayout global;
+    private TextView motiffraude;
+
     private Annonce annonce;
     public FragmentDetailMesAnnoncePart() {
         // Required empty public constructor
@@ -66,6 +74,10 @@ public class FragmentDetailMesAnnoncePart extends Fragment {
         this.iconFavoris = root.findViewById(R.id.iconfavoris);
         this.supprimer = root.findViewById(R.id.Suprimer);
         this.modifier = root.findViewById(R.id.Modifier);
+        this.fraude = root.findViewById(R.id.linearfraude);
+        this.motiffraude = root.findViewById(R.id.fraudemotif);
+        this.global = root.findViewById(R.id.linearglobal);
+
 
 
         Gson gson = new Gson();
@@ -77,8 +89,14 @@ public class FragmentDetailMesAnnoncePart extends Fragment {
 
         if (bundle.getBoolean("FAV")) {
             this.iconFavoris.setImageResource(R.drawable.baseline_favorite_black_24dp);
+            global.setBackgroundColor(Color.RED);
         }
 
+        if(!annonce.isIsfraude()){
+            fraude.removeAllViews();
+        }else{
+            motiffraude.setText(annonce.getMotifFraude());
+        }
 
         titre.setText(annonce.getTitre());
         description.setText(annonce.getDescription());
@@ -107,10 +125,10 @@ public class FragmentDetailMesAnnoncePart extends Fragment {
             public void onClick(View v) {
                 UserControlers userControlers = new ViewModelProvider(getActivity()).get(UserControlers.class);
                 userControlers.init(getContext());
-                String url = "http://172.16.5.209:8080/LeMauvaisCoin/api/annonce/deleteannonce/" + userControlers.getPlanning().get(0).getId_user()+"/"+annonce.getId_annonce();
 
                 try {
-                    DeleteRequest(url);
+                    serveur s = new serveur("annonce/deleteannonce/" + userControlers.getPlanning().get(0).getId_user()+"/"+annonce.getId_annonce());
+                    s.DeleteRequest();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -148,7 +166,6 @@ public class FragmentDetailMesAnnoncePart extends Fragment {
         return root;
     }
     public void iconFavoris(){
-        String url = "http://172.16.5.209:8080/LeMauvaisCoin/api/annonce/Favoris";
         UserControlers userControlers = new ViewModelProvider(getActivity()).get(UserControlers.class);
         userControlers.init(getContext());
         ArrayList<String> params = new ArrayList<>();
@@ -157,7 +174,8 @@ public class FragmentDetailMesAnnoncePart extends Fragment {
         Gson gson = new Gson();
         String query = gson.toJson(params);
         try {
-            PostRequest(url,query);
+            serveur s = new serveur("annonce/Favoris");
+            s.PostRequest(query);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -168,76 +186,5 @@ public class FragmentDetailMesAnnoncePart extends Fragment {
         }
 
     }
-    public void PostRequest(String url,String param) throws IOException {
-        Thread thread = new Thread(new Runnable() {
 
-            @Override
-            public void run() {
-                try  {
-                    URL adress = null;
-                    try {
-                        adress = new URL(url);
-                        HttpURLConnection httpCon = (HttpURLConnection) adress.openConnection();
-                        httpCon.setDoOutput(true);
-                        httpCon.setRequestMethod("POST");
-                        httpCon.setRequestProperty("Content-Type", "application/json");
-                        httpCon.setRequestProperty("Accept", "application/json");
-                        OutputStreamWriter out = new OutputStreamWriter (
-                                httpCon.getOutputStream());
-                        out.write(param);
-                        out.close();
-                        httpCon.getInputStream();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    public void DeleteRequest(String url) throws IOException {
-        Thread thread = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                try  {
-                    URL adress = null;
-                    try {
-                        adress = new URL(url);
-                        HttpURLConnection httpCon = (HttpURLConnection) adress.openConnection();
-                        httpCon.setDoOutput(true);
-                        httpCon.setRequestMethod("DELETE");
-                        httpCon.setRequestProperty("Content-Type", "application/json");
-                        httpCon.setRequestProperty("Accept", "application/json");
-                        OutputStreamWriter out = new OutputStreamWriter (
-                                httpCon.getOutputStream());
-                        out.close();
-                        httpCon.getInputStream();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
 }

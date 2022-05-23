@@ -56,7 +56,7 @@ private static final String uri = "LeMauvaisCoin/api/message";
 
     @PostMapping(uri + "/ConversationById")
     public Conversation GetConversationById(@RequestBody long id) {
-        System.out.println(id);
+        System.out.println("VALEUR " + id);
         //System.out.println(conversation.findById(id).get().getList_messages().get(0).getUser());
         return conversation.findById(id).get();
     }

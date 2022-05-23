@@ -22,8 +22,6 @@
                 android:id="@+id/idemail"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
 
-
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:startIconDrawable="@drawable/baseline_lock_person_black_24dp"
@@ -54,11 +52,12 @@
                 app:startIconDrawable="@drawable/baseline_vpn_key_black_24dp"
                 android:id="@+id/idpassword"
                 android:hint="Mots de passe"
-                app:endIconMode="password_toggle">
+                app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,23 +82,6 @@
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="288dp"
             app:layout_constraintHorizontal_bias="0.6"/>
-<!--
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavigationView"
-            android:layout_width="match_parent"
-            android:textSize="24dp"
-            android:textStyle="bold"
-            android:layout_height="wrap_content"
-            android:background="#64B5F6"
-            app:menu="@menu/bottom_navigation_view"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:itemIconTint="@color/black"
-            app:itemTextColor="@color/black"
-            app:labelVisibilityMode="labeled"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintVertical_bias="0.981"/>
-            -->
 
     <ImageView
             android:layout_width="369dp"

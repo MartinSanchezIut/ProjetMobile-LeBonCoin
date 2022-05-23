@@ -18,7 +18,9 @@ public class Annonce  {
     private Float prix;
     private String date_publication;
     private Long id_annonceur;
+    private boolean isfraude = false;
 
+    private String motifFraude = "";
     private String ville;
 
     private String departement;
@@ -92,6 +94,22 @@ public class Annonce  {
 
     public Long getAnnonceur() {
         return id_annonceur;
+    }
+
+    public boolean isIsfraude() {
+        return isfraude;
+    }
+
+    public String getMotifFraude() {
+        return motifFraude;
+    }
+
+    public void setIsfraude(boolean isfraude) {
+        this.isfraude = isfraude;
+    }
+
+    public void setMotifFraude(String motifFraude) {
+        this.motifFraude = motifFraude;
     }
 
     public ArrayList<String> getAdresse_image() {

@@ -1,6 +1,8 @@
 package com.example.projetmobile;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,8 +21,10 @@ import androidx.room.Room;
 import com.example.projetmobile.BDD.models.Controllers.UserControlers;
 import com.example.projetmobile.BDD.Repository.AppDataBase;
 import com.example.projetmobile.BDD.Repository.UserDao;
+import com.example.projetmobile.BDD.models.UserBDD;
 import com.example.projetmobile.Model.Annonce;
 import com.example.projetmobile.Model.Message;
+import com.example.projetmobile.Model.serveur;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 
@@ -89,16 +93,16 @@ public class FragmentDeposer extends Fragment {
         String[] mimeTypes = {"image/jpeg", "image/png","image/jpg"};
         intent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
         image1 = (ImageView) root.findViewById(R.id.image1);
-        image1();
         image2 = (ImageView) root.findViewById(R.id.image2);
-        image2();
         image3 = (ImageView) root.findViewById(R.id.image3);
-        image3();
         image4 = (ImageView) root.findViewById(R.id.image4);
-        image4();
         image5 = (ImageView) root.findViewById(R.id.image5);
-        image5();
         image6 = (ImageView) root.findViewById(R.id.image6);
+        image1();
+        image2();
+        image3();
+        image4();
+        image5();
         image6();
 
 
@@ -145,10 +149,9 @@ public class FragmentDeposer extends Fragment {
                         annonce.setNbvues(d);
                         List<Message> m = new ArrayList<>();
                         annonce.setList_messages(m);
-                        String url = "http://172.16.5.209:8080/LeMauvaisCoin/api/annonce/PutAnnonce";
                         String json = gson.toJson(annonce);
-                        System.out.println(json);
-                        PutRequest(url,json);
+                        serveur s = new serveur("annonce/PutAnnonce");
+                        s.PutRequest(json);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -279,7 +282,6 @@ public class FragmentDeposer extends Fragment {
                         annonce = new Annonce(0L, Titre.getEditText().getText().toString(), Description.getEditText().getText().toString(), null, null, Ville.getEditText().getText().toString(), annonce.getDepartement(), 0L, annonce.getimage(), null, Contact.getEditText().getText().toString(), annonce.getCategories(), annonce.getFiltre(), null);
                     }
                     String json = gson.toJson(annonce);
-                    System.out.println("IMAGE : " + annonce.getimage());
                     fOut.write(json.getBytes());
                     fOut.close();
 
@@ -303,19 +305,25 @@ public class FragmentDeposer extends Fragment {
             @Override
             public void onClick(View v) {
                 if(image1.getDrawable().getConstantState().equals(getResources().getDrawable(R.drawable.baseline_add_photo_alternate_black_24dp).getConstantState())) {
-                    startActivityForResult(intent,1);
-                }else{
-                    Annonce annonce = getAnnonce();
-                    Bitmap bm=((BitmapDrawable)image1.getDrawable()).getBitmap();
-                    ByteArrayOutputStream baos=new ByteArrayOutputStream();
-                    bm.compress(Bitmap.CompressFormat.PNG,100, baos);
-                    byte [] b=baos.toByteArray();
-                    String temp = Base64.getEncoder().encodeToString(b);
-                    System.out.println("ICI"+temp);
-                    annonce.remove(temp);
-                    setAnnonce(annonce);
-                    image1.setImageDrawable(getResources().getDrawable(R.drawable.baseline_add_photo_alternate_black_24dp));
+                    UserControlers userControlers = new ViewModelProvider(getActivity()).get(UserControlers.class);
+                    userControlers.init(getContext());
+                        if (getAnnonce().getimage().size() <= 2 || userControlers.getPlanning().get(0).getStatu().equals("AnnonceurPro")) {
+                            startActivityForResult(intent, 1);
+                        } else {
+                            boitedialogue();
+                        }
 
+                }else{
+                        Annonce annonce = getAnnonce();
+                        Bitmap bm = ((BitmapDrawable) image1.getDrawable()).getBitmap();
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                        byte[] b = baos.toByteArray();
+                        String temp = Base64.getEncoder().encodeToString(b);
+                        System.out.println("ICI" + temp);
+                        annonce.remove(temp);
+                        setAnnonce(annonce);
+                        image1.setImageDrawable(getResources().getDrawable(R.drawable.baseline_add_photo_alternate_black_24dp));
                 }
             }
         });
@@ -327,18 +335,29 @@ public class FragmentDeposer extends Fragment {
             @Override
             public void onClick(View v) {
                 if(image2.getDrawable().getConstantState().equals(getResources().getDrawable(R.drawable.baseline_add_photo_alternate_black_24dp).getConstantState())) {
-                    startActivityForResult(intent,2);
+                    UserControlers userControlers = new ViewModelProvider(getActivity()).get(UserControlers.class);
+                    userControlers.init(getContext());
+                    if(getAnnonce().getimage() == null){
+                        System.out.println("TAILLE " + 0);
+                    }else{
+                        System.out.println("TAILLE " + getAnnonce().getimage().size());
+                    }
+                    System.out.println("USER " +userControlers.getPlanning().get(0).getStatu());
+                        if (getAnnonce().getimage().size() <= 2 || userControlers.getPlanning().get(0).getStatu().equals("AnnonceurPro")) {
+                            startActivityForResult(intent, 2);
+                        } else {
+                            boitedialogue();
+                        }
                 }else{
-                    Annonce annonce = getAnnonce();
-                    Bitmap bm=((BitmapDrawable)image2.getDrawable()).getBitmap();
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    bm.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                    String temp = Base64.getEncoder().encodeToString(stream.toByteArray());
-                    annonce.remove(temp);
-                    setAnnonce(annonce);
-                    image2.setImageDrawable(getResources().getDrawable(R.drawable.baseline_add_photo_alternate_black_24dp));
-
-                }
+                        Annonce annonce = getAnnonce();
+                        Bitmap bm = ((BitmapDrawable) image2.getDrawable()).getBitmap();
+                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                        bm.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                        String temp = Base64.getEncoder().encodeToString(stream.toByteArray());
+                        annonce.remove(temp);
+                        setAnnonce(annonce);
+                        image2.setImageDrawable(getResources().getDrawable(R.drawable.baseline_add_photo_alternate_black_24dp));
+                    }
             }
         });
     }
@@ -349,7 +368,19 @@ public class FragmentDeposer extends Fragment {
             public void onClick(View v) {
 
                 if(image3.getDrawable().getConstantState().equals(getResources().getDrawable(R.drawable.baseline_add_photo_alternate_black_24dp).getConstantState())) {
-                    startActivityForResult(intent,3);
+                    UserControlers userControlers = new ViewModelProvider(getActivity()).get(UserControlers.class);
+                    userControlers.init(getContext());
+                    if(getAnnonce().getimage() == null){
+                        System.out.println("TAILLE " + 0);
+                    }else{
+                        System.out.println("TAILLE " + getAnnonce().getimage().size());
+                    }
+                    System.out.println("USER " +userControlers.getPlanning().get(0).getStatu());
+                        if (getAnnonce().getimage().size() <= 2 || userControlers.getPlanning().get(0).getStatu().equals("AnnonceurPro")) {
+                            startActivityForResult(intent, 3);
+                        } else {
+                            boitedialogue();
+                        }
                 }else{
                     Annonce annonce = getAnnonce();
                     Bitmap bm=((BitmapDrawable)image3.getDrawable()).getBitmap();
@@ -359,7 +390,6 @@ public class FragmentDeposer extends Fragment {
                     annonce.remove(temp);
                     setAnnonce(annonce);
                     image3.setImageDrawable(getResources().getDrawable(R.drawable.baseline_add_photo_alternate_black_24dp));
-
                 }
             }
         });
@@ -370,7 +400,21 @@ public class FragmentDeposer extends Fragment {
             @Override
             public void onClick(View v) {
                 if(image4.getDrawable().getConstantState().equals(getResources().getDrawable(R.drawable.baseline_add_photo_alternate_black_24dp).getConstantState())) {
-                    startActivityForResult(intent,4);
+                    UserControlers userControlers = new ViewModelProvider(getActivity()).get(UserControlers.class);
+                    userControlers.init(getContext());
+                    if(getAnnonce().getimage() == null){
+                        System.out.println("TAILLE " + 0);
+                    }else{
+                        System.out.println("TAILLE " + getAnnonce().getimage().size());
+                    }
+                    System.out.println("USER " +userControlers.getPlanning().get(0).getStatu());
+
+                        if (getAnnonce().getimage().size() <= 2 || userControlers.getPlanning().get(0).getStatu().equals("AnnonceurPro")) {
+                            startActivityForResult(intent, 4);
+                        } else {
+                            boitedialogue();
+                        }
+
                 }else{
                     Annonce annonce = getAnnonce();
                     Bitmap bm=((BitmapDrawable)image4.getDrawable()).getBitmap();
@@ -380,8 +424,7 @@ public class FragmentDeposer extends Fragment {
                     annonce.remove(temp);
                     setAnnonce(annonce);
                     image4.setImageDrawable(getResources().getDrawable(R.drawable.baseline_add_photo_alternate_black_24dp));
-
-                }
+                    }
             }
         });
     }
@@ -391,7 +434,20 @@ public class FragmentDeposer extends Fragment {
             @Override
             public void onClick(View v) {
                 if(image5.getDrawable().getConstantState().equals(getResources().getDrawable(R.drawable.baseline_add_photo_alternate_black_24dp).getConstantState())) {
-                    startActivityForResult(intent,5);
+                    UserControlers userControlers = new ViewModelProvider(getActivity()).get(UserControlers.class);
+                    userControlers.init(getContext());
+                    if(getAnnonce().getimage() == null){
+                        System.out.println("TAILLE " + 0);
+                    }else{
+                        System.out.println("TAILLE " + getAnnonce().getimage().size());
+                    }
+                    System.out.println("USER " +userControlers.getPlanning().get(0).getStatu());
+                        if (getAnnonce().getimage().size() <= 2 || userControlers.getPlanning().get(0).getStatu().equals("AnnonceurPro")) {
+                            startActivityForResult(intent, 5);
+                        } else {
+                            boitedialogue();
+                        }
+
                 }else{
                     Annonce annonce = getAnnonce();
                     Bitmap bm=((BitmapDrawable)image5.getDrawable()).getBitmap();
@@ -401,7 +457,6 @@ public class FragmentDeposer extends Fragment {
                     annonce.remove(temp);
                     setAnnonce(annonce);
                     image5.setImageDrawable(getResources().getDrawable(R.drawable.baseline_add_photo_alternate_black_24dp));
-
                 }
             }
         });
@@ -412,7 +467,19 @@ public class FragmentDeposer extends Fragment {
             @Override
             public void onClick(View v) {
                 if(image6.getDrawable().getConstantState().equals(getResources().getDrawable(R.drawable.baseline_add_photo_alternate_black_24dp).getConstantState())) {
-                    startActivityForResult(intent,6);
+                    UserControlers userControlers = new ViewModelProvider(getActivity()).get(UserControlers.class);
+                    userControlers.init(getContext());
+                    if(getAnnonce().getimage() == null){
+                        System.out.println("TAILLE " + 0);
+                    }else{
+                        System.out.println("TAILLE " + getAnnonce().getimage().size());
+                    }
+                    System.out.println("USER " +userControlers.getPlanning().get(0).getStatu());
+                        if (getAnnonce().getimage().size() <= 2 || userControlers.getPlanning().get(0).getStatu().equals("AnnonceurPro")) {
+                            startActivityForResult(intent, 6);
+                        } else {
+                            boitedialogue();
+                        }
                 }else{
                     Annonce annonce = getAnnonce();
                     Bitmap bm=((BitmapDrawable)image6.getDrawable()).getBitmap();
@@ -422,7 +489,6 @@ public class FragmentDeposer extends Fragment {
                     annonce.remove(temp);
                     setAnnonce(annonce);
                     image6.setImageDrawable(getResources().getDrawable(R.drawable.baseline_add_photo_alternate_black_24dp));
-
                 }
             }
         });
@@ -433,42 +499,6 @@ public class FragmentDeposer extends Fragment {
     }
     public void setAnnonce(Annonce annonce){
         this.annonce = annonce;
-    }
-    public void PutRequest(String url,String json) throws IOException {
-        Thread thread = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                try  {
-                    URL adress = null;
-                    try {
-                        adress = new URL(url);
-                        HttpURLConnection httpCon = (HttpURLConnection) adress.openConnection();
-                        httpCon.setDoOutput(true);
-                        httpCon.setRequestMethod("PUT");
-                        httpCon.setRequestProperty("Content-Type", "application/json");
-                        httpCon.setRequestProperty("Accept", "application/json");
-                        OutputStreamWriter out = new OutputStreamWriter (
-                                httpCon.getOutputStream());
-                        out.write(json);
-                        out.close();
-                        httpCon.getInputStream();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
     }
 
     @Override
@@ -513,7 +543,29 @@ public class FragmentDeposer extends Fragment {
 
         }
 
-    }
 
+    }
+    public void boitedialogue(){
+        // Create the object of
+        // AlertDialog Builder class
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        builder.setMessage("Vous ne pouvez pas déposer plus de 3 images");
+
+        builder.setTitle("Erreur dépo image");
+
+        builder.setCancelable(false);
+
+        builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
 
 }

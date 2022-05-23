@@ -2,17 +2,29 @@ package com.example.projetmobile;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.projetmobile.BDD.models.Controllers.UserControlers;
+import com.google.android.gms.ads.*;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class navbarre extends Fragment {
+    private static final long GAME_LENGTH_MILLISECONDS = 3000;
+    private static final String AD_UNIT_ID = "ca-app-pub-3940256099942544/1033173712";
+    private static final String TAG = "MyActivity";
 
+    private InterstitialAd interstitialAd;
      BottomNavigationView bottomNavigationView;
     public navbarre() {
 
@@ -28,6 +40,7 @@ public class navbarre extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View root = inflater.inflate(R.layout.fragment_navbarre, container, false);
         bottomNavigationView = root.findViewById(R.id.bottomNavigationView);
         UserControlers userControlers = new ViewModelProvider(this).get(UserControlers.class);
@@ -78,4 +91,6 @@ public class navbarre extends Fragment {
         }
         return true;
     }
+
+
 }

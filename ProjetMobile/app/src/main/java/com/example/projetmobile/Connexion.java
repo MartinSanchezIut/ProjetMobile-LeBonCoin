@@ -12,6 +12,7 @@ import com.example.projetmobile.BDD.models.UserBDD;
 import com.example.projetmobile.Model.Annonceur_Particulier;
 import com.example.projetmobile.Model.Annonceur_pro;
 import com.example.projetmobile.Model.User;
+import com.example.projetmobile.Model.serveur;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
@@ -57,7 +58,8 @@ public class Connexion extends AppCompatActivity {
         Gson gson = new Gson();
         System.out.println(this.email.getEditText().getText().toString());
         String url = "http://172.16.5.209:8080/LeMauvaisCoin/api/User/Connexion/" + this.email.getEditText().getText().toString() + "/" + this.password.getEditText().getText().toString();
-        String reponse = getRequest(url);
+        serveur s = new serveur("User/Connexion/" + this.email.getEditText().getText().toString() + "/" + this.password.getEditText().getText().toString());
+        String reponse = s.getRequest();
         System.out.println("ICI " + reponse);
         if(!reponse.equals("")) {
             User user = gson.fromJson(reponse, User.class);
@@ -88,29 +90,6 @@ public class Connexion extends AppCompatActivity {
 
     }
 
-    public String getRequest(String url) throws IOException {
-        final String[] result = {""};
-        Thread thread = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                try  {
-                    result[0]= IOUtils.toString(new InputStreamReader(new BufferedInputStream(new URL(url).openConnection().getInputStream()), Charsets.UTF_8));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        return result[0];
-    }
 
 
 }

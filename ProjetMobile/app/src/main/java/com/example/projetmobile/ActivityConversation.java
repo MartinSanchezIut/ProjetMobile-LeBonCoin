@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.projetmobile.BDD.models.Controllers.UserControlers;
 import com.example.projetmobile.Model.Conversation;
 import com.example.projetmobile.Model.Message;
+import com.example.projetmobile.Model.serveur;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -75,12 +76,13 @@ public class ActivityConversation extends AppCompatActivity {
         p.add(json);
         String query = gson.toJson(p);
         System.out.println(query);
-        PutMessage(url,query);
+        serveur s = new serveur("message/PutMessage");
+        s.PutRequest(query);
          gson = new Gson();
-         url = "http://172.16.5.209:8080/LeMauvaisCoin/api/message/ConversationById";
         String result = null;
         try {
-            result = GetConversation(url,c.getId_conversation());
+             s = new serveur("message/ConversationById");
+            result = s.PostRequest(String.valueOf(c.getId_conversation()));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -142,41 +144,7 @@ public class ActivityConversation extends AppCompatActivity {
 
         return result[0];
     }
-    public void PutMessage(String url, String json) {
-        Thread thread = new Thread(new Runnable() {
 
-            @Override
-            public void run() {
-                try  {
-                    URL adress = null;
-                    try {
-                        adress = new URL(url);
-                        HttpURLConnection httpCon = (HttpURLConnection) adress.openConnection();
-                        httpCon.setDoOutput(true);
-                        httpCon.setRequestMethod("PUT");
-                        httpCon.setRequestProperty("Content-Type", "application/json");
-                        httpCon.setRequestProperty("Accept", "application/json");
-                        OutputStreamWriter out = new OutputStreamWriter (
-                                httpCon.getOutputStream());
-                        out.write(json);
-                        out.close();
-                        httpCon.getInputStream();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
 
 

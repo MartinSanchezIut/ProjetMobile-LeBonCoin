@@ -24,22 +24,20 @@
             tools:context=".MainActivity" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="100dp"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.578"
-            android:layout_marginStart="5dp" android:layout_marginEnd="5dp">
+            android:layout_marginStart="5dp" android:layout_marginEnd="5dp" android:id="@+id/linearLayout4">
 
         <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/idrecherche"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:enabled="true"
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:startIconDrawable="@drawable/baseline_search_black_24dp"
-
-
                 android:hint="Rechercher">
 
             <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
+                    android:imeOptions="actionSearch"
+                    android:inputType="textPersonName"
                     android:layout_height="wrap_content"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -51,16 +49,14 @@
             android:layout_width="344dp"
             android:layout_height="462dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="260dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             android:numColumns="2"
             android:stretchMode="columnWidth"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.757" app:layout_constraintHorizontal_bias="0.484">
+            app:layout_constraintHorizontal_bias="0.484">
     </GridView>
     <ImageView
             android:layout_width="361dp"
@@ -75,4 +71,19 @@
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintVertical_bias="1.0" app:layout_constraintHorizontal_bias="0.666"/>
+
+
+    <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            app:adSize="BANNER"
+            app:adUnitId="ca-app-pub-3940256099942544/6300978111" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="220dp"
+            android:layout_marginEnd="24dp">
+    </com.google.android.gms.ads.AdView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

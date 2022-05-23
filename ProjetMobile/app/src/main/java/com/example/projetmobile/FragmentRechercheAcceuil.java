@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.FragmentTransaction;
 import com.example.projetmobile.Model.Recherche;
+import com.example.projetmobile.Model.serveur;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import org.apache.commons.io.Charsets;
@@ -91,11 +92,6 @@ public class FragmentRechercheAcceuil extends Fragment {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(r.getCategorie());
-        System.out.println(r.getFiltre());
-        System.out.println(r.getDepartement());
-        System.out.println(r.getPrix1());
-        System.out.println(r.getPrix2());
 
 
         categorie.setOnClickListener(new View.OnClickListener() {
@@ -236,9 +232,9 @@ public class FragmentRechercheAcceuil extends Fragment {
 
 
 
-                    String url = "http://172.16.5.209:8080/LeMauvaisCoin/api/annonce/Recherche" ;
                     String reponse = null;
-                        reponse = PostRequest(url,json);
+                    serveur s = new serveur("annonce/Recherche");
+                    reponse = s.PostRequest(json);
 
                     System.out.println(reponse);
 
@@ -265,49 +261,5 @@ public class FragmentRechercheAcceuil extends Fragment {
 
     }
 
-    public String PostRequest(String url,String json) throws IOException {
-        final String[] result = {""};
-        Thread thread = new Thread(new Runnable() {
-            URL adresse = null;
-
-            @Override
-            public void run() {
-                try  {
-                    try {
-                        adresse = new URL(url);
-                        HttpURLConnection httpCon = (HttpURLConnection) adresse.openConnection();
-                        httpCon.setDoOutput(true);
-                        httpCon.setRequestMethod("POST");
-                        httpCon.setRequestProperty("Content-Type", "application/json");
-                        httpCon.setRequestProperty("Accept", "application/json");
-                        OutputStreamWriter out = new OutputStreamWriter (
-                                httpCon.getOutputStream());
-                        out.write(json);
-                        out.flush();
-                        String builtResponse = "";
-                        String line ="";
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(httpCon.getInputStream()));
-                        while ((line = reader.readLine()) != null) {
-                            result[0] += line;
-                        }
-                        out.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        return result[0];
-    }
 
     }

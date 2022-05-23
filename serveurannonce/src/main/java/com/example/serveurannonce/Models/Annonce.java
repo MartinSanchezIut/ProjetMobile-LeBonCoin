@@ -28,6 +28,12 @@ public class Annonce {
     @Column(name = "DATE_PUBLICATION")
     private String date_publication;
 
+    @Column(name = "Fraude")
+    private boolean isfraude = false;
+
+    @Column(name = "motifFraude")
+    private String motifFraude = "";
+
 
     @Column(name = "id_annonceur")
     private Long id_annonceur;
@@ -128,6 +134,22 @@ public class Annonce {
     }
     public Annonce() {
 
+    }
+
+    public boolean isIsfraude() {
+        return isfraude;
+    }
+
+    public String getMotifFraude() {
+        return motifFraude;
+    }
+
+    public void setIsfraude(boolean isfraude) {
+        this.isfraude = isfraude;
+    }
+
+    public void setMotifFraude(String motifFraude) {
+        this.motifFraude = motifFraude;
     }
 
     public User getAnn1() {

@@ -15,9 +15,7 @@ import android.view.ViewGroup;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 import com.example.projetmobile.BDD.models.Controllers.UserControlers;
-import com.example.projetmobile.Model.Annonce;
-import com.example.projetmobile.Model.User;
-import com.example.projetmobile.Model.Conversation;
+import com.example.projetmobile.Model.*;
 import com.google.gson.Gson;
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;
@@ -43,7 +41,10 @@ public class DetailAnnoncePart extends Fragment {
 
     private LinearLayout annonceur;
 
+    private LinearLayout Fraude;
+
     private Annonce annonce;
+    private CustomDialogFraude boitedialog;
     public DetailAnnoncePart() {
         // Required empty public constructor
     }
@@ -62,6 +63,7 @@ public class DetailAnnoncePart extends Fragment {
         this.pseudo = root.findViewById(R.id.pseudo);
         this.profileAnnonceur = root.findViewById(R.id.profil);
         this.annonceur = root.findViewById(R.id.messageAnnoneur);
+        this.Fraude = root.findViewById(R.id.fraude);
         this.iconFavoris = root.findViewById(R.id.iconfavoris);
 
         Gson gson = new Gson();
@@ -77,10 +79,10 @@ public class DetailAnnoncePart extends Fragment {
         prix.setText(String.valueOf(annonce.getPrix()));
         département.setText(annonce.getDepartement());
         ville.setText(annonce.getVille());
-        String url = "http://172.16.5.209:8080/LeMauvaisCoin/api/User/UserById/" + annonce.getAnnonceur();
          String reponse = null;
         try {
-            reponse = getRequest(url);
+            serveur s = new serveur("User/UserById/" + annonce.getAnnonceur());
+            reponse = s.getRequest();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -101,13 +103,52 @@ public class DetailAnnoncePart extends Fragment {
         this.viewPager2image.setAdapter(adapter);
 
 
-         url = "http://172.16.5.209:8080/LeMauvaisCoin/api/annonce/vu/" + annonce.getId_annonce();
         try {
-            System.out.println("ICI");
-            getRequest(url);
+            serveur s = new serveur("annonce/vu/" + annonce.getId_annonce());
+            s.getRequest();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+
+
+        Fraude.setOnClickListener(
+                new View.OnClickListener() {
+                                      @Override
+                                      public void onClick(View v) {
+                                          boitedialog = new CustomDialogFraude(getActivity());
+                                          boitedialog.getConfirmer().setOnClickListener(new View.OnClickListener() {
+                                              @Override
+                                              public void onClick(View v) {
+                                                  com.example.projetmobile.Model.Fraude fraude = new Fraude(boitedialog.getMotif().getText().toString(),annonce.getId_annonce(),true);
+                                                  Gson gson = new Gson();
+                                                  String json = gson.toJson(fraude);
+
+                                                  try {
+                                                      serveur s = new serveur("annonce/fraude");
+                                                      s.PostRequest(json);
+                                                  } catch (IOException e) {
+                                                      throw new RuntimeException(e);
+                                                  }
+                                                  boitedialog.dismiss();
+                                                  Intent intention= new Intent(getContext(), Acceuille.class);
+                                                  startActivity(intention);
+
+                                              }});
+
+                                          boitedialog.getAnnuler().setOnClickListener(new View.OnClickListener() {
+                                              @Override
+                                              public void onClick(View v) {
+
+                                                  boitedialog.dismiss();
+
+
+                                              }});
+                                          boitedialog.show();
+
+                                      }
+                                  }
+        );
 
         annonceur.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,11 +160,8 @@ public class DetailAnnoncePart extends Fragment {
                 Gson gson = new Gson();
                 String json = gson.toJson(c);
                 String result = null;
-                try {
-                    result = PutRequest(url,json);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                serveur s = new serveur("message/PutConversation");
+                result = s.PutRequest(json);
                 Intent intention= new Intent(getContext(), ActivityConversation.class);
                 intention.putExtra("Conversation",result);
                 startActivity(intention);
@@ -147,7 +185,6 @@ public class DetailAnnoncePart extends Fragment {
     }
 
     public void iconFavoris(){
-        String url = "http://172.16.5.209:8080/LeMauvaisCoin/api/annonce/Favoris";
         UserControlers userControlers = new ViewModelProvider(getActivity()).get(UserControlers.class);
         userControlers.init(getContext());
         ArrayList<String> params = new ArrayList<>();
@@ -156,7 +193,8 @@ public class DetailAnnoncePart extends Fragment {
         Gson gson = new Gson();
         String query = gson.toJson(params);
         try {
-            PostRequest(url,query);
+            serveur s = new serveur("annonce/Favoris");
+            s.PostRequest(query);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -166,127 +204,5 @@ public class DetailAnnoncePart extends Fragment {
             this.iconFavoris.setImageResource(R.drawable.baseline_favorite_black_24dp);
         }
 
-    }
-
-    public String getRequest(String url) throws IOException {
-        final String[] result = {""};
-        Thread thread = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                try  {
-                    result[0]= IOUtils.toString(new InputStreamReader(new BufferedInputStream(new URL(url).openConnection().getInputStream()), Charsets.UTF_8));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        return result[0];
-    }
-
-    public void PostRequest(String url,String param) throws IOException {
-        Thread thread = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                try  {
-                    URL adress = null;
-                    try {
-                        adress = new URL(url);
-                        HttpURLConnection httpCon = (HttpURLConnection) adress.openConnection();
-                        httpCon.setDoOutput(true);
-                        httpCon.setRequestMethod("POST");
-                        httpCon.setRequestProperty("Content-Type", "application/json");
-                        httpCon.setRequestProperty("Accept", "application/json");
-                        OutputStreamWriter out = new OutputStreamWriter (
-                                httpCon.getOutputStream());
-                        out.write(param);
-                        out.close();
-                        httpCon.getInputStream();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-    private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException{
-        StringBuilder result = new StringBuilder();
-        boolean first = true;
-        for(Map.Entry<String, String> entry : params.entrySet()){
-            if (first)
-                first = false;
-            else
-                result.append("&");
-
-            result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
-            result.append("=");
-            result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
-        }
-
-        return result.toString();
-    }
-
-    public String PutRequest(String url,String json) throws IOException {
-        final String[] result = {""};
-        Thread thread = new Thread(new Runnable() {
-            URL adresse = null;
-
-            @Override
-            public void run() {
-                try  {
-                    try {
-                        adresse = new URL(url);
-                        HttpURLConnection httpCon = (HttpURLConnection) adresse.openConnection();
-                        httpCon.setDoOutput(true);
-                        httpCon.setRequestMethod("PUT");
-                        httpCon.setRequestProperty("Content-Type", "application/json");
-                        httpCon.setRequestProperty("Accept", "application/json");
-                        OutputStreamWriter out = new OutputStreamWriter (
-                                httpCon.getOutputStream());
-                        out.write(json);
-                        out.flush();
-                        String builtResponse = "";
-                        String line ="";
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(httpCon.getInputStream()));
-                        while ((line = reader.readLine()) != null) {
-                            result[0] += line;
-                        }
-                        out.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        return result[0];
     }
 }

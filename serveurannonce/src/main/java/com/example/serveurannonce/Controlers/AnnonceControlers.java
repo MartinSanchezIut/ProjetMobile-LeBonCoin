@@ -1,6 +1,7 @@
 package com.example.serveurannonce.Controlers;
 
 import com.example.serveurannonce.Models.Annonce;
+import com.example.serveurannonce.Models.Fraude;
 import com.example.serveurannonce.Models.Recherche;
 import com.example.serveurannonce.Models.User;
 import com.example.serveurannonce.Repository.AnnonceRepository;
@@ -30,6 +31,11 @@ public class AnnonceControlers {
         return annonce.findById(id).get();
     }
 
+    @GetMapping(uri + "/getAll")
+    public List<Annonce> getAllAnnonces() {
+        return annonce.findAll();
+    }
+
     @GetMapping(uri + "/Getsauvegardeid/{id_user}")
     public List<Long> GetSauvegardeid(@PathVariable long id_user) {
         System.out.println(id_user);
@@ -48,7 +54,11 @@ public class AnnonceControlers {
                     Map<String, Integer> ret = Annonce.getNbvues();
                     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                     String date = dtf.format(LocalDateTime.now());
-                    ret.put(date, ret.get(date) + 1);
+                    if(ret.get(date) == null){
+                        ret.put(date, 1);
+                    }else {
+                        ret.put(date, ret.get(date) + 1);
+                    }
                     Annonce.setNbvues(ret);
 
                     return annonce.save(Annonce);
@@ -62,6 +72,17 @@ public class AnnonceControlers {
     @GetMapping(uri + "/Getsauvegarde/{id_user}")
     public List<Annonce> GetSauvegarde(@PathVariable long id_user) {
         return user.findById(id_user).get().getSauvegarde();
+    }
+
+
+    @PostMapping(uri + "/fraude")
+    public void PostFraude(@RequestBody Fraude fraude) {
+        System.out.println(fraude);
+        Annonce a =  annonce.findById(fraude.getId_annonce()).get();
+        a.setMotifFraude(fraude.getMotif());
+        a.setIsfraude(fraude.isIsfraude());
+        System.out.println(a);
+        annonce.save(a);
     }
 
     @GetMapping(uri + "/GetMesAnnonces/{id_user}")
@@ -79,6 +100,18 @@ public class AnnonceControlers {
             user.save(u);
         }
         annonce.delete(a);
+    }
+
+    @PostMapping(uri + "/RechercheTitre")
+    public List<Annonce> GetRechercheTitreAnnonce(@RequestBody String titre) {
+        List<Annonce> result = new ArrayList<Annonce>();
+        for(Annonce ann : annonce.findAll()){
+            if(ann.getTitre().equals(titre)){
+                result.add(ann);
+            }
+        }
+        return result;
+
     }
 
     @PostMapping(uri + "/Recherche")
@@ -116,7 +149,7 @@ public class AnnonceControlers {
                             departement  &&
                             (re.getVille().equals("") || re.getVille().equals(ann.getVille())) &&
                             ((u.getStatu().equals("AnnonceurPart") && re.isParticulier()) ||
-                            (u.getStatu().equals("AnnonceurPro") && re.isProfessionel()))
+                            (u.getStatu().equals("AnnonceurPro") && re.isProfessionel())) && !ann.isIsfraude()
             ){
                     result.add(ann);
 
@@ -135,7 +168,7 @@ public class AnnonceControlers {
         String formattedDate = dtf.format(dateObj);
         List<Annonce> result = new ArrayList<Annonce>();
         for(Annonce ann : annonce.findAll()){
-            if(ann.getDate_publication().equals(formattedDate)){
+            if(ann.getDate_publication().equals(formattedDate) && !ann.isIsfraude()){
                 result.add(ann);
             }
         }

@@ -6,7 +6,7 @@
     <com.google.android.material.card.MaterialCardView
             android:id="@+id/card"
             android:layout_width="166dp"
-            android:layout_height="371dp"
+            android:layout_height="382dp"
             android:layout_margin="25dp" tools:ignore="MissingConstraints"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -14,6 +14,7 @@
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:id="@+id/lineargeneral"
                 android:orientation="vertical">
 
             <!-- Media -->
@@ -27,8 +28,8 @@
                     android:contentDescription=""
             />
             <LinearLayout
-                    android:layout_width="172dp"
-                    android:layout_height="241dp"
+                    android:layout_width="176dp"
+                    android:layout_height="260dp"
                     android:orientation="vertical"
                     android:padding="16dp">
 
@@ -93,6 +94,29 @@
                             android:textAppearance="?attr/textAppearanceHeadline6"
                     />
                 </LinearLayout>
+                <LinearLayout
+                        android:layout_width="143dp"
+                        android:layout_height="25dp"
+                        android:id="@+id/fraude"
+                        android:orientation="horizontal">
+                    <ImageView
+                            android:layout_width="19dp"
+                            android:layout_height="19dp"
+                            app:srcCompat="@drawable/iconfraude"
+                            android:scaleType="centerCrop"
+                            android:contentDescription=""
+                    />
+                    <TextView
+                            android:id="@+id/motifFraude"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textSize="10dp"
+                            android:text="Fraude par remis l'objet"
+                            android:textAppearance="?attr/textAppearanceBody2"
+                            android:textColor="?android:attr/textColorSecondary"
+                    />
+                </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
 

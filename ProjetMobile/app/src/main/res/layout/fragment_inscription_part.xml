@@ -83,21 +83,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="5dp" android:layout_marginEnd="5dp">
 
-        <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/idpassword"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:startIconDrawable="@drawable/baseline_vpn_key_black_24dp"
-
-
-                android:hint="Mot de passe">
-
-            <com.google.android.material.textfield.TextInputEditText
+            <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    app:startIconDrawable="@drawable/baseline_vpn_key_black_24dp"
+                    android:id="@+id/idpassword"
+                    android:hint="Mots de passe"
+                    app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

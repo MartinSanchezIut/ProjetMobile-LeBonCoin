@@ -4,13 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.*;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
@@ -19,6 +17,7 @@ import com.example.projetmobile.BDD.Repository.UserDao;
 import com.example.projetmobile.BDD.models.Controllers.UserControlers;
 import com.example.projetmobile.BDD.models.UserBDD;
 import com.example.projetmobile.Model.Annonce;
+import com.example.projetmobile.Model.serveur;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.apache.commons.io.Charsets;
@@ -53,11 +52,11 @@ public class AnnonceRecentAdaptateur extends BaseAdapter  {
         UserDao userDao = db.userDao();
         System.out.println(userDao.getCount());
         if(userDao.getCount()!=0) {
-            String url = "http://172.16.5.209:8080/LeMauvaisCoin/api/annonce/Getsauvegardeid/" + userDao.getAll().get(0).getId_user();
+            serveur s = new serveur("annonce/Getsauvegardeid/" + userDao.getAll().get(0).getId_user());
 
             String reponse = null;
             try {
-                reponse = getRequest(url);
+                reponse = s.getRequest();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -66,29 +65,6 @@ public class AnnonceRecentAdaptateur extends BaseAdapter  {
             }.getType());
         }
         layoutInflater = LayoutInflater.from(aContext);
-    }
-    public String getRequest(String url) throws IOException {
-        final String[] result = {""};
-        Thread thread = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                try  {
-                    result[0]= IOUtils.toString(new InputStreamReader(new BufferedInputStream(new URL(url).openConnection().getInputStream()), Charsets.UTF_8));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        return result[0];
     }
     @Override
     public int getCount() {
@@ -130,6 +106,15 @@ public class AnnonceRecentAdaptateur extends BaseAdapter  {
         TextView Date = (TextView)view.findViewById(R.id.Date);
         TextView Lieux = (TextView)view.findViewById(R.id.Lieux);
         TextView Prix = (TextView)view.findViewById(R.id.Prix);
+        LinearLayout ln = view.findViewById(R.id.fraude);
+        if(!getItem(i).isIsfraude()){
+            ln.removeAllViews();
+        }else {
+            TextView MotifFraude = (TextView)view.findViewById(R.id.motifFraude);
+            MotifFraude.setText(getItem(i).getMotifFraude());
+            LinearLayout ln2 = view.findViewById(R.id.lineargeneral);
+            ln2.setBackgroundColor(Color.RED);
+        }
         Prix.setText(String.valueOf(getItem(i).getPrix()));
         Titre.setText(getItem(i).getTitre());
         Description.setText(getItem(i).getDescription());
@@ -159,7 +144,8 @@ public class AnnonceRecentAdaptateur extends BaseAdapter  {
         Gson gson = new Gson();
         String query = gson.toJson(params);
         try {
-            PostRequest(url,query);
+            serveur s = new serveur("annonce/Favoris");
+            s.PostRequest(query);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -169,42 +155,6 @@ public class AnnonceRecentAdaptateur extends BaseAdapter  {
         }else {
             iconfavoris.setImageResource(R.drawable.baseline_favorite_black_24dp);
             this.fav.set(position,true);
-        }
-
-    }
-    public void PostRequest(String url,String param) throws IOException {
-        Thread thread = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                try  {
-                    URL adress = null;
-                    try {
-                        adress = new URL(url);
-                        HttpURLConnection httpCon = (HttpURLConnection) adress.openConnection();
-                        httpCon.setDoOutput(true);
-                        httpCon.setRequestMethod("POST");
-                        httpCon.setRequestProperty("Content-Type", "application/json");
-                        httpCon.setRequestProperty("Accept", "application/json");
-                        OutputStreamWriter out = new OutputStreamWriter (
-                                httpCon.getOutputStream());
-                        out.write(param);
-                        out.close();
-                        httpCon.getInputStream();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
 
     }
