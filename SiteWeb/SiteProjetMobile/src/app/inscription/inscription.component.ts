@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormUser } from '../_Models/FormUser';
+import { User } from '../_Models/dbAcces/User';
 import { UserauthentificationService } from '../userauthentification.service';
 import { Router } from '@angular/router';
 
@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
 export class InscriptionComponent implements OnInit {
 
   private page : number = 1;
-  private usr : FormUser = new FormUser() ;
-  private registeredUser : FormUser = new FormUser() ;
+  private usr : User = new User() ;
+  private registeredUser : User = new User() ;
 
   
 

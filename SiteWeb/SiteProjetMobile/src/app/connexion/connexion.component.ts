@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { UserauthentificationService } from '../userauthentification.service';
 import { Router } from '@angular/router';
-import { FormUser } from '../_Models/FormUser';
+import { User } from '../_Models/dbAcces/User';
 
 @Component({
   selector: 'app-connexion',
@@ -12,7 +12,7 @@ export class ConnexionComponent {
 
   public email: string = "";
   public password: string = "";
-  private userconnected: FormUser = new FormUser();
+  private userconnected: User = new User();
 
 
   constructor(private connectingUser: UserauthentificationService, private router: Router) { }
@@ -26,7 +26,7 @@ export class ConnexionComponent {
     this.email = (<HTMLInputElement>document.getElementById('Identifiant')!).value;
     this.password = (<HTMLInputElement>document.getElementById('password')!).value;
     console.log("Recherche des identifiants pour la connexion");
-    this.connectingUser.getUserConnexion(this.email, this.password).subscribe(userconnected => {
+    this.connectingUser.connexion(this.email, this.password).subscribe(userconnected => {
       if (userconnected != undefined) {
         this.userconnected = userconnected; 
         localStorage.setItem("user", JSON.stringify(this.userconnected));

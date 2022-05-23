@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AnnonceService } from '../annonce.service' ;
 
 @Component({
   selector: 'app-listeannonce',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListeannonceComponent implements OnInit {
 
-  constructor() { }
+  constructor(private annonce : AnnonceService) { }
 
   ngOnInit(): void {
+    this.annonce.getAllAnnonces() ;
   }
+
+
 
 }
