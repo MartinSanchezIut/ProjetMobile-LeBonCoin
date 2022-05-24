@@ -1,5 +1,5 @@
 
-export var apiUrl : string = "http://192.168.0.13:8080/LeMauvaisCoin/api" ;
+export var apiUrl : string = "http://localhost:8080/LeMauvaisCoin/api" ;
 
 
 export class Departements {

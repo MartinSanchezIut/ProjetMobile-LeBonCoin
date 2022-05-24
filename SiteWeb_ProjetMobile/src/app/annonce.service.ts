@@ -12,11 +12,19 @@ export class AnnonceService {
 
   private urlBase: string = apiUrl + '/annonce';
 
-  // Récupère toute les annonces
-  getAllAnnonces() : Observable<any> {
-      console.log("Récupération de toutes les annonces.");
-      return this.http.get<any>(this.urlBase + "/getAll");
+  // Récupère une liste d'annonces
+  getListAnnonce(url : string) : Observable<any> {
+      console.log("Récupération d'annonces ("+ url +").");
+
+      return this.http.get<any>(this.urlBase + url);
     }
+
+  // Récupère une annonce par son id
+  getAnnonceById(id : number) : Observable<any> {
+    console.log("Récupération de l'annonces "+ id +".");
+
+    return this.http.get<any>(this.urlBase + "/AnnonceById/"+id);
+  }
   
 
 }

@@ -1,1 +1,52 @@
-<p>detailannonce works!</p>
+<div class="row" style="margin-top: 20px;">
+
+    <div #userProfile id="userProfile" class="col s3 card" style="background-color: #F1EEEE;">
+        <h4 class="center"> Profil de l'annonceur </h4>
+        <hr style="width: 80%;">
+
+        <div class="row" style="margin-top: 50px;">
+            <img class="col s6 offset-s3 circle  responsive-img center"  src="assets/img/profilepictures/testPP.jpg">
+
+
+        </div>
+        <p style="font-weight: 600; font-size: 24px; margin-top: 10px;"
+        class="center"> Pseudo du client</p>
+
+
+        <div class="row" style="margin-top: 50px;">
+            <p style="font-weight: 400; font-size: 18px;" class="col s4 offset-s2">Nom</p>
+            <p style="font-weight: 400; font-size: 18px;" class="col s4 offset-s1">Prenom</p>
+        </div>
+
+        <p style="font-weight: 400; font-size: 18px; margin-left: 16.6666666667%;" >Date d'inscription</p>
+
+        <div class="row" style="margin-top: 75px;">
+            <a class="waves-effect waves-light btn-large black-text col s6 offset-s3"
+            style="background-color: #9BE7FF;  margin-top: 30px; margin-bottom: 30px;">Contacter</a>
+        </div>
+
+    </div>
+
+   
+    <div class="card col s7 offset-s1" style="background-color: #F1EEEE;"> 
+        <h4 style="font-weight: 500;" class="center"> {{ detailedAnnonce.titre }} </h4>
+        <p style="font-weight: 500;" class="center"> {{ detailedAnnonce.ville }} ( {{detailedAnnonce.departement}} ) </p>
+        <hr style="width: 80%; margin-top: 20px; margin-bottom: 20px;">
+        <div class="center">
+            <img class="responsive-img" style="height: 250px;" src="assets/img/profilepictures/testPP.jpg">
+        </div>
+        <p style="font-weight: 500; font-size: 18px; margin-left: 10%;"> Description : {{ detailedAnnonce.description }} </p> 
+        <p style="font-weight: 500;font-size: 18px; margin-left: 10%;"> Prix : {{ detailedAnnonce.prix }} € </p> 
+        <p style="font-weight: 500;font-size: 18px; margin-left: 10%;"> Contactez de préférence par : {{ detailedAnnonce.contact }} € </p> 
+
+
+        <div style="margin-left: 10%; display: flex; margin-bottom: 30px;">
+            
+            <a href="#"> <span class="material-icons red-text" style="font-size: 32px; margin-top: 45%;"> report_problem </span>  </a>
+            <a href="#"> <span class="material-icons black-text" style="font-size: 32px; right: 10%;position: absolute;font-size: 32px;margin-top: 13px;"> favorite_border </span>  </a>
+        </div>
+    
+        <p style="font-weight: 500;font-size: 18px;" class="center"> {{ detailedAnnonce.date_publication }} </p> 
+
+    </div> 
+</div>
