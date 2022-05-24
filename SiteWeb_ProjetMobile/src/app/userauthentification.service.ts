@@ -37,4 +37,17 @@ export class UserauthentificationService {
 
     return this.http.put<User>(this.urlBase+urlAnnonceur, JSON.stringify(user), httpOptions);
   }
+
+  getUserById(id : string) : Observable<User> {
+    console.log(this.urlBase + "/UserById/" + id);
+    return this.http.get<User>(this.urlBase +'/UserById/'+id);
+  }
+
+  getConnectedUser(){
+    return localStorage.getItem("user");
+  }
+
+  isConnected(): boolean {
+    return (localStorage.getItem("user") != null);
+  }
 }
