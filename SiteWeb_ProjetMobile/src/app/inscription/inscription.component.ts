@@ -12,7 +12,7 @@ export class InscriptionComponent implements OnInit {
 
   private page : number = 1;
   private usr : User = new User() ;
-  private registeredUser : User = new User() ;
+  private registeredUser : any;
 
   
 
@@ -79,11 +79,9 @@ export class InscriptionComponent implements OnInit {
 
   //Fonction pour l'inscription
   public signIn() : void {
-    if (this.userauthentification.setUserLogIn(this.usr) != null){
-      this.router.navigate(['/connexion']);
-    } else {
-      alert("Un problème est survenue");
-    }
-
+    this.userauthentification.setUserLogIn(this.usr).subscribe(registeredUser => {
+      this.registeredUser = registeredUser;
+      this.router.navigate(['/connexion']); //Redirection  
+    });
   }
 }
