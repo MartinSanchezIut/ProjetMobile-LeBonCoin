@@ -1,1 +1,44 @@
-<p>mesannonces works!</p>
+<div class="row" *ngIf="listeAnnonces.length > 0" style="margin-top: 20px;">
+
+    <div *ngFor="let annonce of listeAnnonces; let even = even;">
+        
+        <div *ngIf="even; then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock>
+            <div class="card col s4 offset-s1" style="background-color: #F1EEEE;"> 
+                <h4 style="font-weight: 500;" class="center"> {{ annonce.titre }} </h4>
+                <hr style="width: 80%; margin-top: 20px; margin-bottom: 20px;">
+                <div class="center">
+                    <img class="responsive-img" style="height: 250px;" src="assets/img/profilepictures/testPP.jpg">
+                </div>
+                <p style="font-weight: 500; font-size: 18px; margin-left: 10%;"> {{ annonce.description }} </p> 
+                <div style="margin-left: 10%; display: flex;">
+                    <p style="font-weight: 500;font-size: 18px;left: 10%;"> {{ annonce.prix }} € </p> 
+                    <a href="#">  
+                        <span class="material-icons black-text" style="font-size: 32px; right: 10%;position: absolute;font-size: 32px;margin-top: 13px;"> favorite_border </span>  </a>
+                </div>
+                <hr style="width: 80%; margin-top: 20px; margin-bottom: 20px;">
+                <a class="waves-effect waves-light btn black-text col s6 offset-s3" [routerLink]="['/detailannonce', annonce.id_annonce]"
+                style="background-color: #9BE7FF; margin-bottom: 20px;">En savoir plus</a>
+            </div>        
+        </ng-template>
+        <ng-template #elseBlock>
+            <div class="card col s4 offset-s2" style="background-color: #F1EEEE;"> 
+                <h4 style="font-weight: 500;" class="center"> {{ annonce.titre }} </h4>
+                <hr style="width: 80%; margin-top: 20px; margin-bottom: 20px;">
+                <div class="center">
+                    <img class="responsive-img" style="height: 250px;" src="assets/img/profilepictures/testPP.jpg">
+                </div>
+
+                <p style="font-weight: 500; font-size: 18px; margin-left: 10%;"> {{ annonce.description }} </p> 
+                <div style="margin-left: 10%; display: flex;">
+                    <p style="font-weight: 500;font-size: 18px;left: 10%;"> {{ annonce.prix }} € </p> 
+                    <a href="#">  
+                        <span class="material-icons black-text" style="font-size: 32px; right: 10%;position: absolute;font-size: 32px;margin-top: 13px;"> favorite_border </span>  </a>
+                </div>
+                <hr style="width: 80%; margin-top: 20px; margin-bottom: 20px;">
+                <a class="waves-effect waves-light btn black-text col s6 offset-s3" [routerLink]="['/detailannonce', annonce.id_annonce]"
+                style="background-color: #9BE7FF; margin-bottom: 20px;">En savoir plus</a>
+            </div>         
+        </ng-template>
+    </div>
+</div>

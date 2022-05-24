@@ -33,18 +33,17 @@ const routes: Routes = [
   { path: 'detailannonce/:id', component: DetailannonceComponent },
   { path: 'detailannonce', component: DetailannonceComponent },
   
+  { path: 'annoncesauvegardes', component: AnnoncessauvegardeesComponent },
+  { path: 'mesannonces', component: MesannoncesComponent },
+
   
-  { path: '**', component: Error404Component },
-
-
-
-
   { path: 'test/navbar', component: NavbarComponent },
   { path: 'test/header', component: HeaderComponent },
   { path: 'test/footer', component: FooterComponent },
-  { path: 'test/mesannonces', component: MesannoncesComponent },
   { path: 'test/editerannonce', component: EditerannonceComponent },
-  { path: 'test/annoncesauvegardes', component: AnnoncessauvegardeesComponent },
+
+  
+  { path: '**', component: Error404Component },
 ];
 
 @NgModule({

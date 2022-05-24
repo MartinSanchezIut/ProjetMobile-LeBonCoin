@@ -43,7 +43,7 @@ export class UserauthentificationService {
     return this.http.get<User>(this.urlBase +'/UserById/'+id);
   }
 
-  getConnectedUser(){
+  getConnectedUser() : string | null{
     return localStorage.getItem("user");
   }
 
