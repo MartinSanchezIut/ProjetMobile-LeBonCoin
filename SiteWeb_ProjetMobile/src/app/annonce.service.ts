@@ -105,4 +105,11 @@ export class AnnonceService {
 		console.log("Signaler fraude :"+ fraude );
 		return this.http.post<any>(this.urlBase + "/RechercheTitre", fraude);
 	}
+
+
+  // Récupère la liste d'identifiant d'annonce sauvegarder par :id
+  getIdOfSavedAnnonces(id : number) : Observable<any> {
+    console.log("Annonces sauvegardés de "+ id +".");
+    return this.http.get<any>(this.urlBase + "/Getsauvegardeid/"+id);
+  }
 }
