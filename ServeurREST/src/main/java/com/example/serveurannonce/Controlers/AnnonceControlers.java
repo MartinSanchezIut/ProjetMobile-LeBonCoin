@@ -35,17 +35,6 @@ public class AnnonceControlers {
     public List<Annonce> getAllAnnonces() {
         return annonce.findAll();
     }
-    @GetMapping(uri + "/savedAnnoncesOf/{id_user}")
-    public List<Annonce> savedAnnoncesOf(@PathVariable long id_user) {
-        System.out.println(id_user);
-        ArrayList<Annonce> result = new ArrayList<>();
-        for(Annonce a : user.findById(id_user).get().getSauvegarde()){
-            result.add(a);
-        }
-        return result;
-    }
-
-
 
     @GetMapping(uri + "/Getsauvegardeid/{id_user}")
     public List<Long> GetSauvegardeid(@PathVariable long id_user) {

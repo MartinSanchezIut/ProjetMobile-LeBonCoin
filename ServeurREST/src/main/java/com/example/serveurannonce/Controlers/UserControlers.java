@@ -60,6 +60,8 @@ public class UserControlers {
     }
 
 
+    // Ces fonctions ne sont pas utiles !!!!
+
     @GetMapping(uri + "/Sauvegarde/{id}")
     public List<Annonce> GetConnexion(@PathVariable Long id) {
 
