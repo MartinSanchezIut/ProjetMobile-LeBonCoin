@@ -99,6 +99,9 @@
                 </a>
             </li>
         </ul>
+        <a (click)="hideMeToShow(departementSel, form);" class="waves-effect waves-light btn-large center black-text" style="background-color: #F1EEEE; width: 80%;">
+            Retour
+        </a>
     </div>
 
     <div #categorieSel id="categorieSel" class="center hide">
@@ -112,6 +115,9 @@
                     {{ cat.nomCat }}
                 </a>
         </ul>    
+        <a (click)="hideMeToShow(categorieSel, form);" class="waves-effect waves-light btn-large center black-text" style="background-color: #F1EEEE; width: 80%;">
+            Retour
+        </a>
     </div>
 
     <div #souscategorieSel id="souscategorieSel" class="center hide">    
@@ -125,5 +131,8 @@
                 </a>
             </li>
         </ul>
+        <a (click)="hideMeToShow(souscategorieSel, form);" class="waves-effect waves-light btn-large center black-text" style="background-color: #F1EEEE; width: 80%;">
+            Retour
+        </a>
     </div>
 </div>

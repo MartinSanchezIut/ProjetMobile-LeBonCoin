@@ -35,12 +35,12 @@ const routes: Routes = [
   
   { path: 'annoncesauvegardes', component: AnnoncessauvegardeesComponent },
   { path: 'mesannonces', component: MesannoncesComponent },
+  { path: 'editerannonce/:id', component: EditerannonceComponent },
 
   
   { path: 'test/navbar', component: NavbarComponent },
   { path: 'test/header', component: HeaderComponent },
   { path: 'test/footer', component: FooterComponent },
-  { path: 'test/editerannonce', component: EditerannonceComponent },
 
   
   { path: '**', component: Error404Component },
