@@ -20,8 +20,16 @@
 
       <li><a href="#">  <span class="material-icons black-text" style="font-size: 32px; margin-top: 45%;"> favorite_border </span>  </a></li>
       <li><a href="#">  <span class="material-icons black-text" style="font-size: 32px; margin-top: 45%;"> question_answer </span>  </a></li>
-      <li><a href="#" [routerLink]="['/connexion']">  <span class="material-icons black-text" style="font-size: 32px; margin-top: 45%;"> perm_identity </span>  </a></li>
-      
+      <li>
+        <div *ngIf="!this.userauthentification.isConnected() else othercontent">
+          <a href="#" [routerLink]="['/connexion']"><span class="material-icons black-text" style="font-size: 32px; margin-top: 45%;"> perm_identity </span></a>
+        </div>
+        <ng-template #othercontent>
+          <div>
+            <a href="" (click)="this.userauthentification.removeUserConnected();"><span class="material-icons black-text" style="font-size: 32px; margin-top: 45%;">power_settings_new</span></a>
+          </div>
+        </ng-template>
+      </li>
 
     </ul>
   </div>

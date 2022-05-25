@@ -12,8 +12,7 @@ export class ConnexionComponent {
 
   public email: string = "";
   public password: string = "";
-  // private userconnected: User = new User();
-  private userconnected: any;
+  private userconnected: User = new User();
 
 
   constructor(private connectingUser: UserauthentificationService, private router: Router) { }

@@ -43,8 +43,12 @@ export class UserauthentificationService {
     return this.http.get<User>(this.urlBase +'/UserById/'+id);
   }
 
-  getConnectedUser() : string | null{
+  getConnectedUser() : string | null {
     return localStorage.getItem("user");
+  }
+
+  removeUserConnected() : void {
+    localStorage.removeItem("user");
   }
 
   isConnected(): boolean {
