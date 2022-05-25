@@ -3,11 +3,10 @@
         <h3 style="padding: 20px;"> Vous cherchez quelque chose ?? </h3>
         <hr style="width: 98%;">
 
-        <div style="display: flex; padding-top: 150px; padding-bottom: 200px; ">
-
+        <p style="padding-top: 150px; text-align: left; padding-top: 150px; margin-left: 5%; margin-bottom: 0px; font-size: 18px; font-weight: 500; font-style: oblique;">Titre de l'annonce : </p>
+        <input #titre id="titre" type="text" style="width: 90%; " placeholder="Titre de l'annonce ..">
+        <div style="display: flex; padding-bottom: 200px; ">
             <div style="margin-left: 5%; display: flex; width: 100%;"> 
-                
-
                 <a  (click)="hideMeToShow(form, categorieSel);" class="waves-effect waves-light btn-large center black-text white" style="width: 50%;">
                     <p #categorie id="categorie" style="margin-top:0%;"> Choisir une catégorie ...  </p>
                     <span class="material-icons black-text" style="top: 15px; position: absolute; right: 20px; font-weight: 100;"> expand_more </span>
@@ -17,7 +16,9 @@
 
                 <a #lieu id="lieu" (click)="hideMeToShow(form, departementSel);" class="waves-effect waves-light btn-large center black-text white" style="width: 30%;">Ou ?</a>
 
-                <a (click)="chercher(categorie.innerText, lieu.innerText);" class="waves-effect waves-light btn-large center black-text" style="background-color: #9BE7FF; width: 15%;">Chercher</a>
+
+
+                <a (click)="chercher(categorie.innerText, lieu.innerText, titre.value);" class="waves-effect waves-light btn-large center black-text" style="background-color: #9BE7FF; width: 15%;">Chercher</a>
 
             </div>
         </div>

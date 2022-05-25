@@ -25,16 +25,22 @@ export class ListeannonceComponent implements OnInit {
     }
     this.type = this.type.replace('_', '/' ) ;      
 
-    console.log(this.type) ;
-    this.annonce.getListAnnonce(this.type).subscribe(doc => {
-      console.log(doc) ;
-      this.listeAnnonces = doc; 
-    });
-    if (this.listeAnnonces.length == 0) {
-      let error = document.getElementById("error")  ;
-      if (error){
-        error.classList.remove("hide");
-      }
+
+    if (this.route.snapshot.params['listeAnnonce'] != undefined) {
+      this.listeAnnonces = this.route.snapshot.params['listeAnnonce'];    
+    
+    }else {
+      console.log(this.type) ;
+      this.annonce.getListAnnonce(this.type).subscribe(doc => {
+        console.log(doc) ;
+        this.listeAnnonces = doc; 
+        if (this.listeAnnonces.length == 0) {
+          let error = document.getElementById("error")  ;
+          if (error){
+            error.classList.remove("hide");
+          }
+        }
+      });
     }
   }
 }

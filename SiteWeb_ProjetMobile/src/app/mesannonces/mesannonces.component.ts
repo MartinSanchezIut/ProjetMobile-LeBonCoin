@@ -16,6 +16,11 @@ export class MesannoncesComponent implements OnInit {
 
   public listeAnnonces : any[] = [];
   ngOnInit(): void {
+    if (!this.user.isConnected()) {
+      console.log("Pas d'utilisateur connecté. Renvoie vers la page de connexion.");
+      this.router.navigate(['/connexion']);
+    }
+
      if (this.user.isConnected()) {
         let loggegUserString = this.user.getConnectedUser() ;
         if (loggegUserString != null ) {

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Departements, Categories } from '../_Models/Utils';
+import { AnnonceService } from '../annonce.service' ;
 
 @Component({
   selector: 'app-recherche',
@@ -16,7 +18,7 @@ export class RechercheComponent implements OnInit {
   public categories : { nomCat : string, listeSousCat : string[]}[] = Categories.list ;
 
   
-  constructor() { }
+  constructor(private router : Router, private annonce : AnnonceService,) { }
 
   ngOnInit(): void {
   }
@@ -31,7 +33,15 @@ export class RechercheComponent implements OnInit {
     elmt.innerText = text;
   }
 
-  public chercher(cat : string, lieu : string) : void {
-    console.log(cat + " " + lieu) ;
+  public chercher(cat : string, lieu : string, titre : string) : void {
+    let listeAnnonces = [] ;
+
+    let recherche = {categorie : cat, departement: [lieu]};
+    this.annonce.rechercher(recherche).subscribe(doc => {
+      console.log(doc) ;
+      listeAnnonces = doc; 
+      this.router.navigate(['/listeannonce', recherche]);
+    });      
+    console.log(cat + " " + lieu + " " + titre) ;
   }
 }
