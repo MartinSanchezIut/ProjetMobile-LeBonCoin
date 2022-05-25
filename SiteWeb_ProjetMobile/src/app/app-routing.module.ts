@@ -30,6 +30,7 @@ const routes: Routes = [
   { path: 'connexion', component: ConnexionComponent },
   { path: 'statistiques', component: StatistiquesComponent },
   { path: 'listeannonce', component: ListeannonceComponent },
+  { path: 'listeannonce/:type', component: ListeannonceComponent },
   { path: 'detailannonce/:id', component: DetailannonceComponent },
   { path: 'detailannonce', component: DetailannonceComponent },
   

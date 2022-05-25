@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AnnonceService } from '../annonce.service' ;
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-listeannonce',
@@ -8,17 +9,32 @@ import { AnnonceService } from '../annonce.service' ;
 })
 export class ListeannonceComponent implements OnInit {
 
-  constructor(private annonce : AnnonceService) { }
+  constructor(private route: ActivatedRoute, 
+              private annonce : AnnonceService,
+              private router : Router) { }
+
 
   public listeAnnonces : any[] = [];
+
+  @Input()
+  public type : string = "/getAll";
+
   ngOnInit(): void {
-     
-    this.annonce.getListAnnonce("/getAll").subscribe(doc => {
+    if (this.route.snapshot.params['type'] != undefined) {
+      this.type = this.route.snapshot.params['type'];    
+    }
+    this.type = this.type.replace('_', '/' ) ;      
+
+    console.log(this.type) ;
+    this.annonce.getListAnnonce(this.type).subscribe(doc => {
       console.log(doc) ;
       this.listeAnnonces = doc; 
     });
+    if (this.listeAnnonces.length == 0) {
+      let error = document.getElementById("error")  ;
+      if (error){
+        error.classList.remove("hide");
+      }
+    }
   }
-
-
-
 }
