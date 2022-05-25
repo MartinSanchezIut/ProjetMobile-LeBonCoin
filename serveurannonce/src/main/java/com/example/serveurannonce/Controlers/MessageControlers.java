@@ -34,7 +34,6 @@ private static final String uri = "LeMauvaisCoin/api/message";
     @PutMapping(uri + "/PutMessage")
     public Message PutMessage(@RequestBody ArrayList<String> argument) {
         Gson gson = new Gson();
-        System.out.println(argument.get(1));
         Message newmessage = gson.fromJson(argument.get(1),Message.class);
         System.out.println(newmessage.getMessage());
         newmessage.setMessagec(conversation.findById(Long.valueOf(argument.get(0))).get());

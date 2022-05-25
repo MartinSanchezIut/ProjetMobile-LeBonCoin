@@ -7,11 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Configuration
@@ -54,13 +51,13 @@ public class UserData {
             ArrayList<String> i7 = new ArrayList<>();
             i7.add("src/main/java/com/example/serveurannonce/Image/eponge.jpg");
 
-            Annonce ann = new Annonce("Velo","Tres beau velo",50,"23/05/2022","Bouche du Rhone","Montpellier" ,a.getId_user(),i1,nbvue,"Email","Vacances","Location et Gites");
-            Annonce ann1 = new Annonce("Marteau","Tres beau Marteau",50,"23/05/2022","Hérault","Montpellier" ,ap.getId_user(),i2,nbvue,"Email","Bricolage","Marteau");
-            Annonce ann2 = new Annonce("Phone","Tres beau téléphone",50,"23/05/2022","Bouche du Rhone","Miramas" ,a.getId_user(),i3,nbvue,"Email","Multimedia","Telephone");
-            Annonce ann3 = new Annonce("ordinateur","Tres beau ordinateur",50,"23/0452022","Bouche du Rhone","Eyguières" ,a.getId_user(),i4,nbvue,"Email","Sport","velo");
-            Annonce ann4 = new Annonce("bateau","Tres beau bateau",50,"23/05/2022","Bouche du Rhone","Salon" ,a.getId_user(),i5,nbvue,"Email","Sport","velo");
-            Annonce ann5 = new Annonce("cafetière","Tres beau cafetière",50,"23/05/2022","Ile est Vilaine","Renne" ,a.getId_user(),i6,nbvue,"Email","Sport","velo");
-            Annonce ann6 = new Annonce("Eponge","Tres beau Eponge",50,"23/05/2022","Finistère","Brest" ,a.getId_user(),i7,nbvue,"Email","Sport","velo");
+            Annonce ann = new Annonce("Velo","Tres beau velo",50,"24/05/2022","Bouche du Rhone","Montpellier" ,a.getId_user(),i1,nbvue,"Email","Vacances","Location et Gites");
+            Annonce ann1 = new Annonce("Marteau","Tres beau Marteau",50,"24/05/2022","Hérault","Montpellier" ,ap.getId_user(),i2,nbvue,"Email","Bricolage","Marteau");
+            Annonce ann2 = new Annonce("Phone","Tres beau téléphone",50,"24/05/2022","Bouche du Rhone","Miramas" ,a.getId_user(),i3,nbvue,"Email","Multimedia","Telephone");
+            Annonce ann3 = new Annonce("ordinateur","Tres beau ordinateur",50,"24/05/2022","Bouche du Rhone","Eyguières" ,a.getId_user(),i4,nbvue,"Email","Sport","velo");
+            Annonce ann4 = new Annonce("bateau","Tres beau bateau",50,"24/05/2022","Bouche du Rhone","Salon" ,a.getId_user(),i5,nbvue,"Email","Vacances","bateau");
+            Annonce ann5 = new Annonce("cafetière","Tres beau cafetière",50,"24/05/2022","Ile est Vilaine","Renne" ,a.getId_user(),i6,nbvue,"Email","Autre","Cafetière");
+            Annonce ann6 = new Annonce("Eponge","Tres beau Eponge",50,"24/05/2022","Finistère","Brest" ,a.getId_user(),i7,nbvue,"Email","Autre","cuisine");
 
             ann.setAnn1(a);
             ann1.setAnn1(ap);

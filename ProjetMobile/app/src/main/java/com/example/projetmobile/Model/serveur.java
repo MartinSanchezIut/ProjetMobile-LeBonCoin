@@ -12,7 +12,7 @@ public class serveur {
     private String url ;
 
     public serveur(String controler) {
-        url = "http://172.16.5.209:8080/LeMauvaisCoin/api/";
+        url = "http://192.168.1.25:8080/LeMauvaisCoin/api/";
         this.url = this.url + controler;
     }
 
