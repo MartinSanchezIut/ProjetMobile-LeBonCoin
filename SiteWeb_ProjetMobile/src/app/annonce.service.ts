@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { apiUrl } from './_Models/Utils' ;
+import { Annonce } from './_Models/dbAcces/Annonce';
 
 @Injectable({
   providedIn: 'root'
@@ -47,9 +48,9 @@ export class AnnonceService {
       return this.http.get<any>(this.urlBase + url);
     }
   // Récupère une annonce par son id
-  getAnnonceById(id : number) : Observable<any> {
+  getAnnonceById(id : number) : Observable<Annonce> {
     console.log("Récupération de l'annonces "+ id +".");
-    return this.http.get<any>(this.urlBase + "/AnnonceById/"+id);
+    return this.http.get<Annonce>(this.urlBase + "/AnnonceById/"+id);
   }
   // Récupère une annonce par son id
   getNombreVueAnnonceById(id : number) : Observable<any> {

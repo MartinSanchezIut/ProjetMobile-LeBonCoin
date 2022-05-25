@@ -10,15 +10,13 @@
 
         </div>
         <p style="font-weight: 600; font-size: 24px; margin-top: 10px;"
-        class="center"> Pseudo du client</p>
+        class="center"> {{ user.pseudo }}</p>
 
 
         <div class="row" style="margin-top: 50px;">
-            <p style="font-weight: 400; font-size: 18px;" class="col s4 offset-s2">Nom</p>
-            <p style="font-weight: 400; font-size: 18px;" class="col s4 offset-s1">Prenom</p>
+            <p style="font-weight: 400; font-size: 18px;" class="col s4 offset-s2">{{ user.nom }}</p>
+            <p style="font-weight: 400; font-size: 18px;" class="col s4 offset-s1">{{ user.prenom }}</p>
         </div>
-
-        <p style="font-weight: 400; font-size: 18px; margin-left: 16.6666666667%;" >Date d'inscription</p>
 
         <div class="row" style="margin-top: 75px;">
             <a class="waves-effect waves-light btn-large black-text col s6 offset-s3"
