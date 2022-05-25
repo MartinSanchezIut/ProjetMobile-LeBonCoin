@@ -1,0 +1,85 @@
+<div class="container">
+
+    <!-- START OF DEBUGGER -->
+    <div #btnOpen style="position: relative; top: 30px; left: -200px;">
+        <a class="waves-effect waves-light btn black-text col s6 offset-s3" 
+        style="background-color: #f87979;" (click)="hideMeToShow(btnOpen, debugger);">Debugger</a>
+    </div>
+    <div #debugger class="card hide"  style="background-color: #f87979; padding: 15px; margin-top: 75px;">
+
+        <div style="position: relative; top: 30px; left: 30px;">
+            <a class="waves-effect waves-light btn black-text col s6 offset-s3" 
+            style="background-color: rgb(255, 255, 255);" (click)="hideMeToShow(debugger, btnOpen);">Close</a>
+        </div>
+        <h4 class="center" style="font-weight: 700;">  Debugger </h4>
+        <hr style="width: 75%; " class=" center">
+    
+
+        <div class="row" style="margin-top: 25px;">
+            <a href="/" class="waves-effect waves-light btn-large black-text col s6 offset-s3" 
+            style="background-color: #9BE7FF;">HomepageComponent</a>
+        </div>
+
+        <div class="row" style="margin-top: 25px;">
+            <a href="recherche" class="waves-effect waves-light btn-large black-text col s6 offset-s3"
+            style="background-color: #9BE7FF; ">RechercheComponent</a>
+        </div>
+
+        <div class="row" style="margin-top: 25px;">
+            <a href="ajouterAnnonce" class="waves-effect waves-light btn-large black-text col s6 offset-s3"
+            style="background-color: #9BE7FF; ">AjouterannonceComponent</a>
+        </div>
+        
+        <div class="row" style="margin-top: 25px;">
+            <a href="profil" class="waves-effect waves-light btn-large black-text col s6 offset-s3"
+            style="background-color: #9BE7FF; ">ProfilComponent</a>
+        </div>
+
+        <div class="row" style="margin-top: 25px;">
+            <a href="inscription" class="waves-effect waves-light btn-large black-text col s6 offset-s3"
+            style="background-color: #9BE7FF; ">InscriptionComponent</a>
+        </div>
+
+        <div class="row" style="margin-top: 25px;">
+            <a href="connexion" class="waves-effect waves-light btn-large black-text col s6 offset-s3"
+            style="background-color: #9BE7FF; ">ConnexionComponent</a>
+        </div>
+
+        <div class="row" style="margin-top: 25px;">
+            <a href="messages" class="waves-effect waves-light btn-large black-text col s6 offset-s3"
+            style="background-color: #9BE7FF; ">MessagesComponent</a>
+        </div>
+
+        <div class="row" style="margin-top: 25px;">
+            <a href="statistiques" class="waves-effect waves-light btn-large black-text col s6 offset-s3"
+            style="background-color: #9BE7FF; ">StatistiquesComponent</a>
+        </div>
+        <div class="row" style="margin-top: 25px;">
+            <a href="listeannonce" class="waves-effect waves-light btn-large black-text col s6 offset-s3"
+            style="background-color: #9BE7FF; ">listeannonce</a>
+        </div>
+        <div class="row" style="margin-top: 25px;">
+            <a href="detailannonce" class="waves-effect waves-light btn-large black-text col s6 offset-s3"
+            style="background-color: #9BE7FF; ">detailannonce</a>
+        </div>
+        <div class="row" style="margin-top: 25px;">
+            <a href="annoncesauvegardes" class="waves-effect waves-light btn-large black-text col s6 offset-s3"
+            style="background-color: #9BE7FF; ">annoncesauvegardes</a>
+        </div>
+        <div class="row" style="margin-top: 25px;">
+            <a href="mesannonces" class="waves-effect waves-light btn-large black-text col s6 offset-s3"
+            style="background-color: #9BE7FF; ">mesannonces</a>
+        </div>
+        <div class="row" style="margin-top: 25px;">
+            <a href="editerannonce" class="waves-effect waves-light btn-large black-text col s6 offset-s3"
+            style="background-color: #9BE7FF; ">editerannonce</a>
+        </div>
+    </div>
+
+    <!-- END OF DEBUGGER -->
+
+   
+    <img class="responsive-img center" src="assets/img/logos/2d_logo.png">
+</div>
+
+<app-recherche></app-recherche>

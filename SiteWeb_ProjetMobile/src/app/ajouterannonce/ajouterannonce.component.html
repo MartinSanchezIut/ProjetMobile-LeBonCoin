@@ -1,0 +1,138 @@
+<div class="container" style="margin-top: 50px; margin-bottom: 50px;">
+    <div #form id="form" class="center card" style="background-color: #F1EEEE;">
+        <h3 style="padding: 20px;"> Ajoutez votre annonce ! </h3>
+        <hr style="width: 98%;">
+
+
+        <div class="row" style="padding-top: 100px;">
+            <h5 class="col s5"> Catégorie : </h5>
+            <a (click)="hideMeToShow(form, categorieSel);" class="waves-effect waves-light btn-large center black-text white col s6">
+                <p #categorie id="categorie" style="margin-top:0%;"> Choisir une catégorie  </p>
+                <span class="material-icons black-text" style="top: 15px; position: absolute; right: 20px; font-weight: 100;"> expand_more </span>
+            </a>
+        </div>
+
+        <div class="row">
+            <h5 class="col s5"> Sous-Catégorie : </h5>
+            <a (click)="hideMeToShow(form, souscategorieSel);" class="waves-effect waves-light btn-large center black-text white col s6">
+                <p #souscat id="souscat" style="margin-top:0%;"> Choisir une sous-catégorie  </p>
+                <span class="material-icons black-text" style="top: 15px; position: absolute; right: 20px; font-weight: 100;"> expand_more </span>
+            </a>
+        </div>
+
+        <div class="row">
+            <h5 class="col s5"> Titre : </h5>
+            <div class="input-field col s6">
+                <input #Titre placeholder="Titre" id="Titre" type="text" class="validate left">
+                <label for="Titre">Titre :</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <h5 class="col s5"> Description : </h5>
+            <div class="input-field col s6">
+                <input #Description placeholder="Description" id="Description" type="text" class="validate left">
+                <label for="Description">Description :</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <h5 class="col s5"> Prix : </h5>
+            <div class="input-field col s6">
+                <input #Prix placeholder="Prix" id="Prix" type="number" min="0" class="validate left">
+                <label for="Prix">Prix :</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <h5 class="col s5"> Département : </h5>
+            <a (click)="hideMeToShow(form, departementSel);" class="waves-effect waves-light btn-large center black-text white col s6">
+                <p #departement id="departement" style="margin-top:0%;"> Sélectionnez un département  </p>
+                <span class="material-icons black-text" style="top: 15px; position: absolute; right: 20px; font-weight: 100;"> expand_more </span>
+            </a>
+        </div>
+
+        <div class="row">
+            <h5 class="col s5"> Ville : </h5>
+            <div class="input-field col s6">
+                <input #Ville placeholder="Ville" id="Ville" type="text" class="validate left">
+                <label for="Ville">Ville :</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <h5 class="col s5"> Images : </h5>
+        <!--    <a class="waves-effect waves-light btn-large center black-text white col s6">
+                <p #images id="images" style="margin-top:0%;"> Sélectionnez vos images </p>
+                <span class="material-icons black-text" style="top: 15px; position: absolute; right: 20px; font-weight: 100;"> expand_more </span>
+            </a>
+        -->    
+            <div class="file-field input-field center col s6">
+                <div class="waves-effect waves-light btn-large white  black-text">
+                  <span>Sélectionnez vos images</span>
+                  <input type="file" multiple>
+                  <span class="material-icons black-text" style="top: 10px; right: 1px; position: absolute; font-weight: 100;"> expand_more </span>
+                </div>
+                <div class="file-path-wrapper">
+                  <input #img class="file-path validate" type="text">
+                </div>
+              </div>
+        </div>
+
+
+
+        <a (click)="addAnnonce(Titre.value, Description.value, Prix.value, categorie.innerText, souscat.innerText, departement.innerText, Ville.value, img.value);" 
+            class="waves-effect waves-light btn-large center black-text" 
+            style="background-color: #9BE7FF; width: 15%; margin-bottom: 75px; margin-top: 45px;">
+            Ajouter !</a>
+
+    </div>
+
+    <div #departementSel id="departementSel" class="center hide" >
+        <ul>
+            <li *ngFor="let dep of departements; let isOdd = odd;">
+                <a  *ngIf="isOdd" (click)="setTextOf(departement, dep); hideMeToShow(departementSel, form);" class="waves-effect waves-light btn-large center black-text" style="background-color: #9BE7FF; width: 80%;">
+                    {{ dep }}
+                </a>
+                <a  *ngIf="!isOdd" (click)="setTextOf(departement, dep); hideMeToShow(departementSel, form);" class="waves-effect waves-light btn-large center black-text" style="background-color: #F1EEEE; width: 80%;">
+                    {{ dep }}
+                </a>
+            </li>
+        </ul>
+        <a (click)="hideMeToShow(departementSel, form);" class="waves-effect waves-light btn-large center black-text" style="background-color: #F1EEEE; width: 80%;">
+            Retour
+        </a>
+    </div>
+
+    <div #categorieSel id="categorieSel" class="center hide">
+        <ul>
+            <li *ngFor="let cat of categories; let isOdd = odd;">
+
+                <a  *ngIf="isOdd" (click)="setTextOf(categorie, cat.nomCat); hideMeToShow(categorieSel, form);" class="waves-effect waves-light btn-large center black-text" style="background-color: #9BE7FF; width: 80%;">
+                    {{ cat.nomCat }}
+                </a>
+                <a  *ngIf="!isOdd" (click)="setTextOf(categorie, cat.nomCat); hideMeToShow(categorieSel, form);" class="waves-effect waves-light btn-large center black-text" style="background-color: #F1EEEE; width: 80%;">
+                    {{ cat.nomCat }}
+                </a>
+        </ul>    
+        <a (click)="hideMeToShow(categorieSel, form);" class="waves-effect waves-light btn-large center black-text" style="background-color: #F1EEEE; width: 80%;">
+            Retour
+        </a>
+    </div>
+
+    <div #souscategorieSel id="souscategorieSel" class="center hide">    
+        <ul *ngIf="getSousCategories(categorie.innerText).length > 0">
+            <li *ngFor="let souscategorie of getSousCategories(categorie.innerText);  let isOdd = odd;">
+                <a  *ngIf="isOdd" (click)="setTextOf(souscat, souscategorie); hideMeToShow(souscategorieSel, form);" class="waves-effect waves-light btn-large center black-text" style="background-color: #9BE7FF; width: 65%; left: 7.5%;">
+                    {{ souscategorie }}
+                </a>
+                <a  *ngIf="!isOdd" (click)="setTextOf(souscat, souscategorie); hideMeToShow(souscategorieSel, form);" class="waves-effect waves-light btn-large center black-text" style="background-color: #F1EEEE; width: 65%; left: 7.5%;">
+                    {{ souscategorie }}
+                </a>
+            </li>
+        </ul>
+        <a (click)="hideMeToShow(souscategorieSel, form);" class="waves-effect waves-light btn-large center black-text" style="background-color: #F1EEEE; width: 80%;">
+            Retour
+        </a>
+    </div>
+</div>
