@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+                                                   android:layout_height="match_parent">
+
+    <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card"
+            android:layout_width="166dp"
+            android:layout_height="382dp"
+            android:layout_margin="25dp" tools:ignore="MissingConstraints"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/lineargeneral"
+                android:orientation="vertical">
+
+            <!-- Media -->
+
+            <ImageView
+                    android:id="@+id/photo_annonce"
+                    android:layout_width="match_parent"
+                    android:layout_height="132dp"
+                    app:srcCompat="@drawable/velo"
+                    android:scaleType="centerCrop"
+                    android:contentDescription=""
+            />
+            <LinearLayout
+                    android:layout_width="176dp"
+                    android:layout_height="260dp"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                <!-- Title, secondary and supporting text -->
+                <TextView
+                        android:id="@+id/Titre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Velo"
+                        android:textAppearance="?attr/textAppearanceHeadline6"
+                />
+
+
+                <TextView
+                        android:id="@+id/Descriptions"
+                        android:layout_width="137dp"
+                        android:layout_height="102dp"
+                        android:layout_marginTop="16dp"
+                        android:text="Ceci est un très beau velo tres grand a en prendre grand soins"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="?android:attr/textColorSecondary"
+                />
+                <LinearLayout
+                        android:layout_width="148dp"
+                        android:layout_height="30dp"
+                        android:orientation="horizontal">
+                    <TextView
+                            android:id="@+id/Lieux"
+                            android:layout_width="102dp"
+                            android:layout_height="20dp"
+                            android:text="Montpellier"
+                            android:textAppearance="?attr/textAppearanceBody2"
+                            android:textColor="?android:attr/textColorSecondary"
+                    />
+                    <ImageView
+                            android:layout_width="39dp"
+                            android:id="@+id/favoris"
+                            android:layout_height="match_parent"
+                            app:srcCompat="@drawable/baseline_favorite_border_black_24dp"
+                            android:scaleType="centerCrop"
+                            android:contentDescription=""
+                    />
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="143dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                    <TextView
+                            android:id="@+id/Date"
+                            android:layout_width="100dp"
+                            android:layout_height="30dp"
+                            android:textSize="10dp"
+                            android:text="14/04/2022"
+                    />
+                    <TextView
+                            android:id="@+id/Prix"
+                            android:layout_width="48dp"
+                            android:layout_height="match_parent"
+                            android:text="50€"
+                            android:gravity="bottom"
+                            android:textAppearance="?attr/textAppearanceHeadline6"
+                    />
+                </LinearLayout>
+                <LinearLayout
+                        android:layout_width="143dp"
+                        android:layout_height="25dp"
+                        android:id="@+id/fraude"
+                        android:orientation="horizontal">
+                    <ImageView
+                            android:layout_width="19dp"
+                            android:layout_height="19dp"
+                            app:srcCompat="@drawable/iconfraude"
+                            android:scaleType="centerCrop"
+                            android:contentDescription=""
+                    />
+                    <TextView
+                            android:id="@+id/motifFraude"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textSize="10dp"
+                            android:text="Fraude par remis l'objet"
+                            android:textAppearance="?attr/textAppearanceBody2"
+                            android:textColor="?android:attr/textColorSecondary"
+                    />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
