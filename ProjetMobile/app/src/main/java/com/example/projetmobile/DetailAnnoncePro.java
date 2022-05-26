@@ -40,7 +40,9 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -220,13 +222,14 @@ public class DetailAnnoncePro extends Fragment {
 
 
         ArrayList<BarEntry> NoOfEmp = new ArrayList();
+
         int i = 0;
         int toto = 0;
         for (Integer value : x.values()) {
             toto = toto + Integer.valueOf(value);
-            NoOfEmp.add(new BarEntry(Float.valueOf(value), i));
-            ++i;
         }
+
+
         total.setText(String.valueOf(toto));
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String date = dtf.format(LocalDateTime.now());
@@ -242,10 +245,147 @@ public class DetailAnnoncePro extends Fragment {
             }
 
         }
+        /*
         ArrayList<String> year = new ArrayList();
+        String d = "";
+        int m = 0;
         for (String key : x.keySet()) {
-            year.add(key);
+            if(!d.equals("")){
+
+                do{
+                    System.out.println("VAL1" + d);
+                    System.out.println("VAL2" + key);
+                    if(!d.equals(key)){
+                        year.add(d);
+                        NoOfEmp.add(new BarEntry(0, m));
+                        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                        //create instance of the Calendar class and set the date to the given date
+                        Calendar cal = Calendar.getInstance();
+                        try{
+                            cal.setTime(formatter.parse(d));
+                        }catch(ParseException e){
+                            e.printStackTrace();
+                        }
+
+                        // use add() method to add the days to the given date
+                        cal.add(Calendar.DAY_OF_MONTH, 1);
+                         d = formatter.format(cal.getTime());
+
+                    }else{
+                        year.add(d);
+                        NoOfEmp.add(new BarEntry(Float.valueOf(x.get(key)), m));
+                        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                        //create instance of the Calendar class and set the date to the given date
+                        Calendar cal = Calendar.getInstance();
+                        try{
+                            cal.setTime(formatter.parse(d));
+                        }catch(ParseException e){
+                            e.printStackTrace();
+                        }
+
+                        // use add() method to add the days to the given date
+                        cal.add(Calendar.DAY_OF_MONTH, 1);
+                        d = formatter.format(cal.getTime());
+                    }
+                    ++m;
+
+                   // year.add(key);
+                }
+                while(!key.equals(d));
+
+            }
+            else{
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                //create instance of the Calendar class and set the date to the given date
+                Calendar cal = Calendar.getInstance();
+                try{
+                    cal.setTime(formatter.parse(key));
+                }catch(ParseException e){
+                    e.printStackTrace();
+                }
+
+                // use add() method to add the days to the given date
+                cal.add(Calendar.DAY_OF_MONTH, 1);
+                d = formatter.format(cal.getTime());
+            }
+
         }
+
+         */
+        ArrayList<String> year = new ArrayList();
+        String d = "";
+        int m = 0;
+        for (String key : x.keySet()) {
+            System.out.println("VAL 1 = " + key);
+            System.out.println("VAL 2 = " + d);
+            if(!d.equals("")){
+                   while(!d.equals(key)){
+                       year.add(d);
+                       NoOfEmp.add(new BarEntry(0, m));
+                       ++m;
+                       SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                       Calendar cal = Calendar.getInstance();
+                       try{
+                           cal.setTime(formatter.parse(d));
+                       }catch(ParseException e){
+                           e.printStackTrace();
+                       }
+                       cal.add(Calendar.DAY_OF_MONTH, 1);
+                       d = formatter.format(cal.getTime());
+                       System.out.println("VALEUR d = " + d );
+
+                   }
+                year.add(key);
+                NoOfEmp.add(new BarEntry(x.get(d), m));
+                ++m;
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                Calendar cal = Calendar.getInstance();
+                try{
+                    cal.setTime(formatter.parse(key));
+                }catch(ParseException e){
+                    e.printStackTrace();
+                }
+                cal.add(Calendar.DAY_OF_MONTH, 1);
+                d = formatter.format(cal.getTime());
+
+
+            }
+            else{
+                year.add(key);
+                NoOfEmp.add(new BarEntry(x.get(key), m));
+                ++m;
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                Calendar cal = Calendar.getInstance();
+                try{
+                    cal.setTime(formatter.parse(key));
+                }catch(ParseException e){
+                    e.printStackTrace();
+                }
+                cal.add(Calendar.DAY_OF_MONTH, 1);
+                d = formatter.format(cal.getTime());
+            }
+
+        }
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        DateTimeFormatter l = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            while(!year.get(year.size()-1).equals(l.format(LocalDateTime.now()))){
+                year.add(d);
+                NoOfEmp.add(new BarEntry(0, m));
+                ++m;
+                 formatter = new SimpleDateFormat("dd/MM/yyyy");
+                Calendar cal = Calendar.getInstance();
+                try{
+                    cal.setTime(formatter.parse(d));
+                }catch(ParseException e){
+                    e.printStackTrace();
+                }
+                cal.add(Calendar.DAY_OF_MONTH, 1);
+                d = formatter.format(cal.getTime());
+                System.out.println("VALEUR d = " + d );
+
+            }
+
+
 
         BarDataSet bardataset = new BarDataSet(NoOfEmp, "");
         barChart.animateY(500);

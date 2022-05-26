@@ -161,7 +161,7 @@ public class AnnonceControlers {
     public List<Annonce> GetRecentAnnonce() {
         SimpleDateFormat dtf = new SimpleDateFormat("dd/MM/yyyy");
         Calendar calendar = Calendar.getInstance();
-
+        System.out.println("ICI");
         Date dateObj = calendar.getTime();
         String formattedDate = dtf.format(dateObj);
         List<Annonce> result = new ArrayList<Annonce>();
