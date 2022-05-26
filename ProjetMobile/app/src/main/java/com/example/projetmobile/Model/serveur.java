@@ -17,6 +17,7 @@ public class serveur {
     }
 
     public String getRequest() throws IOException {
+        System.out.println(url);
         final String[] result = {""};
         Thread thread = new Thread(new Runnable() {
 

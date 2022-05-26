@@ -27,13 +27,12 @@ public class UserData {
             ArrayList<Annonce> n3= new ArrayList<>();
 
             Map<String, Integer> nbvue = new HashMap<>();
-            nbvue.put("14/05/2022",10);
-            nbvue.put("15/05/2022",6);
-            nbvue.put("16/05/2022",8);
-            nbvue.put("17/05/2022",12);
-            nbvue.put("18/05/2022",3);
-            nbvue.put("19/05/2022",1);
-            nbvue.put("20/05/2022",15);
+            nbvue.put("16/05/2022",10);
+            nbvue.put("17/05/2022",6);
+            nbvue.put("20/05/2022",8);
+            nbvue.put("22/05/2022",12);
+            nbvue.put("23/05/2022",3);
+            nbvue.put("24/05/2022",1);
             ArrayList<Conversation> m1= new ArrayList<>();
 
             ArrayList<String> i1 = new ArrayList<>();
@@ -51,13 +50,13 @@ public class UserData {
             ArrayList<String> i7 = new ArrayList<>();
             i7.add("src/main/java/com/example/serveurannonce/Image/eponge.jpg");
 
-            Annonce ann = new Annonce("Velo","Tres beau velo",50,"24/05/2022","Bouche du Rhone","Montpellier" ,a.getId_user(),i1,nbvue,"Email","Vacances","Location et Gites");
-            Annonce ann1 = new Annonce("Marteau","Tres beau Marteau",50,"24/05/2022","Hérault","Montpellier" ,ap.getId_user(),i2,nbvue,"Email","Bricolage","Marteau");
-            Annonce ann2 = new Annonce("Phone","Tres beau téléphone",50,"24/05/2022","Bouche du Rhone","Miramas" ,a.getId_user(),i3,nbvue,"Email","Multimedia","Telephone");
-            Annonce ann3 = new Annonce("ordinateur","Tres beau ordinateur",50,"24/05/2022","Bouche du Rhone","Eyguières" ,a.getId_user(),i4,nbvue,"Email","Sport","velo");
-            Annonce ann4 = new Annonce("bateau","Tres beau bateau",50,"24/05/2022","Bouche du Rhone","Salon" ,a.getId_user(),i5,nbvue,"Email","Vacances","bateau");
-            Annonce ann5 = new Annonce("cafetière","Tres beau cafetière",50,"24/05/2022","Ile est Vilaine","Renne" ,a.getId_user(),i6,nbvue,"Email","Autre","Cafetière");
-            Annonce ann6 = new Annonce("Eponge","Tres beau Eponge",50,"24/05/2022","Finistère","Brest" ,a.getId_user(),i7,nbvue,"Email","Autre","cuisine");
+            Annonce ann = new Annonce("Velo","Tres beau velo",50,"26/05/2022","Bouche du Rhone","Montpellier" ,a.getId_user(),i1,nbvue,"Email","Vacances","Location et Gites");
+            Annonce ann1 = new Annonce("Marteau","Tres beau Marteau",50,"26/05/2022","Hérault","Montpellier" ,ap.getId_user(),i2,nbvue,"Email","Bricolage","Marteau");
+            Annonce ann2 = new Annonce("Phone","Tres beau téléphone",50,"26/05/2022","Bouche du Rhone","Miramas" ,a.getId_user(),i3,nbvue,"Email","Multimedia","Telephone");
+            Annonce ann3 = new Annonce("ordinateur","Tres beau ordinateur",50,"26/05/2022","Bouche du Rhone","Eyguières" ,a.getId_user(),i4,nbvue,"Email","Sport","velo");
+            Annonce ann4 = new Annonce("bateau","Tres beau bateau",50,"26/05/2022","Bouche du Rhone","Salon" ,a.getId_user(),i5,nbvue,"Email","Vacances","bateau");
+            Annonce ann5 = new Annonce("cafetière","Tres beau cafetière",50,"26/05/2022","Ile est Vilaine","Renne" ,a.getId_user(),i6,nbvue,"Email","Autre","Cafetière");
+            Annonce ann6 = new Annonce("Eponge","Tres beau Eponge",50,"26/05/2022","Finistère","Brest" ,a.getId_user(),i7,nbvue,"Email","Autre","cuisine");
 
             ann.setAnn1(a);
             ann1.setAnn1(ap);
