@@ -44,7 +44,7 @@ export class AjouterannonceComponent implements OnInit {
     annonce.titre = titre;
     annonce.description = description;
     annonce.prix = prix;
-    annonce.categorie = categorie;
+    annonce.categories = categorie;
     annonce.filtre = sous_categorie;
     annonce.departement = departement;
     annonce.ville = ville;

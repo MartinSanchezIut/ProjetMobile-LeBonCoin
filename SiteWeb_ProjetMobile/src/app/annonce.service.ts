@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { apiUrl } from './_Models/Utils' ;
 import { Annonce } from './_Models/dbAcces/Annonce';
+import { Recherche } from './_Models/dbAcces/Recherche';
 
 @Injectable({
   providedIn: 'root'
@@ -95,16 +96,16 @@ export class AnnonceService {
 		return this.http.post<any>(this.urlBase + "/RechercheTitre", titre);
 	}
 	// Retourne une liste d'annonces qui collent avec recherche
-	rechercher(recherche : any) : Observable<any>{
+	rechercher(recherche : Recherche) : Observable<any[]>{
 		console.log("Recherche annonce :"+ recherche );
-		return this.http.post<any>(this.urlBase + "/RechercheTitre", recherche);
+		return this.http.post<any[]>(this.urlBase + "/Recherche", recherche);
 	}
 
 
 	// Signale une fraude
 	fraude(fraude : any) : Observable<any>{
 		console.log("Signaler fraude :"+ fraude );
-		return this.http.post<any>(this.urlBase + "/RechercheTitre", fraude);
+		return this.http.post<any>(this.urlBase + "/fraude", fraude);
 	}
 
 

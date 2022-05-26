@@ -3,8 +3,8 @@
         <h3 style="padding: 20px;"> Vous cherchez quelque chose ?? </h3>
         <hr style="width: 98%;">
 
-        <p style="padding-top: 150px; text-align: left; padding-top: 150px; margin-left: 5%; margin-bottom: 0px; font-size: 18px; font-weight: 500; font-style: oblique;">Titre de l'annonce : </p>
-        <input #titre id="titre" type="text" style="width: 90%; " placeholder="Titre de l'annonce ..">
+        <!--<p style="padding-top: 150px; text-align: left; padding-top: 150px; margin-left: 5%; margin-bottom: 0px; font-size: 18px; font-weight: 500; font-style: oblique;">Titre de l'annonce : </p>
+        <input #titre id="titre" type="text" style="width: 90%; " placeholder="Titre de l'annonce ..">-->
         <div style="display: flex; padding-bottom: 200px; ">
             <div style="margin-left: 5%; display: flex; width: 100%;"> 
                 <a  (click)="hideMeToShow(form, categorieSel);" class="waves-effect waves-light btn-large center black-text white" style="width: 50%;">
@@ -18,7 +18,7 @@
 
 
 
-                <a (click)="chercher(categorie.innerText, lieu.innerText, titre.value);" class="waves-effect waves-light btn-large center black-text" style="background-color: #9BE7FF; width: 15%;">Chercher</a>
+                <a (click)="chercher(categorie.innerText, lieu.innerText);" class="waves-effect waves-light btn-large center black-text" style="background-color: #9BE7FF; width: 15%;">Chercher</a>
 
             </div>
         </div>
@@ -54,7 +54,7 @@
                     {{ cat.nomCat }}
                 </a>
 
-                <ul *ngIf="cat.listeSousCat.length > 0">
+                <!--<ul *ngIf="cat.listeSousCat.length > 0">
                     <li *ngFor="let souscat of cat.listeSousCat">
                         <a  *ngIf="isOdd" (click)="setTextOf(categorie, souscat); hideMeToShow(categorieSel, form);" class="waves-effect waves-light btn-large center black-text" style="background-color: #9BE7FF; width: 65%; left: 7.5%;">
                             {{ souscat }}
@@ -63,7 +63,7 @@
                             {{ souscat }}
                         </a>
                     </li>
-                </ul>
+                </ul>-->
         </ul>    
         <a (click)="hideMeToShow(categorieSel, form);" class="waves-effect waves-light btn-large center black-text" style="background-color: #F1EEEE; width: 80%;">
             Retour

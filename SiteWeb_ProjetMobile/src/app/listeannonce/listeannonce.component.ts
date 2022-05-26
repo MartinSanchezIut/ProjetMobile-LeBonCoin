@@ -26,9 +26,11 @@ export class ListeannonceComponent implements OnInit {
     this.type = this.type.replace('_', '/' ) ;      
 
 
-    if (this.route.snapshot.params['listeAnnonce'] != undefined) {
-      this.listeAnnonces = this.route.snapshot.params['listeAnnonce'];    
-    
+    //if (this.route.snapshot.params['listeAnnonce'] != undefined) {
+    if (localStorage.getItem("listAnnonces") != null) {
+      this.listeAnnonces = JSON.parse(localStorage.getItem("listAnnonces")!);
+      localStorage.removeItem("listAnnonces");  
+      console.log(this.listeAnnonces);
     }else {
       console.log(this.type) ;
       this.annonce.getListAnnonce(this.type).subscribe(doc => {

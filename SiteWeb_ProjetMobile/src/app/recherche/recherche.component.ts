@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Departements, Categories } from '../_Models/Utils';
 import { AnnonceService } from '../annonce.service' ;
+import { Recherche } from '../_Models/dbAcces/Recherche';
 
 @Component({
   selector: 'app-recherche',
@@ -33,15 +34,25 @@ export class RechercheComponent implements OnInit {
     elmt.innerText = text;
   }
 
-  public chercher(cat : string, lieu : string, titre : string) : void {
-    let listeAnnonces = [] ;
+  public chercher(cat : string, departement : string) : void {
+    let listeAnnonces : Recherche[] ;
 
-    let recherche = {categorie : cat, departement: [lieu]};
+    let recherche : Recherche = new Recherche();
+    if (cat == "CHOISIR UNE CATÉGORIE ..."){
+      cat = "";
+    }
+    if (departement == "OU ?"){
+      departement = "";
+    }
+    recherche.categorie = cat;
+    recherche.departement?.push(departement);
+    console.log(recherche);
     this.annonce.rechercher(recherche).subscribe(doc => {
-      console.log(doc) ;
+      console.log("Résultat recherche :" + doc) ;
       listeAnnonces = doc; 
-      this.router.navigate(['/listeannonce', recherche]);
-    });      
-    console.log(cat + " " + lieu + " " + titre) ;
+      localStorage.setItem("listAnnonces", JSON.stringify(listeAnnonces));
+      this.router.navigate(['/listeannonce']);
+    });
+    console.log(cat + " " + departement + " ") ;
   }
 }

@@ -1,5 +1,5 @@
 
-export var apiUrl : string = "http://192.168.0.13:8080/LeMauvaisCoin/api" ;
+export var apiUrl : string = "http://localhost:8080/LeMauvaisCoin/api" ;
 
 
 export class Departements {
@@ -11,7 +11,7 @@ export class Departements {
     "Côte-d'Or (21)","Côtes-d'Armor (22)","Creuse (23)","Deux-Sèvres (79)","Dordogne (24)","Doubs (25)","Drôme (26)","Essonne (91)",
     "Eure (27)","Eure-et-Loir (28)","Finistère (29)","Gard (30)","Gers (32)","Gironde (33)","Guadeloupe (971)","Guyane (973)","Haut-Rhin (68)",
     "Haute-Corse (2B)","Haute-Garonne (31)","Haute-Loire (43)","Haute-Marne (52)","Haute-Saône (70)","Haute-Savoie (74)","Haute-Vienne (87)",
-    "Hautes-Alpes (05)","Hautes-Pyrénées (65)","Hauts-de-Seine (92)","Hérault (34)","Ille-et-Vilaine (35)","Indre (36)"] ;
+    "Hautes-Alpes (05)","Hautes-Pyrénées (65)","Hauts-de-Seine (92)","Hérault","Ille-et-Vilaine (35)","Indre (36)"] ;
   
 }
 

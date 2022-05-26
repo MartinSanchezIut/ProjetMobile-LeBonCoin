@@ -132,7 +132,7 @@ public class AnnonceControlers {
             boolean departement = false;
             if(re.getDepartement() != null) {
                 for (String s : re.getDepartement()) {
-                    if (s.equals(ann.getDepartement())) {
+                    if (s.equalsIgnoreCase(ann.getDepartement()) || s.equals("")) {
                         departement = true;
                     }
                 }
@@ -140,10 +140,9 @@ public class AnnonceControlers {
             else{
                 departement = true;
             }
-
             if(
-                    (re.getCategorie() == null||re.getCategorie().equals("Toutes les catégories")  || re.getCategorie().equals(ann.getCategories()) ) &&
-                            (re.getFiltre() == null|| re.getFiltre().equals("Tous filtres") || re.getFiltre().equals(ann.getFiltre()) ) &&
+                    (re.getCategorie().equals("") ||re.getCategorie().equals("Toutes les catégories")  || re.getCategorie().equalsIgnoreCase(ann.getCategories()) ) &&
+                            (re.getFiltre().equals("") || re.getFiltre().equals("Tous filtres") || re.getFiltre().equals(ann.getFiltre()) ) &&
                             (re.getPrix1() == null || re.getPrix1() <= ann.getPrix())  &&
                             (re.getPrix2() == null || re.getPrix2() >= ann.getPrix())  &&
                             departement  &&
@@ -151,8 +150,7 @@ public class AnnonceControlers {
                             ((u.getStatu().equals("AnnonceurPart") && re.isParticulier()) ||
                             (u.getStatu().equals("AnnonceurPro") && re.isProfessionel())) && !ann.isIsfraude()
             ){
-                    result.add(ann);
-
+                result.add(ann);
             }
         }
         //System.out.println(result.get(0).getTitre());
