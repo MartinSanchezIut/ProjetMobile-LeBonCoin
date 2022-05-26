@@ -5,13 +5,13 @@ export var apiUrl : string = "http://localhost:8080/LeMauvaisCoin/api" ;
 export class Departements {
     // Liste des départements francais : INCOMPLETTE
     public static list : string[] = [
-    "Ain (01)","Aisne (02)","Allier (03)","Alpes-de-Haute-Provence (04)","Alpes-Maritimes (06)",
-    "Ardèche (07)","Ardennes (08)","Ariège (09)","Aube (10)","Aude (11)","Aveyron (12)","Bas-Rhin (67)","Bouches-du-Rhône (13)",
-    "Calvados (14)","Cantal (15)","Charente (16)","Charente-Maritime (17)","Cher (18)","Corrèze (19)","Corse-du-Sud (2A)",
-    "Côte-d'Or (21)","Côtes-d'Armor (22)","Creuse (23)","Deux-Sèvres (79)","Dordogne (24)","Doubs (25)","Drôme (26)","Essonne (91)",
-    "Eure (27)","Eure-et-Loir (28)","Finistère (29)","Gard (30)","Gers (32)","Gironde (33)","Guadeloupe (971)","Guyane (973)","Haut-Rhin (68)",
-    "Haute-Corse (2B)","Haute-Garonne (31)","Haute-Loire (43)","Haute-Marne (52)","Haute-Saône (70)","Haute-Savoie (74)","Haute-Vienne (87)",
-    "Hautes-Alpes (05)","Hautes-Pyrénées (65)","Hauts-de-Seine (92)","Hérault","Ille-et-Vilaine (35)","Indre (36)"] ;
+    "Ain","Aisne","Allier","Alpes-de-Haute-Provence","Alpes-Maritimes",
+    "Ardèche","Ardennes","Ariège","Aube","Aude","Aveyron","Bas-Rhin","Bouches-du-Rhône",
+    "Calvados","Cantal","Charente","Charente-Maritime","Cher","Corrèze","Corse-du-Sud",
+    "Côte-d'Or","Côtes-d'Armor","Creuse","Deux-Sèvres","Dordogne","Doubs","Drôme","Essonne",
+    "Eure","Eure-et-Loir","Finistère","Gard","Gers","Gironde","Guadeloupe","Guyane","Haut-Rhin",
+    "Haute-Corse","Haute-Garonne","Haute-Loire","Haute-Marne","Haute-Saône","Haute-Savoie","Haute-Vienne",
+    "Hautes-Alpes","Hautes-Pyrénées","Hauts-de-Seine","Hérault","Ille-et-Vilaine","Indre"] ;
   
 }
 
